@@ -9,8 +9,9 @@ Toàn bộ nội dung bằng **tiếng Việt**, không phụ thuộc framework 
 ## Tính năng
 
 - **Trang chủ** (`index.html`): hero, danh mục sản phẩm, sản phẩm nổi bật, giới thiệu Sonic Foam System (SFS), lý do chọn Sonic, giới thiệu đại lý và CTA.
-- **Trang sản phẩm** (`products.html`): danh mục đầy đủ với **bộ lọc theo nhóm** và **modal chi tiết** từng sản phẩm.
-- **Trang liên hệ** (`contact.html`): thông tin liên hệ + biểu mẫu yêu cầu báo giá (demo, có xác nhận gửi).
+- **Trang sản phẩm** (`products.html`): danh mục đầy đủ với **bộ lọc theo nhóm**, **xem nhanh (modal)** và liên kết sang trang chi tiết.
+- **Trang chi tiết** (`product.html?id=...`): trang riêng cho từng sản phẩm gồm thông số, mô tả, nút báo giá và **sản phẩm liên quan**.
+- **Trang liên hệ** (`contact.html`): thông tin liên hệ + biểu mẫu yêu cầu báo giá; khi gửi sẽ **mở ứng dụng email** với nội dung điền sẵn (mailto).
 - Giao diện **responsive** (máy tính, máy tính bảng, điện thoại) với menu mobile.
 - Phối màu theo thương hiệu Sonic: **đỏ / đen / trắng**.
 
@@ -19,8 +20,9 @@ Toàn bộ nội dung bằng **tiếng Việt**, không phụ thuộc framework 
 ```
 Sonic-web/
 ├── index.html          # Trang chủ
-├── products.html       # Danh mục sản phẩm + bộ lọc + modal
-├── contact.html        # Liên hệ & biểu mẫu báo giá
+├── products.html       # Danh mục sản phẩm + bộ lọc + xem nhanh
+├── product.html        # Trang chi tiết 1 sản phẩm (?id=...)
+├── contact.html        # Liên hệ & biểu mẫu báo giá (mailto)
 ├── assets/
 │   ├── css/styles.css  # Toàn bộ giao diện
 │   ├── js/products.js  # Dữ liệu danh mục & sản phẩm (chỉnh sửa tại đây)

@@ -131,17 +131,18 @@ function productCard(p) {
   if (p.dims) meta.push(`<span class="chip">${p.dims}</span>`);
   return `
   <article class="product-card" data-id="${p.id}" data-cat="${p.category}">
-    <div class="product-card__media">
+    <a class="product-card__media" href="product.html?id=${p.id}" aria-label="${p.name}">
       ${p.badge ? `<span class="product-card__badge">${p.badge}</span>` : ""}
       ${artFor(p)}
-    </div>
+    </a>
     <div class="product-card__body">
       <span class="product-card__code">Mã: ${p.code} · ${cat ? cat.name : ""}</span>
-      <h3 class="product-card__name">${p.name}</h3>
+      <h3 class="product-card__name"><a href="product.html?id=${p.id}">${p.name}</a></h3>
       <p class="product-card__desc">${p.desc}</p>
       <div class="product-card__meta">${meta.join("")}</div>
       <div class="product-card__foot">
-        <button class="product-card__cta" data-open="${p.id}">Xem chi tiết →</button>
+        <button class="product-card__cta" data-open="${p.id}">Xem nhanh</button>
+        <a class="product-card__cta" href="product.html?id=${p.id}">Chi tiết →</a>
       </div>
     </div>
   </article>`;
@@ -202,7 +203,10 @@ function showModal(p, modal) {
     <h3>${p.name}</h3>
     <p>${p.desc}</p>
     <ul class="modal__specs">${specs.map(s => `<li><span>${s[0]}</span><span>${s[1]}</span></li>`).join("")}</ul>
-    <a class="btn btn--primary" href="contact.html?sp=${encodeURIComponent(p.code)}">Yêu cầu báo giá</a>`;
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a class="btn btn--primary" href="contact.html?sp=${encodeURIComponent(p.code)}">Yêu cầu báo giá</a>
+      <a class="btn btn--ghost" href="product.html?id=${p.id}">Xem trang chi tiết</a>
+    </div>`;
   modal.classList.add("open");
   document.body.style.overflow = "hidden";
 }
@@ -237,10 +241,82 @@ function setupForm() {
   }
   form.addEventListener("submit", e => {
     e.preventDefault();
+    const data = new FormData(form);
+    const lines = [
+      `Họ tên: ${data.get("name") || ""}`,
+      `Điện thoại: ${data.get("phone") || ""}`,
+      `Email: ${data.get("email") || ""}`,
+      `Quan tâm: ${data.get("topic") || ""}`,
+      "",
+      `Lời nhắn:`,
+      `${data.get("message") || ""}`,
+    ].join("\n");
+    const subject = `[Yêu cầu báo giá] ${data.get("topic") || "Sonic Việt Nam"}`;
+    const mailto = `mailto:info@sonic-vietnam.vn?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines)}`;
+    // Mở ứng dụng email của người dùng với nội dung đã điền sẵn.
+    window.location.href = mailto;
     form.querySelector(".form__success").classList.add("show");
-    form.reset();
-    setTimeout(() => form.querySelector(".form__success").classList.remove("show"), 6000);
+    setTimeout(() => form.querySelector(".form__success").classList.remove("show"), 8000);
   });
+}
+
+/* --- Trang chi tiết sản phẩm --- */
+function renderProductPage() {
+  const root = document.getElementById("product-page");
+  if (!root) return;
+  const id = new URLSearchParams(location.search).get("id");
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) {
+    root.innerHTML = `<div class="container" style="padding:80px 0;text-align:center">
+      <h1 class="section-title">Không tìm thấy sản phẩm</h1>
+      <p class="section-lead" style="margin:14px auto 24px">Sản phẩm bạn tìm không tồn tại hoặc đã thay đổi.</p>
+      <a class="btn btn--primary" href="products.html">Về trang sản phẩm</a></div>`;
+    return;
+  }
+  const cat = CATEGORIES.find(c => c.id === p.category);
+  document.title = `${p.name} — Sonic Việt Nam`;
+
+  const specs = [["Mã sản phẩm", p.code]];
+  if (cat) specs.push(["Danh mục", cat.name]);
+  if (p.pieces) specs.push(["Số chi tiết", p.pieces + " món"]);
+  if (p.drawers) specs.push(["Số ngăn kéo", p.drawers]);
+  if (p.dims) specs.push(["Kích thước", p.dims]);
+
+  const related = PRODUCTS.filter(x => x.category === p.category && x.id !== p.id).slice(0, 3);
+
+  root.innerHTML = `
+    <section class="page-hero" style="padding:40px 0">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="index.html">Trang chủ</a> / <a href="products.html">Sản phẩm</a>
+          ${cat ? ` / <a href="products.html#${cat.id}">${cat.name}</a>` : ""} / ${p.name}
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <div class="pd-grid">
+          <div class="pd-media">
+            ${p.badge ? `<span class="product-card__badge" style="position:static;display:inline-block;margin-bottom:14px">${p.badge}</span>` : ""}
+            ${artFor(p)}
+          </div>
+          <div class="pd-info">
+            <span class="product-card__code">Mã: ${p.code}${cat ? " · " + cat.name : ""}</span>
+            <h1>${p.name}</h1>
+            <p class="pd-desc">${p.desc}</p>
+            <ul class="modal__specs">${specs.map(s => `<li><span>${s[0]}</span><span>${s[1]}</span></li>`).join("")}</ul>
+            <div class="pd-actions">
+              <a class="btn btn--primary" href="contact.html?sp=${encodeURIComponent(p.code)}">Yêu cầu báo giá</a>
+              <a class="btn btn--ghost" href="products.html">← Tất cả sản phẩm</a>
+            </div>
+            <p class="form__note" style="margin-top:18px">Giá và tình trạng hàng vui lòng liên hệ đại lý để được tư vấn chính xác nhất.</p>
+          </div>
+        </div>
+        ${related.length ? `
+        <div class="section-head" style="margin:60px 0 28px"><h2 class="section-title" style="font-size:26px">Sản phẩm liên quan</h2></div>
+        <div class="product-grid">${related.map(productCard).join("")}</div>` : ""}
+      </div>
+    </section>`;
 }
 
 /* --- Năm hiện tại ở footer --- */
@@ -256,6 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupNav();
   setupModal();
   setupForm();
+  renderProductPage();
   setYear();
 
   const hash = location.hash.replace("#", "");
