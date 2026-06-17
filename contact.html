@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liên hệ — Sonic Việt Nam</title>
+  <meta name="description" content="Liên hệ đại lý phân phối Sonic Equipment tại Việt Nam để được tư vấn, báo giá tủ đồ nghề và dụng cụ." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        <span class="brand__mark">S</span>
+        <span><span class="brand__name">SONIC</span><br /><span class="brand__sub">Việt Nam</span></span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="index.html">Trang chủ</a></li>
+        <li><a href="products.html">Sản phẩm</a></li>
+        <li><a href="index.html#sfs">Sonic Foam System</a></li>
+        <li><a href="index.html#about">Về chúng tôi</a></li>
+        <li><a href="contact.html" class="active">Liên hệ</a></li>
+      </ul>
+      <div class="nav__cta">
+        <a class="btn btn--primary" href="products.html">Xem sản phẩm</a>
+        <button class="nav__toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Trang chủ</a> / Liên hệ</div>
+      <h1>Liên hệ với chúng tôi</h1>
+      <p>Cần tư vấn chọn tủ, báo giá hay hỗ trợ kỹ thuật? Để lại lời nhắn, chúng tôi sẽ phản hồi trong vòng 24 giờ làm việc.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-info__item">
+            <span class="ci-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c1 .3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg></span>
+            <div><strong>Điện thoại / Zalo</strong><a href="tel:0900000000">0900 000 000</a></div>
+          </div>
+          <div class="contact-info__item">
+            <span class="ci-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span>
+            <div><strong>Email</strong><a href="mailto:info@sonic-vietnam.vn">info@sonic-vietnam.vn</a></div>
+          </div>
+          <div class="contact-info__item">
+            <span class="ci-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+            <div><strong>Địa chỉ</strong><span>TP. Hồ Chí Minh, Việt Nam</span></div>
+          </div>
+          <div class="contact-info__item">
+            <span class="ci-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>
+            <div><strong>Giờ làm việc</strong><span>Thứ 2 – Thứ 7: 8:00 – 17:30</span></div>
+          </div>
+        </div>
+
+        <form class="form" id="contact-form">
+          <div class="form__success">Cảm ơn bạn! Yêu cầu đã được ghi nhận, chúng tôi sẽ liên hệ sớm.</div>
+          <div class="form__row">
+            <div class="field">
+              <label for="name">Họ và tên *</label>
+              <input id="name" name="name" type="text" required placeholder="Nguyễn Văn A" />
+            </div>
+            <div class="field">
+              <label for="phone">Số điện thoại *</label>
+              <input id="phone" name="phone" type="tel" required placeholder="09xx xxx xxx" />
+            </div>
+          </div>
+          <div class="form__row">
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="email@congty.vn" />
+            </div>
+            <div class="field">
+              <label for="topic">Nội dung quan tâm</label>
+              <select id="topic" name="topic">
+                <option>Tư vấn tủ đồ nghề</option>
+                <option>Bộ dụng cụ SFS</option>
+                <option>Báo giá số lượng lớn</option>
+                <option>Hợp tác / đại lý</option>
+                <option>Bảo hành & hỗ trợ</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="message">Lời nhắn</label>
+            <textarea id="message" name="message" placeholder="Mô tả nhu cầu của bạn..."></textarea>
+          </div>
+          <button class="btn btn--primary" type="submit" style="justify-content:center">Gửi yêu cầu</button>
+          <p class="form__note">* Thông tin bắt buộc. Đây là biểu mẫu demo — dữ liệu không được gửi đi ở phiên bản giới thiệu này.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col footer-brand">
+        <a class="brand" href="index.html">
+          <span class="brand__mark">S</span>
+          <span><span class="brand__name" style="color:#fff">SONIC</span><br/><span class="brand__sub">Việt Nam</span></span>
+        </a>
+        <p>Đại lý phân phối chính thức dụng cụ và tủ đồ nghề Sonic Equipment tại Việt Nam.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Sản phẩm</h4>
+        <ul>
+          <li><a href="products.html#toolboxes">Tủ đồ nghề</a></li>
+          <li><a href="products.html#sfs">Sonic Foam System</a></li>
+          <li><a href="products.html#sockets">Đầu khẩu & tay vặn</a></li>
+          <li><a href="products.html#wrenches">Cờ lê & mỏ lết</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Công ty</h4>
+        <ul>
+          <li><a href="index.html#about">Về chúng tôi</a></li>
+          <li><a href="index.html#sfs">Sonic Foam System</a></li>
+          <li><a href="contact.html">Liên hệ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Liên hệ</h4>
+        <ul>
+          <li>📞 0900 000 000</li>
+          <li>✉️ info@sonic-vietnam.vn</li>
+          <li>📍 TP. Hồ Chí Minh, Việt Nam</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© <span data-year></span> Sonic Việt Nam. Sonic Equipment là thương hiệu của Sonic Equipment B.V. (Hà Lan).</span>
+      <span>Website demo cho mục đích giới thiệu sản phẩm.</span>
+    </div>
+  </footer>
+
+  <script src="assets/js/products.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
