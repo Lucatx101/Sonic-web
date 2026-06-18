@@ -16,11 +16,11 @@ const CONFIG = {
   formspreeEndpoint: "",
 
   /* --- 2) THÔNG TIN LIÊN HỆ (hiển thị ở thanh cố định, footer, trang liên hệ) --- */
-  hotline: "0900 000 000",                 // ← ĐIỀN số hotline
-  hotlineRaw: "0900000000",                // ← số không dấu cách (dùng cho link gọi)
-  zalo: "0900000000",                      // ← số/zalo id (link https://zalo.me/<số>)
+  hotline: "0888 23 23 66",                 // ← ĐIỀN số hotline
+  hotlineRaw: "0843555566",                // ← số không dấu cách (dùng cho link gọi)
+  zalo: "0843555566",                      // ← số/zalo id (link https://zalo.me/<số>)
   email: "info@sonic-vietnam.vn",          // ← email nhận báo giá
-  showroom: "Số ... , Quận ..., TP. Hồ Chí Minh", // ← ĐIỀN địa chỉ showroom
+  showroom: "C7-23, Geleximco,Nam Từ Liêm, TP. Hà Nội", // ← ĐIỀN địa chỉ showroom
   companyName: "Sonic Việt Nam",
   workingHours: "Thứ 2 – Thứ 7: 8:00 – 17:30",
 };
