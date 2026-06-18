@@ -227,7 +227,7 @@ function showModal(p, modal) {
   const variantList = (p.variants && p.variants.length)
     ? `<p style="margin-top:14px;font-weight:600;color:var(--black)">Các cấu hình:</p>
        <ul class="modal__specs">${p.variants.map(v =>
-         `<li><span>${v.pieces != null ? v.pieces + " chi tiết" : "—"}</span><span>Mã ${v.sku}</span></li>`).join("")}</ul>`
+         `<li><span>${v.pieces != null ? v.pieces + " chi tiết" : "—"}</span><span>${v.dimensions}</span></li>`).join("")}</ul>`
     : "";
   modal.querySelector(".modal__body").innerHTML = `
     <button class="modal__close" data-close aria-label="Đóng">×</button>
@@ -437,10 +437,10 @@ function renderProductPage() {
   // Khối chọn biến thể (chỉ cho model có variants)
   const variantBlock = hasVariants ? `
     <div class="pd-variants">
-      <label for="variant-select">Chọn cấu hình (số chi tiết &amp; mã SKU):</label>
+      <label for="variant-select">Chọn cấu hình (số chi tiết):</label>
       <select id="variant-select">
         ${p.variants.map((v, i) =>
-          `<option value="${i}">${v.pieces != null ? v.pieces + " chi tiết" : "—"} — Mã ${v.sku}</option>`).join("")}
+          `<option value="${i}">${v.pieces != null ? v.pieces + " chi tiết" : "—"}</option>`).join("")}
       </select>
       <p class="pd-variant-info" id="variant-info"></p>
     </div>` : "";
@@ -473,7 +473,7 @@ function renderProductPage() {
               <a class="btn btn--primary" id="quote-btn" href="contact.html?pid=${p.id}">Yêu cầu báo giá</a>
               <a class="btn btn--ghost" href="products.html">← Tất cả sản phẩm</a>
             </div>
-            <p class="form__note" style="margin-top:18px">Giá và tình trạng hàng vui lòng liên hệ đại lý để được tư vấn chính xác nhất.</p>
+            <p class="form__note" style="margin-top:18px">Sản phẩm trưng bày theo catalog Sonic — vui lòng liên hệ để được tư vấn &amp; báo giá.</p>
           </div>
         </div>
         ${related.length ? `
@@ -489,8 +489,8 @@ function renderProductPage() {
     const qbtn = root.querySelector("#quote-btn");
     const update = () => {
       const v = p.variants[+sel.value];
-      info.innerHTML = `Đã chọn: <b>${v.pieces != null ? v.pieces + " chi tiết" : "—"}</b> · Mã <b>${v.sku}</b> · ${v.dimensions}`;
-      qbtn.href = `contact.html?pid=${p.id}&sku=${v.sku}${v.pieces != null ? "&pcs=" + v.pieces : ""}`;
+      info.innerHTML = `Đã chọn cấu hình: <b>${v.pieces != null ? v.pieces + " chi tiết" : "—"}</b> · ${v.dimensions}`;
+      qbtn.href = `contact.html?pid=${p.id}${v.pieces != null ? "&pcs=" + v.pieces : ""}`;
     };
     sel.addEventListener("change", update);
     update();
