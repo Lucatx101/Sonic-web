@@ -87,6 +87,7 @@ a { color: inherit; text-decoration: none; }
 .btn:hover { transform: translateY(-2px); }
 .btn--primary { background: var(--red); color: #fff; }
 .btn--primary:hover { background: var(--red-dark); }
+.btn--sm { padding: 9px 16px; font-size: 13.5px; }
 .btn--ghost { background: transparent; color: var(--black); border-color: var(--line); }
 .btn--ghost:hover { border-color: var(--black); }
 .btn--light { background: #fff; color: var(--black); }
@@ -230,6 +231,8 @@ a { color: inherit; text-decoration: none; }
   position: relative; aspect-ratio: 4 / 3; background: linear-gradient(160deg, #f7f8fa, #eceef2);
   display: flex; align-items: center; justify-content: center; padding: 18px;
 }
+.product-photo { width: 100%; height: 100%; object-fit: contain; }
+.pd-media .product-photo { max-height: 360px; }
 .product-card__badge {
   position: absolute; top: 12px; left: 12px;
   background: var(--red); color: #fff; font-size: 11px; font-weight: 700;
@@ -316,9 +319,66 @@ a { color: inherit; text-decoration: none; }
   outline: none; border-color: var(--red); background: #fff;
 }
 .field textarea { resize: vertical; min-height: 110px; }
+.field input.invalid, .field textarea.invalid { border-color: var(--red); background: #fff5f6; }
+.field__err { color: var(--red); font-size: 12.5px; font-weight: 600; min-height: 0; }
 .form__note { font-size: 13px; color: var(--grey); }
-.form__success { display: none; background: #effaf1; border: 1px solid #bfe6c8; color: #1c7a35; padding: 13px 16px; border-radius: 10px; font-size: 14px; font-weight: 600; }
-.form__success.show { display: block; }
+.form__success, .form__error { display: none; padding: 13px 16px; border-radius: 10px; font-size: 14px; font-weight: 600; }
+.form__success { background: #effaf1; border: 1px solid #bfe6c8; color: #1c7a35; }
+.form__error { background: #fff1f2; border: 1px solid #f5c2c7; color: #b3261e; }
+.form__success.show, .form__error.show { display: block; }
+
+/* Nút có trạng thái loading */
+.btn__spinner { display: none; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.45); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; }
+.btn.is-loading .btn__spinner { display: inline-block; }
+.btn.is-loading { opacity: .85; cursor: progress; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ===== Thanh tiện ích trên cùng (hotline + showroom) ===== */
+.topbar { background: var(--black); color: #cfd6df; font-size: 13.5px; }
+.topbar__row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 8px 0; flex-wrap: wrap; }
+.topbar a { display: inline-flex; align-items: center; gap: 7px; color: #cfd6df; font-weight: 600; }
+.topbar a:hover { color: #fff; }
+.topbar svg { color: var(--red); }
+.topbar__left { display: flex; gap: 22px; flex-wrap: wrap; }
+.topbar__badge { color: #fff; font-weight: 700; }
+.topbar__badge b { color: #ff5b6e; }
+
+/* ===== Dải 3 USP ===== */
+.usp { background: #fff; border-bottom: 1px solid var(--line); }
+.usp__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+.usp__item { display: flex; gap: 14px; align-items: center; padding: 22px 24px; border-left: 1px solid var(--line); }
+.usp__item:first-child { border-left: 0; }
+.usp__icon { flex: 0 0 auto; width: 46px; height: 46px; border-radius: 12px; background: linear-gradient(135deg,#fff0f1,#ffe1e4); color: var(--red); display: flex; align-items: center; justify-content: center; }
+.usp__item strong { display: block; color: var(--black); font-size: 15.5px; }
+.usp__item span { font-size: 13px; color: var(--grey); }
+
+/* ===== Thanh liên hệ cố định (mobile-first dock) ===== */
+.contact-dock {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+  display: none; grid-template-columns: repeat(3, 1fr);
+  background: var(--black); border-top: 1px solid rgba(255,255,255,.1);
+  box-shadow: 0 -6px 24px rgba(0,0,0,.25);
+}
+.contact-dock a {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 10px 6px; color: #e9edf2; font-size: 12px; font-weight: 700;
+  border-left: 1px solid rgba(255,255,255,.08);
+}
+.contact-dock a:first-child { border-left: 0; }
+.contact-dock a.is-primary { background: var(--red); color: #fff; }
+.contact-dock a.is-zalo { background: #0068ff; color: #fff; }
+.contact-dock svg { width: 22px; height: 22px; }
+
+/* Floating buttons cho desktop */
+.fab { position: fixed; right: 18px; bottom: 22px; z-index: 60; display: flex; flex-direction: column; gap: 12px; }
+.fab a {
+  display: inline-flex; align-items: center; gap: 9px; padding: 12px 18px; border-radius: 999px;
+  font-weight: 700; font-size: 14px; color: #fff; box-shadow: var(--shadow-lg);
+  transition: transform .15s ease;
+}
+.fab a:hover { transform: translateY(-2px); }
+.fab .fab-hotline { background: var(--red); }
+.fab .fab-zalo { background: #0068ff; }
 
 /* ===== CTA dải ===== */
 .cta-band {
@@ -406,6 +466,15 @@ a { color: inherit; text-decoration: none; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .modal__panel { grid-template-columns: 1fr; }
   .modal__media { display: none; }
+  .usp__grid { grid-template-columns: 1fr; }
+  .usp__item { border-left: 0; border-top: 1px solid var(--line); padding: 16px 20px; }
+  .usp__item:first-child { border-top: 0; }
+  .topbar__left { display: none; }
+  .topbar__row { justify-content: center; }
+  /* Hiện dock cố định, ẩn nút nổi trên mobile */
+  .contact-dock { display: grid; }
+  .fab { display: none; }
+  body { padding-bottom: 64px; }
 }
 @media (max-width: 680px) {
   .nav__links, .nav__cta .btn--ghost { display: none; }

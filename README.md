@@ -1,52 +1,68 @@
-# Sonic Việt Nam — Website giới thiệu sản phẩm
+# Sonic Việt Nam — Website đại lý phân phối
 
-Website tĩnh giới thiệu sản phẩm **Sonic Equipment** dành cho đại lý phân phối tại Việt Nam,
-lấy cảm hứng từ [sonic-equipment.com](https://www.sonic-equipment.com/en-nl).
+Website tĩnh cho **đại lý / nhà phân phối chính hãng Sonic Equipment tại Việt Nam**,
+hướng tới khách hàng B2B: gara ô tô, tiệm xe máy, xưởng cơ khí, thợ chuyên nghiệp.
+Lấy cảm hứng thẩm mỹ (đỏ–đen, ảnh lớn, gọn) từ [sonic-equipment.com](https://www.sonic-equipment.com/en-nl).
 
-Toàn bộ nội dung bằng **tiếng Việt**, không phụ thuộc framework hay tài nguyên ảnh bên ngoài
-(các hình minh họa sản phẩm được vẽ bằng SVG trong mã nguồn).
+**Mô hình KHÔNG hiện giá** — toàn bộ điều hướng về **"Yêu cầu báo giá"** để thu thập lead.
+Toàn bộ nội dung bằng **tiếng Việt**.
 
 ## Tính năng
 
-- **Trang chủ** (`index.html`): hero, danh mục sản phẩm, sản phẩm nổi bật, giới thiệu Sonic Foam System (SFS), lý do chọn Sonic, giới thiệu đại lý và CTA.
-- **Trang sản phẩm** (`products.html`): danh mục đầy đủ với **bộ lọc theo nhóm**, **xem nhanh (modal)** và liên kết sang trang chi tiết.
-- **Trang chi tiết** (`product.html?id=...`): trang riêng cho từng sản phẩm gồm thông số, mô tả, nút báo giá và **sản phẩm liên quan**.
-- **Trang liên hệ** (`contact.html`): thông tin liên hệ + biểu mẫu yêu cầu báo giá; khi gửi sẽ **mở ứng dụng email** với nội dung điền sẵn (mailto).
-- Giao diện **responsive** (máy tính, máy tính bảng, điện thoại) với menu mobile.
-- Phối màu theo thương hiệu Sonic: **đỏ / đen / trắng**.
+- **Trang chủ** (`index.html`): hero nhấn mạnh "Đại lý chính hãng Sonic tại Việt Nam" với 2 CTA
+  (*Xem sản phẩm* / *Nhận báo giá*), dải **3 USP** (Hàng chính hãng / Bảo hành / Giao toàn quốc),
+  danh mục, sản phẩm nổi bật, Sonic Foam System, giới thiệu đại lý.
+- **Trang sản phẩm** (`products.html`): bộ lọc theo nhóm, **xem nhanh (modal)**, nút **Yêu cầu báo giá** trên mỗi thẻ.
+- **Trang chi tiết** (`product.html?id=...`): thông số đầy đủ, mô tả, báo giá, sản phẩm liên quan.
+- **Trang liên hệ** (`contact.html`): **form báo giá B2B** (Họ tên, SĐT bắt buộc, Email, Công ty/gara,
+  Sản phẩm quan tâm — tự điền khi bấm từ sản phẩm, Số lượng, Lời nhắn) với validate, loading, success/error.
+- **Thanh liên hệ cố định**: dock Hotline + Zalo + Báo giá (mobile) và nút nổi Hotline/Zalo (desktop);
+  thanh tiện ích trên cùng hiển thị Hotline + địa chỉ showroom + giờ làm việc.
+- **Responsive** đầy đủ; phối màu thương hiệu Sonic (đỏ/đen/trắng).
 
 ## Cấu trúc
 
 ```
 Sonic-web/
-├── index.html          # Trang chủ
-├── products.html       # Danh mục sản phẩm + bộ lọc + xem nhanh
-├── product.html        # Trang chi tiết 1 sản phẩm (?id=...)
-├── contact.html        # Liên hệ & biểu mẫu báo giá (mailto)
+├── index.html              # Trang chủ
+├── products.html           # Danh mục + bộ lọc + xem nhanh
+├── product.html            # Trang chi tiết 1 sản phẩm (?id=...)
+├── contact.html            # Liên hệ & form báo giá
+├── apps-script/
+│   ├── Code.gs             # Google Apps Script (doPost ghi vào Google Sheet)
+│   └── HUONG-DAN.md        # Hướng dẫn deploy + lấy Web App URL
 ├── assets/
-│   ├── css/styles.css  # Toàn bộ giao diện
-│   ├── js/products.js  # Dữ liệu danh mục & sản phẩm (chỉnh sửa tại đây)
-│   └── js/main.js      # Render, bộ lọc, modal, menu, form
+│   ├── css/styles.css      # Toàn bộ giao diện
+│   ├── img/products/        # Ảnh sản phẩm (+ README hướng dẫn thêm ảnh)
+│   └── js/
+│       ├── config.js        # ★ CẤU HÌNH: URL form + thông tin liên hệ (sửa ở đây)
+│       ├── products.js      # Dữ liệu danh mục & sản phẩm
+│       └── main.js          # Render, bộ lọc, modal, form, thanh liên hệ
 └── README.md
 ```
 
-## Chạy thử
+## Bắt đầu nhanh
 
-Chỉ cần mở `index.html` bằng trình duyệt. Hoặc chạy một web server tĩnh:
+1. **Điền thông tin liên hệ:** mở `assets/js/config.js`, sửa `hotline`, `zalo`, `email`, `showroom`…
+2. **Kết nối form báo giá:** làm theo `apps-script/HUONG-DAN.md` để tạo Google Sheet + Apps Script,
+   rồi dán Web App URL vào `CONFIG.formEndpoint`. (Chưa cấu hình thì form tự gửi qua email — mailto.)
+3. **Thêm ảnh sản phẩm:** xem `assets/img/products/README.md`.
+4. **Chạy thử:**
+   ```bash
+   python3 -m http.server 8000   # rồi mở http://localhost:8000
+   ```
 
-```bash
-python3 -m http.server 8000
-# Mở http://localhost:8000
-```
+## Tùy chỉnh
 
-## Tùy chỉnh nội dung
+- **Liên hệ (hotline/zalo/email/showroom/giờ làm việc):** chỉ sửa `assets/js/config.js` — tự áp dụng toàn site.
+- **Sản phẩm & danh mục:** sửa `PRODUCTS` / `CATEGORIES` trong `assets/js/products.js`.
+- **Màu sắc / thương hiệu:** sửa biến CSS ở đầu `assets/css/styles.css` (`:root`).
 
-- **Thêm/sửa sản phẩm & danh mục:** chỉnh mảng `PRODUCTS` và `CATEGORIES` trong `assets/js/products.js`.
-- **Thông tin liên hệ:** cập nhật số điện thoại, email, địa chỉ trong phần footer của các trang `.html` và trong `contact.html`.
-- **Màu sắc / thương hiệu:** chỉnh các biến CSS ở đầu `assets/css/styles.css` (`:root`).
+## Ghi chú về catalog & ảnh
 
-## Ghi chú
+File catalog PDF của Sonic (host `a.storyblok.com`) **không tải được** trong môi trường tạo site này
+do chính sách chặn truy cập mạng, nên ảnh sản phẩm đang dùng **hình minh hoạ SVG** và thông số được
+điền theo dữ liệu công bố của dòng Sonic NEXT. Để có ảnh/thông số chính xác từ catalog, hãy thêm ảnh
+theo hướng dẫn trong `assets/img/products/README.md` hoặc cấp quyền truy cập host đó.
 
-Đây là website demo phục vụ giới thiệu sản phẩm. Hình ảnh sản phẩm là minh họa SVG;
-khi triển khai chính thức nên thay bằng ảnh thật và bổ sung backend cho biểu mẫu liên hệ.
 Sonic Equipment là thương hiệu của Sonic Equipment B.V. (Hà Lan).

@@ -104,6 +104,22 @@ const ICONS = {
 };
 
 function artFor(p) {
+  // Nếu sản phẩm có ảnh thật (p.image = URL hoặc đường dẫn cục bộ) thì dùng ảnh,
+  // tự fallback về hình minh hoạ SVG nếu ảnh lỗi. Xem assets/img/products/README.md.
+  if (p.image) {
+    return `<img class="product-photo" src="${p.image}" alt="${p.name}" loading="lazy"
+      data-pid="${p.id}" onerror="window.__imgFallback(this)">`;
+  }
+  return svgFor(p);
+}
+
+// Thay ảnh lỗi bằng hình minh hoạ SVG tương ứng.
+window.__imgFallback = function (img) {
+  const p = PRODUCTS.find(x => x.id === img.getAttribute("data-pid"));
+  if (p) img.outerHTML = svgFor(p);
+};
+
+function svgFor(p) {
   if (p.img && p.img.startsWith("toolbox")) return SVG.toolbox(p.drawers || 7);
   if (SVG[p.img]) return SVG[p.img]();
   return SVG.workshop();
@@ -141,8 +157,8 @@ function productCard(p) {
       <p class="product-card__desc">${p.desc}</p>
       <div class="product-card__meta">${meta.join("")}</div>
       <div class="product-card__foot">
+        <a class="btn btn--primary btn--sm" href="contact.html?sp=${p.code}">Yêu cầu báo giá</a>
         <button class="product-card__cta" data-open="${p.id}">Xem nhanh</button>
-        <a class="product-card__cta" href="product.html?id=${p.id}">Chi tiết →</a>
       </div>
     </div>
   </article>`;
@@ -197,6 +213,7 @@ function showModal(p, modal) {
   if (p.pieces) specs.push(["Số chi tiết", p.pieces + " món"]);
   if (p.drawers) specs.push(["Số ngăn kéo", p.drawers]);
   if (p.dims) specs.push(["Kích thước", p.dims]);
+  (p.extra || []).forEach(s => specs.push(s));
   modal.querySelector(".modal__body").innerHTML = `
     <button class="modal__close" data-close aria-label="Đóng">×</button>
     ${p.badge ? `<span class="product-card__badge" style="position:static;display:inline-block">${p.badge}</span>` : ""}
@@ -230,34 +247,137 @@ function renderHeroArt() {
   if (fa) fa.innerHTML = SVG.foam();
 }
 
-/* --- Form liên hệ --- */
+/* --- Form báo giá B2B --- */
+
+// Đặt true nếu muốn dùng Formspree thay cho Google Apps Script (xem config.js).
+const USE_FORMSPREE = false;
+
+const RX_PHONE = /^(0|\+84)\d{8,11}$/;            // SĐT Việt Nam
+const RX_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function validateLead(data) {
+  const errors = {};
+  if (!data.name || data.name.trim().length < 2) errors.name = "Vui lòng nhập họ tên.";
+  const phone = (data.phone || "").replace(/[\s.\-()]/g, "");
+  if (!phone) errors.phone = "Vui lòng nhập số điện thoại.";
+  else if (!RX_PHONE.test(phone)) errors.phone = "Số điện thoại chưa hợp lệ.";
+  if (data.email && !RX_EMAIL.test(data.email.trim())) errors.email = "Email chưa hợp lệ.";
+  return errors;
+}
+
 function setupForm() {
   const form = document.getElementById("contact-form");
   if (!form) return;
+
+  // Prefill "Sản phẩm quan tâm" khi đến từ trang/thẻ sản phẩm (?sp=<mã>).
   const sp = new URLSearchParams(location.search).get("sp");
   if (sp) {
-    const msg = form.querySelector('[name="message"]');
-    if (msg) msg.value = `Tôi quan tâm đến sản phẩm mã ${sp}. Vui lòng tư vấn và báo giá.`;
+    const prod = PRODUCTS.find(p => p.code === sp);
+    const field = form.querySelector('[name="product"]');
+    if (field) field.value = prod ? `${prod.name} (Mã ${prod.code})` : `Mã ${sp}`;
   }
-  form.addEventListener("submit", e => {
+
+  const btn = form.querySelector("#submit-btn");
+  const okBox = form.querySelector(".form__success");
+  const errBox = form.querySelector(".form__error");
+
+  const showFieldErrors = errs => {
+    form.querySelectorAll(".field__err").forEach(el => (el.textContent = ""));
+    form.querySelectorAll(".field input").forEach(el => el.classList.remove("invalid"));
+    Object.keys(errs).forEach(k => {
+      const slot = form.querySelector(`[data-err="${k}"]`);
+      const input = form.querySelector(`[name="${k}"]`);
+      if (slot) slot.textContent = errs[k];
+      if (input) input.classList.add("invalid");
+    });
+  };
+
+  form.addEventListener("submit", async e => {
     e.preventDefault();
-    const data = new FormData(form);
-    const lines = [
-      `Họ tên: ${data.get("name") || ""}`,
-      `Điện thoại: ${data.get("phone") || ""}`,
-      `Email: ${data.get("email") || ""}`,
-      `Quan tâm: ${data.get("topic") || ""}`,
-      "",
-      `Lời nhắn:`,
-      `${data.get("message") || ""}`,
-    ].join("\n");
-    const subject = `[Yêu cầu báo giá] ${data.get("topic") || "Sonic Việt Nam"}`;
-    const mailto = `mailto:info@sonic-vietnam.vn?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines)}`;
-    // Mở ứng dụng email của người dùng với nội dung đã điền sẵn.
-    window.location.href = mailto;
-    form.querySelector(".form__success").classList.add("show");
-    setTimeout(() => form.querySelector(".form__success").classList.remove("show"), 8000);
+    okBox.classList.remove("show");
+    errBox.classList.remove("show");
+
+    const data = Object.fromEntries(new FormData(form).entries());
+    data.page = location.href;
+
+    const errs = validateLead(data);
+    if (Object.keys(errs).length) {
+      showFieldErrors(errs);
+      const first = form.querySelector(".invalid");
+      if (first) first.focus();
+      return;
+    }
+    showFieldErrors({});
+
+    setLoading(btn, true);
+    try {
+      await submitLead(data);
+      form.reset();
+      okBox.classList.add("show");
+      okBox.scrollIntoView({ behavior: "smooth", block: "center" });
+      setTimeout(() => okBox.classList.remove("show"), 9000);
+    } catch (err) {
+      // Fetch lỗi → chuyển sang gửi qua email (mailto) để không mất lead.
+      errBox.textContent = "Không gửi được tự động. Đang mở ứng dụng email để bạn gửi thủ công…";
+      errBox.classList.add("show");
+      window.location.href = mailtoFor(data);
+    } finally {
+      setLoading(btn, false);
+    }
   });
+}
+
+function setLoading(btn, on) {
+  if (!btn) return;
+  btn.disabled = on;
+  btn.classList.toggle("is-loading", on);
+  const label = btn.querySelector(".btn__label");
+  if (label) label.textContent = on ? "Đang gửi…" : "Gửi yêu cầu báo giá";
+}
+
+async function submitLead(data) {
+  const endpoint = USE_FORMSPREE ? CONFIG.formspreeEndpoint : CONFIG.formEndpoint;
+
+  // Không cấu hình endpoint → dùng mailto luôn (không coi là lỗi).
+  if (!endpoint) {
+    window.location.href = mailtoFor(data);
+    return;
+  }
+
+  if (USE_FORMSPREE) {
+    const res = await fetch(endpoint, {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: new FormData(document.getElementById("contact-form")),
+    });
+    if (!res.ok) throw new Error("Formspree error " + res.status);
+    return;
+  }
+
+  // Google Apps Script: gửi JSON dạng text/plain để tránh CORS preflight.
+  const res = await fetch(endpoint, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify(data),
+  });
+  const out = await res.json().catch(() => ({}));
+  if (!res.ok || out.ok === false) throw new Error(out.error || "Apps Script error");
+}
+
+function mailtoFor(data) {
+  const lines = [
+    `Họ tên: ${data.name || ""}`,
+    `Điện thoại: ${data.phone || ""}`,
+    `Email: ${data.email || ""}`,
+    `Công ty/gara: ${data.company || ""}`,
+    `Sản phẩm quan tâm: ${data.product || ""}`,
+    `Số lượng dự kiến: ${data.quantity || ""}`,
+    "",
+    "Lời nhắn:",
+    `${data.message || ""}`,
+  ].join("\n");
+  const subject = `[Yêu cầu báo giá] ${data.product || CONFIG.companyName}`;
+  return `mailto:${CONFIG.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines)}`;
 }
 
 /* --- Trang chi tiết sản phẩm --- */
@@ -281,6 +401,7 @@ function renderProductPage() {
   if (p.pieces) specs.push(["Số chi tiết", p.pieces + " món"]);
   if (p.drawers) specs.push(["Số ngăn kéo", p.drawers]);
   if (p.dims) specs.push(["Kích thước", p.dims]);
+  (p.extra || []).forEach(s => specs.push(s));
 
   const related = PRODUCTS.filter(x => x.category === p.category && x.id !== p.id).slice(0, 3);
 
@@ -319,6 +440,53 @@ function renderProductPage() {
     </section>`;
 }
 
+/* --- Áp dụng cấu hình liên hệ + thanh liên hệ cố định --- */
+function applyConfig() {
+  if (typeof CONFIG === "undefined") return;
+  const mapUrl = "https://maps.google.com/?q=" + encodeURIComponent(CONFIG.showroom);
+  const zaloUrl = "https://zalo.me/" + (CONFIG.zalo || CONFIG.hotlineRaw);
+  const telUrl = "tel:" + (CONFIG.hotlineRaw || CONFIG.hotline).replace(/\s/g, "");
+
+  // Điền các phần tử có data-cfg.
+  document.querySelectorAll("[data-cfg]").forEach(el => {
+    const key = el.getAttribute("data-cfg");
+    const val = {
+      hotline: CONFIG.hotline, email: CONFIG.email, showroom: CONFIG.showroom,
+      hours: CONFIG.workingHours, company: CONFIG.companyName, zalo: CONFIG.zalo,
+    }[key];
+    if (val == null) return;
+    if (el.tagName === "A") {
+      if (key === "hotline") el.href = telUrl;
+      else if (key === "email") el.href = "mailto:" + CONFIG.email;
+      else if (key === "showroom") el.href = mapUrl;
+      else if (key === "zalo") el.href = zaloUrl;
+    }
+    if (!el.hasAttribute("data-cfg-href-only")) el.textContent = val;
+  });
+
+  const ICON_PHONE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c1 .3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>';
+  const ICON_CHAT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-12 7.6L3 21l1.9-6A8.4 8.4 0 1 1 21 11.5z"/></svg>';
+  const ICON_PIN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>';
+  const ICON_QUOTE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg>';
+
+  // Thanh liên hệ cố định (mobile) — Hotline + Zalo + Báo giá.
+  const dock = document.createElement("div");
+  dock.className = "contact-dock";
+  dock.innerHTML = `
+    <a class="is-primary" href="${telUrl}">${ICON_PHONE}<span>Gọi: ${CONFIG.hotline}</span></a>
+    <a class="is-zalo" href="${zaloUrl}" target="_blank" rel="noopener">${ICON_CHAT}<span>Chat Zalo</span></a>
+    <a href="contact.html">${ICON_QUOTE}<span>Báo giá</span></a>`;
+  document.body.appendChild(dock);
+
+  // Nút nổi (desktop) — Hotline + Zalo.
+  const fab = document.createElement("div");
+  fab.className = "fab";
+  fab.innerHTML = `
+    <a class="fab-zalo" href="${zaloUrl}" target="_blank" rel="noopener">${ICON_CHAT}<span>Zalo</span></a>
+    <a class="fab-hotline" href="${telUrl}">${ICON_PHONE}<span>${CONFIG.hotline}</span></a>`;
+  document.body.appendChild(fab);
+}
+
 /* --- Năm hiện tại ở footer --- */
 function setYear() {
   document.querySelectorAll("[data-year]").forEach(el => (el.textContent = new Date().getFullYear()));
@@ -333,6 +501,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupModal();
   setupForm();
   renderProductPage();
+  applyConfig();
   setYear();
 
   const hash = location.hash.replace("#", "");
