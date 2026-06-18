@@ -142,7 +142,16 @@ function renderCategories() {
 function productCard(p) {
   const cat = CATEGORIES.find(c => c.id === p.category);
   const meta = [];
-  if (p.pieces) meta.push(`<span class="chip">${p.pieces} chi tiết</span>`);
+  if (p.variants && p.variants.length) {
+    const ps = p.variants.map(v => v.pieces).filter(x => x != null);
+    if (ps.length) {
+      const lo = Math.min(...ps), hi = Math.max(...ps);
+      meta.push(`<span class="chip">${lo === hi ? lo : lo + "–" + hi} chi tiết</span>`);
+    }
+    meta.push(`<span class="chip">${p.variants.length} cấu hình</span>`);
+  } else if (p.pieces) {
+    meta.push(`<span class="chip">${p.pieces} chi tiết</span>`);
+  }
   if (p.drawers) meta.push(`<span class="chip">${p.drawers} ngăn kéo</span>`);
   if (p.dims) meta.push(`<span class="chip">${p.dims}</span>`);
   return `
@@ -157,7 +166,7 @@ function productCard(p) {
       <p class="product-card__desc">${p.desc}</p>
       <div class="product-card__meta">${meta.join("")}</div>
       <div class="product-card__foot">
-        <a class="btn btn--primary btn--sm" href="contact.html?sp=${p.code}">Yêu cầu báo giá</a>
+        <a class="btn btn--primary btn--sm" href="contact.html?pid=${p.id}">Yêu cầu báo giá</a>
         <button class="product-card__cta" data-open="${p.id}">Xem nhanh</button>
       </div>
     </div>
@@ -210,18 +219,25 @@ function showModal(p, modal) {
   const specs = [];
   if (p.code) specs.push(["Mã sản phẩm", p.code]);
   if (cat) specs.push(["Danh mục", cat.name]);
-  if (p.pieces) specs.push(["Số chi tiết", p.pieces + " món"]);
+  if (p.variants && p.variants.length) specs.push(["Số cấu hình", p.variants.length + " biến thể"]);
+  else if (p.pieces) specs.push(["Số chi tiết", p.pieces + " món"]);
   if (p.drawers) specs.push(["Số ngăn kéo", p.drawers]);
   if (p.dims) specs.push(["Kích thước", p.dims]);
   (p.extra || []).forEach(s => specs.push(s));
+  const variantList = (p.variants && p.variants.length)
+    ? `<p style="margin-top:14px;font-weight:600;color:var(--black)">Các cấu hình:</p>
+       <ul class="modal__specs">${p.variants.map(v =>
+         `<li><span>${v.pieces != null ? v.pieces + " chi tiết" : "—"}</span><span>Mã ${v.sku}</span></li>`).join("")}</ul>`
+    : "";
   modal.querySelector(".modal__body").innerHTML = `
     <button class="modal__close" data-close aria-label="Đóng">×</button>
     ${p.badge ? `<span class="product-card__badge" style="position:static;display:inline-block">${p.badge}</span>` : ""}
     <h3>${p.name}</h3>
     <p>${p.desc}</p>
     <ul class="modal__specs">${specs.map(s => `<li><span>${s[0]}</span><span>${s[1]}</span></li>`).join("")}</ul>
+    ${variantList}
     <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <a class="btn btn--primary" href="contact.html?sp=${encodeURIComponent(p.code)}">Yêu cầu báo giá</a>
+      <a class="btn btn--primary" href="contact.html?pid=${p.id}">Yêu cầu báo giá</a>
       <a class="btn btn--ghost" href="product.html?id=${p.id}">Xem trang chi tiết</a>
     </div>`;
   modal.classList.add("open");
@@ -269,12 +285,23 @@ function setupForm() {
   const form = document.getElementById("contact-form");
   if (!form) return;
 
-  // Prefill "Sản phẩm quan tâm" khi đến từ trang/thẻ sản phẩm (?sp=<mã>).
-  const sp = new URLSearchParams(location.search).get("sp");
-  if (sp) {
-    const prod = PRODUCTS.find(p => p.code === sp);
-    const field = form.querySelector('[name="product"]');
-    if (field) field.value = prod ? (prod.code ? `${prod.name} (Mã ${prod.code})` : prod.name) : `Mã ${sp}`;
+  // Prefill "Sản phẩm quan tâm" khi đến từ trang/thẻ sản phẩm.
+  // Hỗ trợ: ?pid=<id>[&sku=<sku>&pcs=<pcs>]  (kèm biến thể đã chọn)  hoặc  ?sp=<mã> (cũ).
+  const qs = new URLSearchParams(location.search);
+  const field = form.querySelector('[name="product"]');
+  if (field) {
+    const pid = qs.get("pid"), sku = qs.get("sku"), pcs = qs.get("pcs"), sp = qs.get("sp");
+    if (pid) {
+      const prod = PRODUCTS.find(p => p.id === pid);
+      let val = prod ? prod.name : pid;
+      if (pcs) val += ` — ${pcs} chi tiết`;
+      if (sku) val += ` (Mã ${sku})`;
+      else if (prod && prod.code) val += ` (Mã ${prod.code})`;
+      field.value = val;
+    } else if (sp) {
+      const prod = PRODUCTS.find(p => p.code === sp);
+      field.value = prod ? (prod.code ? `${prod.name} (Mã ${prod.code})` : prod.name) : `Mã ${sp}`;
+    }
   }
 
   const btn = form.querySelector("#submit-btn");
@@ -396,13 +423,27 @@ function renderProductPage() {
   const cat = CATEGORIES.find(c => c.id === p.category);
   document.title = `${p.name} — Sonic Việt Nam`;
 
+  const hasVariants = p.variants && p.variants.length > 0;
+
   const specs = [];
   if (p.code) specs.push(["Mã sản phẩm", p.code]);
   if (cat) specs.push(["Danh mục", cat.name]);
-  if (p.pieces) specs.push(["Số chi tiết", p.pieces + " món"]);
+  if (hasVariants) specs.push(["Số cấu hình", p.variants.length + " biến thể"]);
+  else if (p.pieces) specs.push(["Số chi tiết", p.pieces + " món"]);
   if (p.drawers) specs.push(["Số ngăn kéo", p.drawers]);
   if (p.dims) specs.push(["Kích thước", p.dims]);
   (p.extra || []).forEach(s => specs.push(s));
+
+  // Khối chọn biến thể (chỉ cho model có variants)
+  const variantBlock = hasVariants ? `
+    <div class="pd-variants">
+      <label for="variant-select">Chọn cấu hình (số chi tiết &amp; mã SKU):</label>
+      <select id="variant-select">
+        ${p.variants.map((v, i) =>
+          `<option value="${i}">${v.pieces != null ? v.pieces + " chi tiết" : "—"} — Mã ${v.sku}</option>`).join("")}
+      </select>
+      <p class="pd-variant-info" id="variant-info"></p>
+    </div>` : "";
 
   const related = PRODUCTS.filter(x => x.category === p.category && x.id !== p.id).slice(0, 3);
 
@@ -423,12 +464,13 @@ function renderProductPage() {
             ${artFor(p)}
           </div>
           <div class="pd-info">
-            <span class="product-card__code">${p.code ? "Mã: " + p.code : "Mã: đang cập nhật"}${cat ? " · " + cat.name : ""}</span>
+            <span class="product-card__code">${p.code ? "Mã: " + p.code : (hasVariants ? "Nhiều mã SKU theo cấu hình" : "Mã: đang cập nhật")}${cat ? " · " + cat.name : ""}</span>
             <h1>${p.name}</h1>
             <p class="pd-desc">${p.desc}</p>
             <ul class="modal__specs">${specs.map(s => `<li><span>${s[0]}</span><span>${s[1]}</span></li>`).join("")}</ul>
+            ${variantBlock}
             <div class="pd-actions">
-              <a class="btn btn--primary" href="contact.html?sp=${encodeURIComponent(p.code)}">Yêu cầu báo giá</a>
+              <a class="btn btn--primary" id="quote-btn" href="contact.html?pid=${p.id}">Yêu cầu báo giá</a>
               <a class="btn btn--ghost" href="products.html">← Tất cả sản phẩm</a>
             </div>
             <p class="form__note" style="margin-top:18px">Giá và tình trạng hàng vui lòng liên hệ đại lý để được tư vấn chính xác nhất.</p>
@@ -439,6 +481,20 @@ function renderProductPage() {
         <div class="product-grid">${related.map(productCard).join("")}</div>` : ""}
       </div>
     </section>`;
+
+  // Cập nhật theo biến thể được chọn
+  if (hasVariants) {
+    const sel = root.querySelector("#variant-select");
+    const info = root.querySelector("#variant-info");
+    const qbtn = root.querySelector("#quote-btn");
+    const update = () => {
+      const v = p.variants[+sel.value];
+      info.innerHTML = `Đã chọn: <b>${v.pieces != null ? v.pieces + " chi tiết" : "—"}</b> · Mã <b>${v.sku}</b> · ${v.dimensions}`;
+      qbtn.href = `contact.html?pid=${p.id}&sku=${v.sku}${v.pieces != null ? "&pcs=" + v.pieces : ""}`;
+    };
+    sel.addEventListener("change", update);
+    update();
+  }
 }
 
 /* --- Áp dụng cấu hình liên hệ + thanh liên hệ cố định --- */

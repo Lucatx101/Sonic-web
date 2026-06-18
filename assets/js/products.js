@@ -1,19 +1,13 @@
 // Dữ liệu sản phẩm Sonic — dùng chung cho trang chủ, trang sản phẩm và trang chi tiết.
 //
-// ẢNH SẢN PHẨM: mỗi sản phẩm có trường "image".
-//   - Để trống ""  → website tự dùng hình minh hoạ SVG.
-//   - Điền đường dẫn ảnh thật để hiển thị ảnh, ví dụ:
-//       image: "assets/img/products/next-s12.jpg"   (ảnh tải về máy)
-//       image: "https://.../next-s12.png"           (link ảnh trực tiếp)
-//   Xem hướng dẫn thêm ảnh trong assets/img/products/README.md
+// MÔ HÌNH: dòng tủ NEXT theo "1 model = nhiều biến thể".
+//   - Mỗi model có field "variants": [{ sku, pieces, dimensions }] lấy từ Sonic Catalogue 2026.
+//   - KHÔNG hiển thị số chi tiết của một biến thể như thể là của cả model.
+//   - Ảnh là ảnh đại diện model (catalog không có ảnh riêng tin cậy cho từng SKU).
 //
-// XÁC THỰC DỮ LIỆU (verified):
-//   - verified: true  → mã SKU#, số chi tiết, số ngăn kéo, kích thước đã đối chiếu
-//                       ĐÚNG với Sonic Catalogue 2026 (mã/pcs/ảnh lấy cùng một trang).
-//   - verified: false → chưa xác định được mã SKU chính xác trong catalog; code để trống
-//                       ("") để tránh hiển thị mã sai. Cần xác nhận thủ công trước khi bán.
-//   Kích thước tủ: Rộng×Cao×Sâu — Rộng & Sâu đối chiếu đúng catalog; Cao theo thông số
-//   Sonic NEXT công bố (catalog dạng văn bản không in chiều cao).
+// ẢNH: trường "image" rỗng "" → dùng hình minh hoạ SVG; có đường dẫn → dùng ảnh thật.
+// verified: true = mã/biến thể đã đối chiếu đúng catalog; false = chưa xác định SKU, cần xác nhận.
+// Kích thước: Rộng×Cao×Sâu (Rộng/Sâu khớp catalog; Cao theo thông số Sonic NEXT công bố).
 
 const CATEGORIES = [
   { id: "toolboxes", name: "Tủ đồ nghề", tagline: "Dòng NEXT S7 – S15", icon: "toolbox",
@@ -34,7 +28,6 @@ const CATEGORIES = [
     desc: "Đèn làm việc, xe đẩy dụng cụ, búa, đục và phụ kiện hỗ trợ cho xưởng." },
 ];
 
-// Đặc tính chung của dòng tủ NEXT (dùng lại cho mọi model tủ).
 const TOOLBOX_FEATURES = [
   ["Thân tủ", "Thép nguyên khối, sơn tĩnh điện"],
   ["Ray trượt", "Ray bi, ngăn kéo mở 100%, tải ~60kg/ngăn"],
@@ -43,40 +36,107 @@ const TOOLBOX_FEATURES = [
 ];
 
 const PRODUCTS = [
-  // ===== Tủ đồ nghề — đã đối chiếu Catalog 2026 (mã/pcs/ảnh cùng trang) =====
-  { id: "next-s7-140", code: "714075", name: "Tủ đồ nghề NEXT S7 — 140 chi tiết SFS", category: "toolboxes",
-    pieces: 140, drawers: 6, dims: "R80 × C90 × S51 cm", badge: "Phổ thông", verified: true,
-    image: "assets/img/products/next-s7-140.png",
+  // ===== Tủ đồ nghề NEXT — mỗi model nhiều biến thể (đối chiếu Catalog 2026) =====
+  { id: "next-s7", code: "", name: "Tủ đồ nghề NEXT S7", category: "toolboxes",
+    drawers: 6, dims: "R80 × C90 × S51 cm", badge: "Phổ thông", verified: true,
+    image: "assets/img/products/next-s7.png",
     desc: "Mẫu nhỏ gọn lý tưởng cho kỹ thuật viên cần bộ dụng cụ cơ bản. Dễ di chuyển và đặt ở bất kỳ vị trí nào trong xưởng.",
-    img: "toolbox-s7", extra: TOOLBOX_FEATURES },
-  { id: "next-s8-197", code: "719776", name: "Tủ đồ nghề NEXT S8 — 197 chi tiết SFS", category: "toolboxes",
-    pieces: 197, drawers: 7, dims: "R80 × C104 × S51 cm", badge: "Phổ thông", verified: true,
-    image: "assets/img/products/next-s8-197.png",
+    img: "toolbox-s7", extra: TOOLBOX_FEATURES,
+    variants: [
+      { sku: "713875", pieces: 138, dimensions: "R80 × C90 × S51 cm" },
+      { sku: "714075", pieces: 140, dimensions: "R80 × C90 × S51 cm" }
+    ] },
+  { id: "next-s8", code: "", name: "Tủ đồ nghề NEXT S8", category: "toolboxes",
+    drawers: 7, dims: "R80 × C104 × S51 cm", badge: "Phổ thông", verified: true,
+    image: "assets/img/products/next-s8.png",
     desc: "Phù hợp cho kỹ thuật viên cần bộ dụng cụ cơ bản đến trung cấp với không gian lưu trữ rộng hơn.",
-    img: "toolbox-s8", extra: TOOLBOX_FEATURES },
-  { id: "next-s9-384", code: "738477", name: "Tủ đồ nghề NEXT S9 — 384 chi tiết SFS", category: "toolboxes",
-    pieces: 384, drawers: 8, dims: "R83 × C103 × S52 cm", badge: "Bán chạy", verified: true,
-    image: "assets/img/products/next-s9-384.png",
+    img: "toolbox-s8", extra: TOOLBOX_FEATURES,
+    variants: [
+      { sku: "719776", pieces: 197, dimensions: "R80 × C104 × S51 cm" },
+      { sku: "720776", pieces: 207, dimensions: "R80 × C104 × S51 cm" },
+      { sku: "722376", pieces: 223, dimensions: "R80 × C104 × S51 cm" },
+      { sku: "725076", pieces: 250, dimensions: "R80 × C104 × S51 cm" }
+    ] },
+  { id: "next-s9", code: "", name: "Tủ đồ nghề NEXT S9", category: "toolboxes",
+    drawers: 8, dims: "R83 × C103 × S52 cm", badge: "Bán chạy", verified: true,
+    image: "assets/img/products/next-s9.png",
     desc: "Dòng trung cấp với bộ dụng cụ đầy đủ hơn, cân bằng giữa kích thước và số lượng dụng cụ.",
-    img: "toolbox-s9", extra: TOOLBOX_FEATURES },
-  { id: "next-s12-400", code: "749778", name: "Xe tủ dụng cụ NEXT S12 — 497 chi tiết SFS", category: "toolboxes",
-    pieces: 497, drawers: 8, dims: "R100 × C103 × S52 cm", badge: "Bán chạy", verified: true,
-    image: "assets/img/products/next-s12-400.png",
+    img: "toolbox-s9", extra: TOOLBOX_FEATURES,
+    variants: [
+      { sku: "716877", pieces: 249, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "724977", pieces: 249, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "716894", pieces: 249, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "724994", pieces: 249, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "716895", pieces: 249, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "724995", pieces: 249, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "726377", pieces: 263, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "726394", pieces: 263, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "726395", pieces: 263, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "734977", pieces: 325, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "734994", pieces: 325, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "734995", pieces: 325, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "730277", pieces: 363, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "736377", pieces: 363, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "730294", pieces: 363, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "736394", pieces: 363, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "730295", pieces: 363, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "736395", pieces: 363, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "738477", pieces: 384, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "738494", pieces: 384, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "738495", pieces: 384, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "742977", pieces: 429, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "742994", pieces: 429, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "742995", pieces: 429, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "752777", pieces: 527, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "752794", pieces: 527, dimensions: "R83 × C103 × S52 cm" },
+      { sku: "752795", pieces: 527, dimensions: "R83 × C103 × S52 cm" }
+    ] },
+  { id: "next-s12", code: "", name: "Xe tủ dụng cụ NEXT S12", category: "toolboxes",
+    drawers: 8, dims: "R100 × C103 × S52 cm", badge: "Bán chạy", verified: true,
+    image: "assets/img/products/next-s12.png",
     desc: "Xe tủ rộng rãi cho xưởng chuyên nghiệp, nhiều ngăn kéo lớn chứa được bộ dụng cụ chuyên sâu.",
-    img: "toolbox-s12", extra: TOOLBOX_FEATURES },
-  { id: "next-s13-540", code: "738480", name: "Tủ đồ nghề NEXT S13 — 384 chi tiết SFS", category: "toolboxes",
-    pieces: 384, drawers: 13, dims: "R120 × C97 × S76 cm", badge: "Chuyên nghiệp", verified: true,
-    image: "assets/img/products/next-s13-540.png",
+    img: "toolbox-s12", extra: TOOLBOX_FEATURES,
+    variants: [
+      { sku: "730378", pieces: 400, dimensions: "R100 × C103 × S52 cm" },
+      { sku: "740078", pieces: 400, dimensions: "R100 × C103 × S52 cm" },
+      { sku: "730396", pieces: 400, dimensions: "R100 × C103 × S52 cm" },
+      { sku: "740096", pieces: 400, dimensions: "R100 × C103 × S52 cm" },
+      { sku: "730397", pieces: 400, dimensions: "R100 × C103 × S52 cm" },
+      { sku: "740097", pieces: 400, dimensions: "R100 × C103 × S52 cm" },
+      { sku: "748578", pieces: 485, dimensions: "R100 × C103 × S52 cm" },
+      { sku: "748596", pieces: 485, dimensions: "R100 × C103 × S52 cm" },
+      { sku: "748597", pieces: 485, dimensions: "R100 × C103 × S52 cm" },
+      { sku: "749778", pieces: 497, dimensions: "R100 × C103 × S52 cm" },
+      { sku: "749796", pieces: 497, dimensions: "R100 × C103 × S52 cm" },
+      { sku: "749797", pieces: 497, dimensions: "R100 × C103 × S52 cm" },
+      { sku: "757578", pieces: 575, dimensions: "R100 × C103 × S52 cm" },
+      { sku: "757596", pieces: 575, dimensions: "R100 × C103 × S52 cm" },
+      { sku: "757597", pieces: 575, dimensions: "R100 × C103 × S52 cm" },
+      { sku: "764478", pieces: 644, dimensions: "R100 × C103 × S52 cm" },
+      { sku: "764496", pieces: 644, dimensions: "R100 × C103 × S52 cm" },
+      { sku: "764497", pieces: 644, dimensions: "R100 × C103 × S52 cm" }
+    ] },
+  { id: "next-s13", code: "", name: "Tủ đồ nghề NEXT S13", category: "toolboxes",
+    drawers: 13, dims: "R120 × C97 × S76 cm", badge: "Chuyên nghiệp", verified: true,
+    image: "assets/img/products/next-s13.png",
     desc: "Mặt bàn rộng và chiều sâu lớn, dành cho xưởng cần không gian thao tác và lưu trữ tối đa.",
-    img: "toolbox-s13", extra: TOOLBOX_FEATURES },
-  { id: "next-s15-735", code: "714582", name: "Tủ đồ nghề NEXT S15 — 1045 chi tiết SFS", category: "toolboxes",
-    pieces: 1045, drawers: 13, dims: "R165 × C118 × S65 cm", badge: "Cao cấp", verified: true,
-    image: "assets/img/products/next-s15-735.png",
+    img: "toolbox-s13", extra: TOOLBOX_FEATURES,
+    variants: [
+      { sku: "723680", pieces: 236, dimensions: "R120 × C97 × S76 cm" },
+      { sku: "738480", pieces: 384, dimensions: "R120 × C97 × S76 cm" },
+      { sku: "754080", pieces: 540, dimensions: "R120 × C97 × S76 cm" }
+    ] },
+  { id: "next-s15", code: "", name: "Tủ đồ nghề NEXT S15", category: "toolboxes",
+    drawers: 13, dims: "R165 × C118 × S65 cm", badge: "Cao cấp", verified: true,
+    image: "assets/img/products/next-s15.png",
     desc: "Giải pháp lưu trữ tối thượng trên bánh xe: 13 ngăn kéo, hệ thống khoá chống mở nhiều ngăn cùng lúc.",
-    img: "toolbox-s15", extra: TOOLBOX_FEATURES.concat([["Đặc biệt", "Chặn mở nhiều ngăn cùng lúc"]]) },
+    img: "toolbox-s15", extra: TOOLBOX_FEATURES.concat([["Đặc biệt", "Chặn mở nhiều ngăn cùng lúc"]]),
+    variants: [
+      { sku: "792082", pieces: 920, dimensions: "R165 × C118 × S65 cm" },
+      { sku: "714582", pieces: 1045, dimensions: "R165 × C118 × S65 cm" }
+    ] },
 
-  // ===== Bộ dụng cụ — ảnh thật từ catalog, nhưng CHƯA xác định được mã SKU chính xác =====
-  // (mỗi nhóm trong catalog có rất nhiều SKU; cần xác nhận thủ công trước khi gán mã & bán)
+  // ===== Bộ dụng cụ — ảnh thật từ catalog, CHƯA xác định SKU chính xác (cần xác nhận) =====
   { id: "socket-set-14", code: "", name: "Bộ đầu khẩu 1/4\" SFS", category: "sockets",
     pieces: 47, dims: "Khay SFS", badge: "SFS", verified: false,
     image: "assets/img/products/socket-set-14.png",
