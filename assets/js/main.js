@@ -152,7 +152,7 @@ function productCard(p) {
       ${artFor(p)}
     </a>
     <div class="product-card__body">
-      <span class="product-card__code">Mã: ${p.code} · ${cat ? cat.name : ""}</span>
+      <span class="product-card__code">${p.code ? "Mã: " + p.code + " · " : ""}${cat ? cat.name : ""}</span>
       <h3 class="product-card__name"><a href="product.html?id=${p.id}">${p.name}</a></h3>
       <p class="product-card__desc">${p.desc}</p>
       <div class="product-card__meta">${meta.join("")}</div>
@@ -208,7 +208,7 @@ function showModal(p, modal) {
   const cat = CATEGORIES.find(c => c.id === p.category);
   modal.querySelector(".modal__media").innerHTML = artFor(p);
   const specs = [];
-  specs.push(["Mã sản phẩm", p.code]);
+  if (p.code) specs.push(["Mã sản phẩm", p.code]);
   if (cat) specs.push(["Danh mục", cat.name]);
   if (p.pieces) specs.push(["Số chi tiết", p.pieces + " món"]);
   if (p.drawers) specs.push(["Số ngăn kéo", p.drawers]);
@@ -274,7 +274,7 @@ function setupForm() {
   if (sp) {
     const prod = PRODUCTS.find(p => p.code === sp);
     const field = form.querySelector('[name="product"]');
-    if (field) field.value = prod ? `${prod.name} (Mã ${prod.code})` : `Mã ${sp}`;
+    if (field) field.value = prod ? (prod.code ? `${prod.name} (Mã ${prod.code})` : prod.name) : `Mã ${sp}`;
   }
 
   const btn = form.querySelector("#submit-btn");
@@ -396,7 +396,8 @@ function renderProductPage() {
   const cat = CATEGORIES.find(c => c.id === p.category);
   document.title = `${p.name} — Sonic Việt Nam`;
 
-  const specs = [["Mã sản phẩm", p.code]];
+  const specs = [];
+  if (p.code) specs.push(["Mã sản phẩm", p.code]);
   if (cat) specs.push(["Danh mục", cat.name]);
   if (p.pieces) specs.push(["Số chi tiết", p.pieces + " món"]);
   if (p.drawers) specs.push(["Số ngăn kéo", p.drawers]);
@@ -422,7 +423,7 @@ function renderProductPage() {
             ${artFor(p)}
           </div>
           <div class="pd-info">
-            <span class="product-card__code">Mã: ${p.code}${cat ? " · " + cat.name : ""}</span>
+            <span class="product-card__code">${p.code ? "Mã: " + p.code : "Mã: đang cập nhật"}${cat ? " · " + cat.name : ""}</span>
             <h1>${p.name}</h1>
             <p class="pd-desc">${p.desc}</p>
             <ul class="modal__specs">${specs.map(s => `<li><span>${s[0]}</span><span>${s[1]}</span></li>`).join("")}</ul>
