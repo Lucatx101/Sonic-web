@@ -95,6 +95,7 @@ function renderNextProduct() {
               </select>
               <p class="pd-variant-info" id="variant-info"></p>
             </div>
+            <div id="next-trays" style="margin:8px 0 18px"></div>
             <div class="pd-actions">
               <a class="btn btn--primary" id="quote-btn" href="contact.html?pid=${id}">Yêu cầu báo giá</a>
               <a class="btn btn--ghost" id="zalo-btn" target="_blank" rel="noopener" href="#">Chat Zalo</a>
@@ -113,11 +114,33 @@ function renderNextProduct() {
   const sel = root.querySelector("#variant-select");
   const info = root.querySelector("#variant-info");
   const qbtn = root.querySelector("#quote-btn");
+  const trayBox = root.querySelector("#next-trays");
+  const renderTrays = (pieces) => {
+    if (!trayBox) return;
+    const cfg = (typeof NEXT_TRAYS !== "undefined") && NEXT_TRAYS[id] && NEXT_TRAYS[id][String(pieces)];
+    if (!cfg) { trayBox.innerHTML = ""; return; }   // cấu hình chưa có dữ liệu khay -> bỏ qua
+    const cards = cfg.trays.map(t => {
+      const ok = t.confidence === "cao" && t.image;
+      const media = ok
+        ? `<img src="${t.image}" alt="${t.sku}" style="width:100%;height:110px;object-fit:contain;background:#f5f6f8;border-radius:8px">`
+        : `<div style="height:110px;display:flex;align-items:center;justify-content:center;background:#f5f6f8;border:1px dashed #c9ced6;border-radius:8px;color:#8a93a0;font-size:12px;text-align:center;padding:6px">Ảnh: không xác định</div>`;
+      return `<div style="border:1px solid var(--line);border-radius:10px;padding:10px">
+        ${media}
+        <div style="font-weight:700;margin-top:8px;font-size:13px">Mã ${t.sku}</div>
+        <div style="font-size:12px;color:var(--grey)">Ngăn ${t.drawer}${t.name ? " · " + t.name : ""}${t.pieces ? " · " + t.pieces + " món" : ""}</div>
+      </div>`;
+    }).join("");
+    trayBox.innerHTML =
+      `<h3 style="font-size:16px;margin:6px 0 10px;color:var(--black)">Khay foam trong cấu hình ${pieces} chi tiết (${cfg.trays.length} khay)</h3>
+       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px">${cards}</div>
+       <p class="form__note" style="margin-top:10px">Ảnh khay crop từ trang cấu hình catalog; khay không có tên = chưa có trang bán lẻ riêng.</p>`;
+  };
   const update = () => {
     const v = groups[+sel.value];
     const label = nextVariantLabel(v);
     info.innerHTML = `Đã chọn cấu hình: <b>${label}</b> · ${v.dimensions} cm`;
     qbtn.href = `contact.html?pid=${id}&cfg=${encodeURIComponent(label)}`;
+    renderTrays(v.pieces);
   };
   sel.addEventListener("change", update);
   update();
