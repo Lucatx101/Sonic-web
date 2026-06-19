@@ -143,7 +143,7 @@ function productCard(p) {
   const cat = CATEGORIES.find(c => c.id === p.category);
   const meta = [];
   if (p.variants && p.variants.length) {
-    const ps = p.variants.map(v => v.pieces).filter(x => x != null);
+    const ps = p.variants.map(v => v.pieces).filter(x => x > 0);
     if (ps.length) {
       const lo = Math.min(...ps), hi = Math.max(...ps);
       meta.push(`<span class="chip">${lo === hi ? lo : lo + "–" + hi} chi tiết</span>`);
@@ -227,7 +227,7 @@ function showModal(p, modal) {
   const variantList = (p.variants && p.variants.length)
     ? `<p style="margin-top:14px;font-weight:600;color:var(--black)">Các cấu hình:</p>
        <ul class="modal__specs">${p.variants.map(v =>
-         `<li><span>${v.pieces != null ? v.pieces + " chi tiết" : "—"}</span><span>${v.dimensions}</span></li>`).join("")}</ul>`
+         `<li><span>${v.pieces > 0 ? v.pieces + " chi tiết" : (v.config || "Thùng trống")}</span><span>${v.dimensions}</span></li>`).join("")}</ul>`
     : "";
   modal.querySelector(".modal__body").innerHTML = `
     <button class="modal__close" data-close aria-label="Đóng">×</button>
@@ -286,17 +286,17 @@ function setupForm() {
   if (!form) return;
 
   // Prefill "Sản phẩm quan tâm" khi đến từ trang/thẻ sản phẩm.
-  // Hỗ trợ: ?pid=<id>[&sku=<sku>&pcs=<pcs>]  (kèm biến thể đã chọn)  hoặc  ?sp=<mã> (cũ).
+  // Hỗ trợ: ?pid=<id>[&cfg=<nhãn cấu hình>|&pcs=<pcs>]  hoặc  ?sp=<mã> (cũ).
   const qs = new URLSearchParams(location.search);
   const field = form.querySelector('[name="product"]');
   if (field) {
-    const pid = qs.get("pid"), sku = qs.get("sku"), pcs = qs.get("pcs"), sp = qs.get("sp");
+    const pid = qs.get("pid"), cfg = qs.get("cfg"), pcs = qs.get("pcs"), sp = qs.get("sp");
     if (pid) {
       const prod = PRODUCTS.find(p => p.id === pid);
       let val = prod ? prod.name : pid;
-      if (pcs) val += ` — ${pcs} chi tiết`;
-      if (sku) val += ` (Mã ${sku})`;
-      else if (prod && prod.code) val += ` (Mã ${prod.code})`;
+      if (cfg) val += ` — ${cfg}`;
+      else if (pcs) val += ` — ${pcs} chi tiết`;
+      if (prod && prod.code) val += ` (Mã ${prod.code})`;
       field.value = val;
     } else if (sp) {
       const prod = PRODUCTS.find(p => p.code === sp);
@@ -440,7 +440,7 @@ function renderProductPage() {
       <label for="variant-select">Chọn cấu hình (số chi tiết):</label>
       <select id="variant-select">
         ${p.variants.map((v, i) =>
-          `<option value="${i}">${v.pieces != null ? v.pieces + " chi tiết" : "—"}</option>`).join("")}
+          `<option value="${i}">${v.pieces > 0 ? v.pieces + " chi tiết" : (v.config || "Thùng trống")}</option>`).join("")}
       </select>
       <p class="pd-variant-info" id="variant-info"></p>
     </div>` : "";
@@ -489,8 +489,9 @@ function renderProductPage() {
     const qbtn = root.querySelector("#quote-btn");
     const update = () => {
       const v = p.variants[+sel.value];
-      info.innerHTML = `Đã chọn cấu hình: <b>${v.pieces != null ? v.pieces + " chi tiết" : "—"}</b> · ${v.dimensions}`;
-      qbtn.href = `contact.html?pid=${p.id}${v.pieces != null ? "&pcs=" + v.pieces : ""}`;
+      const label = v.pieces > 0 ? v.pieces + " chi tiết" : (v.config || "Thùng trống");
+      info.innerHTML = `Đã chọn cấu hình: <b>${label}</b> · ${v.dimensions}`;
+      qbtn.href = `contact.html?pid=${p.id}&cfg=${encodeURIComponent(label)}`;
     };
     sel.addEventListener("change", update);
     update();
