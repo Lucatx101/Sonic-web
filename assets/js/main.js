@@ -412,6 +412,8 @@ function renderProductPage() {
   const root = document.getElementById("product-page");
   if (!root) return;
   const id = new URLSearchParams(location.search).get("id");
+  // Dòng tủ NEXT render bằng product-next.js (đọc thuần NEXT_DATA) — bỏ qua đường data cũ ở đây.
+  if (id && id.indexOf("next-") === 0) return;
   const p = PRODUCTS.find(x => x.id === id);
   if (!p) {
     root.innerHTML = `<div class="container" style="padding:80px 0;text-align:center">
