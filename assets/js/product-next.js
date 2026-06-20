@@ -114,9 +114,8 @@ function renderNextProduct() {
                  style="margin-top:14px;border-radius:12px" onerror="this.remove()">` : ""}
           </div>
           <div class="pd-info">
-            <span class="product-card__code">Tủ đồ nghề Sonic</span>
+            <p class="pd-subtitle">Tủ đồ nghề chính hãng dòng Sonic NEXT</p>
             <h1>${m.model}</h1>
-            <p class="pd-desc">Tủ đồ nghề chính hãng dòng Sonic NEXT.</p>
             <ul class="modal__specs">${specRows.map(s => `<li><span>${s[0]}</span><span>${s[1]}</span></li>`).join("")}</ul>
             <div class="pd-variants">
               <label for="variant-select">Chọn cấu hình (số chi tiết):</label>
