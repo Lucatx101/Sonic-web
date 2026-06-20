@@ -10,7 +10,7 @@ const NEXT_ID_TO_MODEL = {
 
 // Nhãn màu theo VỊ TRÍ trong skus[] (quy ước CLAUDE.md: index 0=Xám, 1=Đen, 2=Đỏ).
 const NEXT_COLOR_BY_INDEX = ["Xám", "Đen", "Đỏ"];
-const NEXT_COLOR_DOT = { "Xám": "#9aa3ad", "Đen": "#222", "Đỏ": "#d11f2a" };
+const NEXT_COLOR_DOT = { "Xám": "#474A51", "Đen": "#222", "Đỏ": "#d11f2a" };
 
 // Nhãn tiếng Việt cho từng KEY của object specs (chỉ là nhãn — giá trị đọc từ data).
 const NEXT_SPEC_LABELS = {
