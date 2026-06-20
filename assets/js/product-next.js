@@ -14,6 +14,12 @@ const NEXT_BANNERS = {
   "next-s9": "assets/products/next-banners/s9-banner.png",
 };
 
+// id trên web -> ảnh bản vẽ kỹ thuật (dimension) crop từ trang giới thiệu model.
+// Chỉ điền khi đã xác định đúng trang + ảnh; chưa có -> không hiện ảnh dimension.
+const NEXT_DIMS = {
+  "next-s9": "assets/products/next-dims/s9-dim.png",
+};
+
 // Nhãn màu theo VỊ TRÍ trong skus[] (quy ước CLAUDE.md: index 0=Xám, 1=Đen, 2=Đỏ).
 const NEXT_COLOR_BY_INDEX = ["Xám", "Đen", "Đỏ"];
 const NEXT_COLOR_DOT = { "Xám": "#474A51", "Đen": "#222", "Đỏ": "#d11f2a" };
@@ -102,6 +108,8 @@ function renderNextProduct() {
           <div class="pd-media">
             <img class="product-photo" src="${img}" alt="${m.model}"
                  onerror="this.style.display='none'">
+            ${NEXT_DIMS[id] ? `<img class="product-photo" src="${NEXT_DIMS[id]}" alt="${m.model} — bản vẽ kích thước"
+                 style="margin-top:14px" onerror="this.remove()">` : ""}
             ${NEXT_BANNERS[id] ? `<img class="product-photo" src="${NEXT_BANNERS[id]}" alt="${m.model} — không gian xưởng"
                  style="margin-top:14px;border-radius:12px" onerror="this.remove()">` : ""}
           </div>
