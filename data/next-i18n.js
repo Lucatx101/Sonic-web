@@ -13,6 +13,15 @@ const NEXT_VALUE_VI = {
   "120kg double slides": "Ray đôi 120kg/ngăn",
   "4 heavy duty, 300kg each": "4 bánh tải nặng, 300kg/bánh",
   "anti-tilt": "Chống lật",
+  "4 shallow + 2 deep": "4 ngăn nông + 2 ngăn sâu",
+  "5 shallow + 2 deep": "5 ngăn nông + 2 ngăn sâu",
+  "10 shallow + 3 deep": "10 ngăn nông + 3 ngăn sâu",
+  "1 XXL deep + 7 XL shallow + 5 medium (3 shallow, 2 deep)":
+    "1 ngăn sâu XXL + 7 ngăn nông XL + 5 ngăn vừa (3 nông, 2 sâu)",
+  "removable, reinforced steel + composite inlay":
+    "Thép không gỉ gia cường, mặt composite tháo được",
+  "locking (catalog khong ghi tai trong kg)": "Có khóa",
+  "4 heavy duty, 350kg each": "4 bánh tải nặng, 350kg/bánh",
 };
 
 if (typeof window !== "undefined") window.NEXT_VALUE_VI = NEXT_VALUE_VI;

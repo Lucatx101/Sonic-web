@@ -32,7 +32,7 @@ const PRODUCTS = [
   // ===== Tủ đồ nghề NEXT — dữ liệu verified từ Catalog 2026 =====
   { id: "next-s7", code: "", name: "Tủ đồ nghề NEXT S7", category: "toolboxes",
     drawers: 6, dims: "R80 x C90 x S51", badge: "Phổ thông", verified: true,
-    image: "assets/img/products/next-s7.png",
+    image: "assets/products/next/s7-hero.png",
     desc: "Mẫu nhỏ gọn lý tưởng cho kỹ thuật viên cần bộ dụng cụ cơ bản. Dễ di chuyển và đặt ở bất kỳ vị trí nào trong xưởng.",
     img: "toolbox-s7", source: "Sonic Catalogue 2026, p.8",
     extra: [["Ngăn kéo", "6 ngăn (4 nông + 2 sâu)"], ["Mặt bàn", "Tháo rời, thép gia cường + tấm composite"], ["Ray trượt", "Bi 60kg (ball bearing)"], ["Bánh xe", "Có khoá (catalog không ghi tải trọng)"], ["Tải trọng tổng", "400 kg"]],
@@ -43,7 +43,7 @@ const PRODUCTS = [
     ] },
   { id: "next-s8", code: "", name: "Tủ đồ nghề NEXT S8", category: "toolboxes",
     drawers: 7, dims: "R80 x C102 x S51", badge: "Phổ thông", verified: true,
-    image: "assets/img/products/next-s8.png",
+    image: "assets/products/next/s8-hero.png",
     desc: "Phù hợp cho kỹ thuật viên cần bộ dụng cụ cơ bản đến trung cấp với không gian lưu trữ rộng hơn.",
     img: "toolbox-s8", source: "Sonic Catalogue 2026, p.10",
     extra: [["Ngăn kéo", "7 ngăn (5 nông + 2 sâu)"], ["Mặt bàn", "Tháo rời, thép gia cường + tấm composite"], ["Ray trượt", "Bi 60kg (ball bearing)"], ["Bánh xe", "Có khoá (catalog không ghi tải trọng)"], ["Tải trọng tổng", "400 kg"]],
