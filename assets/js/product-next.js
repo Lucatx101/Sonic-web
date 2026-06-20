@@ -8,6 +8,10 @@ const NEXT_ID_TO_MODEL = {
   "next-s12": "NEXT S12", "next-s13": "NEXT S13", "next-s15": "NEXT S15",
 };
 
+// Nhãn màu theo VỊ TRÍ trong skus[] (quy ước CLAUDE.md: index 0=Xám, 1=Đen, 2=Đỏ).
+const NEXT_COLOR_BY_INDEX = ["Xám", "Đen", "Đỏ"];
+const NEXT_COLOR_DOT = { "Xám": "#9aa3ad", "Đen": "#222", "Đỏ": "#d11f2a" };
+
 // Nhãn tiếng Việt cho từng KEY của object specs (chỉ là nhãn — giá trị đọc từ data).
 const NEXT_SPEC_LABELS = {
   worktop: "Mặt bàn",
@@ -95,6 +99,7 @@ function renderNextProduct() {
               </select>
               <p class="pd-variant-info" id="variant-info"></p>
             </div>
+            <div id="next-skus" style="margin:6px 0 14px"></div>
             <div id="next-trays" style="margin:8px 0 18px"></div>
             <div class="pd-actions">
               <a class="btn btn--primary" id="quote-btn" href="contact.html?pid=${id}">Yêu cầu báo giá</a>
@@ -114,7 +119,31 @@ function renderNextProduct() {
   const sel = root.querySelector("#variant-select");
   const info = root.querySelector("#variant-info");
   const qbtn = root.querySelector("#quote-btn");
+  const skuBox = root.querySelector("#next-skus");
   const trayBox = root.querySelector("#next-trays");
+  // Khối mã SKU + màu theo index (CLAUDE.md: 0=Xám, 1=Đen, 2=Đỏ).
+  // 1 mã (thùng trống các model 1 màu) -> hiện 1 mã, KHÔNG nhãn màu.
+  const renderSkus = (skus) => {
+    if (!skuBox) return;
+    const list = skus || [];
+    if (!list.length) { skuBox.innerHTML = ""; return; }
+    const single = list.length === 1;
+    const rows = list.map((sku, i) => {
+      if (single) {
+        return `<li style="display:flex;align-items:center;gap:8px;padding:4px 0">
+          <span style="font-weight:700;font-family:monospace">${sku}</span></li>`;
+      }
+      const color = NEXT_COLOR_BY_INDEX[i] || ("Vị trí " + (i + 1));
+      const dot = NEXT_COLOR_DOT[color] || "#bbb";
+      return `<li style="display:flex;align-items:center;gap:8px;padding:4px 0">
+        <span style="width:12px;height:12px;border-radius:50%;background:${dot};border:1px solid #00000022;flex:0 0 auto"></span>
+        <span style="font-weight:700;font-family:monospace">${sku}</span>
+        <span style="font-size:12px;color:var(--grey)">— ${color}</span></li>`;
+    }).join("");
+    skuBox.innerHTML =
+      `<div style="font-size:13px;font-weight:700;color:var(--black);margin-bottom:2px">Mã SKU theo màu</div>
+       <ul style="list-style:none;margin:0;padding:0">${rows}</ul>`;
+  };
   const renderTrays = (pieces) => {
     if (!trayBox) return;
     const cfg = (typeof NEXT_TRAYS !== "undefined") && NEXT_TRAYS[id] && NEXT_TRAYS[id][String(pieces)];
@@ -140,6 +169,7 @@ function renderNextProduct() {
     const label = nextVariantLabel(v);
     info.innerHTML = `Đã chọn cấu hình: <b>${label}</b> · ${v.dimensions} cm`;
     qbtn.href = `contact.html?pid=${id}&cfg=${encodeURIComponent(label)}`;
+    renderSkus(v.skus);
     renderTrays(v.pieces);
   };
   sel.addEventListener("change", update);
