@@ -23,6 +23,15 @@ const NEXT_SPEC_LABELS = {
   total_loading_kg: "Tải trọng tổng",
 };
 
+// Dịch GIÁ TRỊ spec sang tiếng Việt qua data/next-i18n.js (khoá = đúng chuỗi gốc).
+// Không có bản dịch -> giữ nguyên văn gốc, KHÔNG bịa nghĩa.
+function viValue(val) {
+  if (typeof val === "string" && typeof NEXT_VALUE_VI !== "undefined" && NEXT_VALUE_VI[val] !== undefined) {
+    return NEXT_VALUE_VI[val];
+  }
+  return val;
+}
+
 function nextModelById(id) {
   const name = NEXT_ID_TO_MODEL[id];
   if (!name || typeof NEXT_DATA === "undefined") return null;
@@ -62,12 +71,13 @@ function renderNextProduct() {
   // Bảng spec — TẤT CẢ đọc từ NEXT_DATA (kích thước, ngăn kéo, rồi từng key trong specs)
   const specRows = [];
   if (m.dimensions_cm_display) specRows.push(["Kích thước (R×C×S)", m.dimensions_cm_display + " cm"]);
-  if (m.drawers) specRows.push(["Ngăn kéo", m.drawers]);
+  if (m.drawers) specRows.push(["Ngăn kéo", viValue(m.drawers)]);
   const sp = m.specs || {};
   for (const key of Object.keys(sp)) {
     const label = NEXT_SPEC_LABELS[key] || key;
     let val = sp[key];
     if (key === "total_loading_kg") val = val + " kg";
+    else val = viValue(val);
     specRows.push([label, String(val)]);
   }
 
