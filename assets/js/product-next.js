@@ -8,16 +8,36 @@ const NEXT_ID_TO_MODEL = {
   "next-s12": "NEXT S12", "next-s13": "NEXT S13", "next-s15": "NEXT S15",
 };
 
+// id trên web -> ảnh tủ đơn nền trắng (hero) crop từ trang giới thiệu model.
+// s9 giữ đường dẫn cũ (assets/img/products/) — không đụng. Model mới dùng đường dẫn này.
+const NEXT_HERO = {
+  "next-s7": "assets/products/next/s7-hero.png",
+  "next-s8": "assets/products/next/s8-hero.png",
+  "next-s12": "assets/products/next/s12-hero.png",
+  "next-s13": "assets/products/next/s13-hero.png",
+  "next-s15": "assets/products/next/s15-hero.png",
+};
+
 // id trên web -> ảnh banner lifestyle (crop từ trang giới thiệu model trong catalog).
 // Chỉ điền khi đã xác định đúng trang + ảnh; chưa có -> không hiện banner.
 const NEXT_BANNERS = {
   "next-s9": "assets/products/next-banners/s9-banner.png",
+  "next-s7": "assets/products/next-banners/s7-banner.png",
+  "next-s8": "assets/products/next-banners/s8-banner.png",
+  "next-s12": "assets/products/next-banners/s12-banner.png",
+  "next-s13": "assets/products/next-banners/s13-banner.png",
+  "next-s15": "assets/products/next-banners/s15-banner.png",
 };
 
 // id trên web -> ảnh bản vẽ kỹ thuật (dimension) crop từ trang giới thiệu model.
 // Chỉ điền khi đã xác định đúng trang + ảnh; chưa có -> không hiện ảnh dimension.
 const NEXT_DIMS = {
   "next-s9": "assets/products/next-dims/s9-dim.png",
+  "next-s7": "assets/products/next-dims/s7-dim.png",
+  "next-s8": "assets/products/next-dims/s8-dim.png",
+  "next-s12": "assets/products/next-dims/s12-dim.png",
+  "next-s13": "assets/products/next-dims/s13-dim.png",
+  "next-s15": "assets/products/next-dims/s15-dim.png",
 };
 
 // Nhãn màu theo VỊ TRÍ trong skus[] (quy ước CLAUDE.md: index 0=Xám, 1=Đen, 2=Đỏ).
@@ -77,7 +97,7 @@ function renderNextProduct() {
   if (!m) return false;   // không phải model NEXT -> để renderer khác xử lý
 
   document.title = m.model + " — Sonic Việt Nam";
-  const img = `assets/img/products/${id}.png`;
+  const img = NEXT_HERO[id] || `assets/img/products/${id}.png`;
   const groups = groupNextVariants(m);
 
   // Bảng spec — TẤT CẢ đọc từ NEXT_DATA (kích thước, ngăn kéo, rồi từng key trong specs)
