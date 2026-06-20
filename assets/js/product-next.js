@@ -8,6 +8,12 @@ const NEXT_ID_TO_MODEL = {
   "next-s12": "NEXT S12", "next-s13": "NEXT S13", "next-s15": "NEXT S15",
 };
 
+// id trên web -> ảnh banner lifestyle (crop từ trang giới thiệu model trong catalog).
+// Chỉ điền khi đã xác định đúng trang + ảnh; chưa có -> không hiện banner.
+const NEXT_BANNERS = {
+  "next-s9": "assets/products/next-banners/s9-banner.png",
+};
+
 // Nhãn màu theo VỊ TRÍ trong skus[] (quy ước CLAUDE.md: index 0=Xám, 1=Đen, 2=Đỏ).
 const NEXT_COLOR_BY_INDEX = ["Xám", "Đen", "Đỏ"];
 const NEXT_COLOR_DOT = { "Xám": "#474A51", "Đen": "#222", "Đỏ": "#d11f2a" };
@@ -96,6 +102,8 @@ function renderNextProduct() {
           <div class="pd-media">
             <img class="product-photo" src="${img}" alt="${m.model}"
                  onerror="this.style.display='none'">
+            ${NEXT_BANNERS[id] ? `<img class="product-photo" src="${NEXT_BANNERS[id]}" alt="${m.model} — không gian xưởng"
+                 style="margin-top:14px;border-radius:12px" onerror="this.remove()">` : ""}
           </div>
           <div class="pd-info">
             <span class="product-card__code">Tủ đồ nghề Sonic · Nguồn: Sonic Catalogue 2026${m._source_page ? " · trang " + m._source_page : ""}</span>
