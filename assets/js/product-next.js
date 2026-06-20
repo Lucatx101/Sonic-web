@@ -106,9 +106,9 @@ function renderNextProduct() {
                  style="margin-top:14px;border-radius:12px" onerror="this.remove()">` : ""}
           </div>
           <div class="pd-info">
-            <span class="product-card__code">Tủ đồ nghề Sonic · Nguồn: Sonic Catalogue 2026${m._source_page ? " · trang " + m._source_page : ""}</span>
+            <span class="product-card__code">Tủ đồ nghề Sonic</span>
             <h1>${m.model}</h1>
-            <p class="pd-desc">Tủ đồ nghề chính hãng dòng Sonic NEXT. Thông số kỹ thuật dưới đây trích trực tiếp từ catalog Sonic 2026.</p>
+            <p class="pd-desc">Tủ đồ nghề chính hãng dòng Sonic NEXT.</p>
             <ul class="modal__specs">${specRows.map(s => `<li><span>${s[0]}</span><span>${s[1]}</span></li>`).join("")}</ul>
             <div class="pd-variants">
               <label for="variant-select">Chọn cấu hình (số chi tiết):</label>
