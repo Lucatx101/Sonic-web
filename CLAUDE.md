@@ -20,6 +20,13 @@ KHÔNG tồn kho, KHÔNG giá công khai, KHÔNG giỏ hàng, KHÔNG đặt hàn
   git show origin/catalog-temp:data/products.json — KHÔNG checkout, KHÔNG merge).
 - File assets/js/products.js CŨ chứa dữ liệu BỊA — đang được thay thế, đừng tin.
 
+## Màu tủ NEXT (ground-truth do chủ dự án cung cấp)
+- Catalog KHÔNG in màu. Màu xác định theo VỊ TRÍ trong dãy 3 tủ xếp ngang:
+  TRÁI = xám, GIỮA = đen, PHẢI = đỏ.
+- Áp cho MỌI dãy 3 tủ NEXT.
+- Khi gán màu cho mã SKU: phải verify thứ tự mã ↔ vị trí (toạ độ x) trước,
+  KHÔNG suy màu từ catalog, KHÔNG đoán nếu không đọc được dãy.
+
 ## CÁCH LÀM VIỆC
 - Trước khi sửa dữ liệu sản phẩm: đối chiếu với file verified hoặc catalog-temp trước.
 - Việc lớn (đổi data, đổi cấu trúc): in bảng/log rồi DỪNG chờ tôi duyệt, chưa commit vội.
