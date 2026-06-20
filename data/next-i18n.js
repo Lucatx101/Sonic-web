@@ -22,6 +22,7 @@ const NEXT_VALUE_VI = {
     "Thép không gỉ gia cường, mặt composite tháo được",
   "locking (catalog khong ghi tai trong kg)": "Có khóa",
   "4 heavy duty, 350kg each": "4 bánh tải nặng, 350kg/bánh",
+  "reinforced stainless steel + side pockets": "Thép không gỉ gia cường + hộc bên",
 };
 
 if (typeof window !== "undefined") window.NEXT_VALUE_VI = NEXT_VALUE_VI;
