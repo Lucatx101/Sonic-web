@@ -3,15 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chi tiết sản phẩm — Sonic Việt Nam</title>
-  <meta name="description" content="Thông tin chi tiết sản phẩm Sonic: thông số, mô tả và yêu cầu báo giá." />
+  <title>Chi tiết NEXT MSS — Sonic Việt Nam</title>
+  <meta name="description" content="Thông tin chi tiết tủ lưu trữ NEXT MSS chính hãng Sonic và yêu cầu báo giá." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
-<body>
-  <!-- Topbar liên hệ -->
+<body class="mss-page">
   <div class="topbar">
     <div class="container topbar__row">
       <div class="topbar__left">
@@ -45,7 +44,7 @@
             </div>
             <div class="nav__submenu">
               <div class="nav__submenu-header"><span>MSS - Lưu trữ chuyên nghiệp</span><span class="nav__chevron-right" aria-hidden="true">›</span></div>
-              <a class="nav__dropdown-link" href="next-mss.html">NEXT MSS</a>
+              <a class="nav__dropdown-link active" href="next-mss.html">NEXT MSS</a>
               <span class="nav__dropdown-link is-disabled">MSS+</span>
             </div>
           </div>
@@ -54,14 +53,14 @@
         <li><a href="contact.html">Liên hệ</a></li>
       </ul>
       <div class="nav__cta">
-        <a class="btn btn--ghost" href="contact.html">Nhận tư vấn</a>
+        <a class="btn btn--ghost" href="next-mss.html">Danh sách NEXT MSS</a>
         <a class="btn btn--primary" href="contact.html">Yêu cầu báo giá</a>
         <button class="nav__toggle" aria-label="Menu"><span></span><span></span><span></span></button>
       </div>
     </div>
   </header>
 
-  <main id="product-page"></main>
+  <main id="mss-product-page"></main>
 
   <footer class="site-footer">
     <div class="container footer-grid">
@@ -75,17 +74,15 @@
       <div class="footer-col">
         <h4>Sản phẩm</h4>
         <ul>
-          <li><a href="products.html#toolboxes">Tủ đồ nghề</a></li>
+          <li><a href="products.html">Tủ đồ nghề NEXT</a></li>
+          <li><a href="next-mss.html">NEXT MSS</a></li>
           <li><a href="products.html#sfs">Sonic Foam System</a></li>
-          <li><a href="products.html#sockets">Đầu khẩu & tay vặn</a></li>
-          <li><a href="products.html#wrenches">Cờ lê & mỏ lết</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Công ty</h4>
         <ul>
           <li><a href="index.html#about">Về chúng tôi</a></li>
-          <li><a href="index.html#sfs">Sonic Foam System</a></li>
           <li><a href="contact.html">Liên hệ</a></li>
         </ul>
       </div>
@@ -100,23 +97,13 @@
     </div>
     <div class="container footer-bottom">
       <span>© <span data-year></span> Sonic Việt Nam. Sonic Equipment là thương hiệu của Sonic Equipment B.V. (Hà Lan).</span>
-      <span>Website demo cho mục đích giới thiệu sản phẩm.</span>
+      <span>Website giới thiệu sản phẩm.</span>
     </div>
   </footer>
 
-  <div class="modal" id="modal" aria-hidden="true">
-    <div class="modal__panel">
-      <div class="modal__media"></div>
-      <div class="modal__body"></div>
-    </div>
-  </div>
-
   <script src="assets/js/config.js"></script>
-  <script src="data/data-next.js"></script>
-  <script src="data/next-trays.js"></script>
-  <script src="data/next-i18n.js"></script>
-  <script src="assets/js/products.js"></script>
+  <script src="data/next-mss-data.js"></script>
   <script src="assets/js/main.js"></script>
-  <script src="assets/js/product-next.js"></script>
+  <script src="assets/js/mss-product.js"></script>
 </body>
 </html>
