@@ -248,11 +248,43 @@ function closeModal(modal) {
   document.body.style.overflow = "";
 }
 
-/* --- Menu mobile --- */
+/* --- Menu mobile + dropdown "Sản phẩm" --- */
 function setupNav() {
   const nav = document.querySelector(".nav");
   const toggle = document.querySelector(".nav__toggle");
   if (toggle) toggle.addEventListener("click", () => nav.classList.toggle("nav--open"));
+
+  document.querySelectorAll("[data-dropdown]").forEach(item => {
+    const trigger = item.querySelector("[data-dropdown-toggle]");
+    const wrap = item.querySelector("[data-dropdown-panel]");
+    const submenuToggle = item.querySelector("[data-submenu-toggle]");
+    if (!trigger || !wrap) return;
+
+    trigger.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const open = item.classList.toggle("is-open");
+      trigger.setAttribute("aria-expanded", String(open));
+      if (!open) wrap.classList.remove("submenu-open");
+    });
+
+    if (submenuToggle) {
+      submenuToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        wrap.classList.toggle("submenu-open");
+      });
+      submenuToggle.addEventListener("mouseenter", () => wrap.classList.add("submenu-open"));
+      wrap.addEventListener("mouseleave", () => wrap.classList.remove("submenu-open"));
+    }
+  });
+
+  document.addEventListener("click", (e) => {
+    document.querySelectorAll("[data-dropdown].is-open").forEach(item => {
+      if (item.contains(e.target)) return;
+      item.classList.remove("is-open");
+      item.querySelector("[data-dropdown-toggle]")?.setAttribute("aria-expanded", "false");
+      item.querySelector("[data-dropdown-panel]")?.classList.remove("submenu-open");
+    });
+  });
 }
 
 /* --- Hero illustration --- */
