@@ -606,10 +606,11 @@ a { color: inherit; text-decoration: none; }
 }
 .mss-card:hover { transform: translateY(-3px); box-shadow: 0 15px 36px rgba(15, 19, 23, .11); }
 .mss-card__media {
-  display: flex; min-height: 286px; align-items: center; justify-content: center;
-  padding: 22px; background: #f7f8fa; border-bottom: 1px solid var(--line);
+  display: flex; min-height: 270px; align-items: center; justify-content: center;
+  margin: 16px 16px 0; padding: 16px; background: #fff;
+  border: 1px solid var(--line); border-radius: 12px;
 }
-.mss-card__media img { display: block; width: 100%; height: 242px; object-fit: contain; }
+.mss-card__media img { display: block; width: 100%; height: 236px; object-fit: contain; }
 .mss-card__body { display: flex; flex: 1; flex-direction: column; padding: 22px; }
 .mss-card__group {
   color: var(--red); font-size: 12px; font-weight: 800; letter-spacing: .055em; text-transform: uppercase;
@@ -637,12 +638,23 @@ a { color: inherit; text-decoration: none; }
 .mss-detail .breadcrumb a { color: var(--steel); }
 .mss-detail .breadcrumb a:hover { color: var(--red); }
 .mss-detail__grid { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: 64px; align-items: start; }
+.mss-detail__gallery {
+  display: grid; gap: 28px; position: sticky; top: 104px;
+}
 .mss-detail__media {
   display: flex; min-height: 510px; align-items: center; justify-content: center;
-  position: sticky; top: 104px; border: 1px solid var(--line); border-radius: 20px;
-  background: #f7f8fa; padding: 34px;
+  border: 0; border-radius: 0; background: #fff; padding: 18px 0;
 }
-.mss-detail__media img { display: block; width: 100%; max-height: 450px; object-fit: contain; }
+.mss-detail__image { display: block; width: 100%; max-height: 450px; object-fit: contain; }
+.mss-dimension-block {
+  width: min(100%, 440px); margin: 0 auto; background: #fff; text-align: center;
+}
+.mss-dimension-block figcaption {
+  margin-bottom: 14px; color: var(--steel); font-size: 14px; font-weight: 750;
+}
+.mss-dimension-image {
+  display: block; width: 100%; max-height: 190px; margin: 0 auto; object-fit: contain;
+}
 .mss-detail__line { margin: 2px 0 6px; color: var(--red); font-size: 14px; font-weight: 850; letter-spacing: .08em; }
 .mss-detail__group { margin-bottom: 8px; color: var(--grey); font-size: 15px; }
 .mss-detail__content h1 { margin-bottom: 28px; color: var(--black); font-size: clamp(30px, 4.5vw, 46px); line-height: 1.12; letter-spacing: -.03em; }
@@ -684,7 +696,8 @@ a { color: inherit; text-decoration: none; }
   .mss-page .nav__dropdown-wrap.submenu-open .nav__submenu { display: flex; }
   .mss-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .mss-detail__grid { grid-template-columns: 1fr; gap: 34px; }
-  .mss-detail__media { min-height: 420px; position: static; }
+  .mss-detail__gallery { position: static; }
+  .mss-detail__media { min-height: 420px; }
 }
 
 @media (max-width: 680px) {
@@ -695,14 +708,16 @@ a { color: inherit; text-decoration: none; }
   .mss-filter { flex-wrap: nowrap; margin-right: -20px; padding-right: 20px; overflow-x: auto; scrollbar-width: thin; }
   .mss-filter__button { flex: 0 0 auto; }
   .mss-grid { grid-template-columns: 1fr; gap: 20px; }
-  .mss-card__media { min-height: 250px; }
-  .mss-card__media img { height: 210px; }
+  .mss-card__media { min-height: 234px; margin: 14px 14px 0; padding: 12px; }
+  .mss-card__media img { height: 208px; }
   .mss-card__actions { align-items: stretch; flex-direction: column; }
   .mss-card__actions .btn { justify-content: center; }
   .mss-detail { padding: 30px 0 70px; }
   .mss-detail .breadcrumb { margin-bottom: 22px; }
   .mss-detail__media { min-height: 310px; padding: 20px; }
-  .mss-detail__media img { max-height: 280px; }
+  .mss-detail__image { max-height: 280px; }
+  .mss-dimension-block { width: min(100%, 390px); }
+  .mss-dimension-image { max-height: 170px; }
   .mss-detail__specs div { grid-template-columns: 112px 1fr; gap: 14px; }
   .mss-detail__actions { align-items: stretch; flex-direction: column; }
   .mss-detail__actions .btn { justify-content: center; }

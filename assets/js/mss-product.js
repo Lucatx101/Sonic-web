@@ -22,7 +22,16 @@
     if (!product.image) {
       return '<div class="mss-image-placeholder">Hình ảnh đang được cập nhật</div>';
     }
-    return `<img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name_vi)}">`;
+    return `<img class="mss-detail__image" src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name_vi)}">`;
+  }
+
+  function dimensionMarkup(product) {
+    if (!product.dimension_image) return "";
+    return `<figure class="mss-dimension-block">
+      <figcaption>Kích thước tham khảo</figcaption>
+      <img class="mss-dimension-image" src="${escapeHtml(product.dimension_image)}"
+        alt="Sơ đồ kích thước ${escapeHtml(product.name_vi)}">
+    </figure>`;
   }
 
   function initMssProduct() {
@@ -59,7 +68,10 @@
           <a href="index.html">Trang chủ</a> / <a href="next-mss.html">NEXT MSS</a> / ${escapeHtml(product.name_vi)}
         </nav>
         <div class="mss-detail__grid">
-          <div class="mss-detail__media">${imageMarkup(product)}</div>
+          <div class="mss-detail__gallery">
+            <div class="mss-detail__media">${imageMarkup(product)}</div>
+            ${dimensionMarkup(product)}
+          </div>
           <div class="mss-detail__content">
             <p class="mss-detail__line">NEXT MSS</p>
             <p class="mss-detail__group">${escapeHtml(product.group_vi)}</p>
@@ -80,6 +92,10 @@
 
     root.addEventListener("error", event => {
       if (!(event.target instanceof HTMLImageElement)) return;
+      if (event.target.classList.contains("mss-dimension-image")) {
+        event.target.closest(".mss-dimension-block")?.remove();
+        return;
+      }
       const placeholder = document.createElement("div");
       placeholder.className = "mss-image-placeholder";
       placeholder.textContent = "Hình ảnh đang được cập nhật";
