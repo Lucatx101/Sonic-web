@@ -28,7 +28,6 @@
   function dimensionMarkup(product) {
     if (!product.dimension_image) return "";
     return `<figure class="mss-dimension-block">
-      <figcaption>Kích thước tham khảo</figcaption>
       <img class="mss-dimension-image" src="${escapeHtml(product.dimension_image)}"
         alt="Sơ đồ kích thước ${escapeHtml(product.name_vi)}">
     </figure>`;
