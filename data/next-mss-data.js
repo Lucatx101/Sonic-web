@@ -1,14 +1,343 @@
-/* NEXT MSS Cabinet Core — pilot catalog pages 58–59.
+/* NEXT MSS catalog products — catalog pages 58–63.
    Runtime data is a global const so the site works directly through file://.
    Internal provenance fields are intentionally retained for audit, but renderers
    only expose the Vietnamese public fields. */
+
+const NEXT_MSS_GATE_2B_GROUPS = {
+  stainlessWorktops: { id: "stainless-worktops", name_en: "Stainless steel worktops", name_vi: "Mặt bàn inox" },
+  woodenWorktops: { id: "wooden-worktops", name_en: "Wooden worktops", name_vi: "Mặt bàn gỗ" },
+  backPanels: { id: "back-panels", name_en: "Back panels", name_vi: "Tấm lưng" },
+  posts: { id: "posts", name_en: "Posts", name_vi: "Trụ lắp đặt" },
+  installationAccessories: { id: "installation-accessories", name_en: "Installation accessories", name_vi: "Phụ kiện lắp đặt" },
+  ledLighting: { id: "led-lighting", name_en: "LED lighting", name_vi: "Đèn LED và phụ kiện" },
+  cableTieStorage: { id: "cable-tie-storage", name_en: "Tie wrap storage", name_vi: "Dây rút và giá đựng" },
+  drawerOrganizers: { id: "drawer-organizers", name_en: "Drawer organizers", name_vi: "Khay chia ngăn kéo" },
+  powerDistribution: { id: "power-distribution", name_en: "Power distribution", name_vi: "Ổ cắm điện" },
+  wallCabinetAccessories: { id: "wall-cabinet-accessories", name_en: "Wall cabinet accessories", name_vi: "Phụ kiện tủ treo tường" },
+  perforatedPanelAccessories: { id: "perforated-panel-accessories", name_en: "Accessories for perforated back panels", name_vi: "Phụ kiện cho tấm lưng đục lỗ" },
+  setups: { id: "preconfigured-setups", name_en: "Preconfigured setups", name_vi: "Bộ tủ cấu hình sẵn" },
+};
+
+function createNextMssGate2BProduct({
+  sku, group, name_en, name_vi, dimensions_display = "", specs_en = [], specs_vi = [],
+  catalog_page, image_file = null, source_image = null, image_status = "sku_mapped_extracted_image",
+  image_shared_group = null, dimension_file = null, dimension_shared_group = null,
+  warnings = [], compatible_accessory_skus = [], compatible_product_skus = [], source_name = null,
+  setup_layout_shared = false,
+}) {
+  return {
+    line: "NEXT MSS", group_id: group.id, group_en: group.name_en, group_vi: group.name_vi,
+    sku, name_en, name_vi, dimensions_display, specs_en, specs_vi, catalog_page,
+    image: image_file ? `assets/products/next-mss/${image_file}` : null,
+    source_image: source_image
+      ? (source_image.startsWith("origin/") ? source_image : `assets/img/products/${source_image}`)
+      : null,
+    source_page: catalog_page,
+    dimension_image: dimension_file ? `assets/products/next-mss/dimensions/${dimension_file}` : null,
+    dimension_source_image: dimension_file
+      ? `origin/catalog-temp:assets/Sonic Catalogue 2026.pdf#page=${catalog_page}`
+      : null,
+    dimension_verified: Boolean(dimension_file), dimension_warning: null,
+    image_status, image_shared_group, dimension_shared_group, setup_layout_shared,
+    confidence: "high", verified: true, warnings,
+    compatible_accessory_skus, compatible_product_skus,
+    source_name,
+    catalog_source: `origin/catalog-temp:assets/Sonic Catalogue 2026.pdf#page=${catalog_page}`,
+  };
+}
+
+const NEXT_MSS_GATE_2B_PRODUCTS = [
+  ...[
+    ["47977", "NEXT MSS stainless steel worktop 674x500x20mm", "Mặt bàn inox NEXT MSS 674 × 500 × 20 mm", "674 × 500 × 20 mm"],
+    ["47984", "NEXT MSS stainless steel worktop 845x500x20mm", "Mặt bàn inox NEXT MSS 845 × 500 × 20 mm", "845 × 500 × 20 mm"],
+    ["47978", "NEXT MSS stainless steel worktop 1348x500x20mm", "Mặt bàn inox NEXT MSS 1348 × 500 × 20 mm", "1348 × 500 × 20 mm"],
+    ["47980", "NEXT MSS stainless steel worktop 1519x500x20mm", "Mặt bàn inox NEXT MSS 1519 × 500 × 20 mm", "1519 × 500 × 20 mm"],
+    ["47985", "NEXT MSS stainless steel worktop 1690x500x20mm", "Mặt bàn inox NEXT MSS 1690 × 500 × 20 mm", "1690 × 500 × 20 mm"],
+    ["47982", "NEXT MSS stainless steel worktop 2193x500x20mm", "Mặt bàn inox NEXT MSS 2193 × 500 × 20 mm", "2193 × 500 × 20 mm"],
+    ["47979", "NEXT MSS stainless steel extra deep worktop 1348x570x20mm", "Mặt bàn inox sâu mở rộng NEXT MSS 1348 × 570 × 20 mm", "1348 × 570 × 20 mm"],
+    ["47981", "NEXT MSS stainless steel extra deep worktop 1519x570x20mm", "Mặt bàn inox sâu mở rộng NEXT MSS 1519 × 570 × 20 mm", "1519 × 570 × 20 mm"],
+    ["47986", "NEXT MSS stainless steel extra deep worktop 1690x570x20mm", "Mặt bàn inox sâu mở rộng NEXT MSS 1690 × 570 × 20 mm", "1690 × 570 × 20 mm"],
+    ["47983", "NEXT MSS stainless steel extra deep worktop 2193x570x20mm", "Mặt bàn inox sâu mở rộng NEXT MSS 2193 × 570 × 20 mm", "2193 × 570 × 20 mm"],
+    ["47987", "NEXT MSS stainless steel corner worktop 875x500x20mm", "Mặt bàn inox góc NEXT MSS 875 × 500 × 20 mm", "875 × 500 × 20 mm"],
+  ].map(([sku, name_en, name_vi, dimensions_display]) => createNextMssGate2BProduct({
+    sku, group: NEXT_MSS_GATE_2B_GROUPS.stainlessWorktops, name_en, name_vi, dimensions_display,
+    catalog_page: 60, image_file: "shared-page060-stainless-worktops.png", source_image: "page060_img02.png",
+    image_status: "catalog_shared_group_image", image_shared_group: "page60-stainless-worktops",
+  })),
+  ...[
+    ["47378", "NEXT MSS wooden worktop 674x500x40mm", "Mặt bàn gỗ NEXT MSS 674 × 500 × 40 mm", "674 × 500 × 40 mm"],
+    ["47382", "NEXT MSS wooden worktop 845x500x40mm", "Mặt bàn gỗ NEXT MSS 845 × 500 × 40 mm", "845 × 500 × 40 mm"],
+    ["47279", "NEXT MSS wooden worktop 1348x500x40mm", "Mặt bàn gỗ NEXT MSS 1348 × 500 × 40 mm", "1348 × 500 × 40 mm"],
+    ["47988", "NEXT MSS wooden worktop 1519x500x40mm", "Mặt bàn gỗ NEXT MSS 1519 × 500 × 40 mm", "1519 × 500 × 40 mm"],
+    ["47295", "NEXT MSS wooden worktop 1690x500x40mm", "Mặt bàn gỗ NEXT MSS 1690 × 500 × 40 mm", "1690 × 500 × 40 mm"],
+    ["47306", "NEXT MSS wooden worktop 2193x500x40mm", "Mặt bàn gỗ NEXT MSS 2193 × 500 × 40 mm", "2193 × 500 × 40 mm"],
+    ["47544", "NEXT MSS wooden corner worktop 875x500x40mm", "Mặt bàn gỗ góc NEXT MSS 875 × 500 × 40 mm", "875 × 500 × 40 mm"],
+  ].map(([sku, name_en, name_vi, dimensions_display]) => createNextMssGate2BProduct({
+    sku, group: NEXT_MSS_GATE_2B_GROUPS.woodenWorktops, name_en, name_vi, dimensions_display,
+    catalog_page: 60, image_file: "shared-page060-wooden-worktops.png",
+    source_image: "origin/catalog-temp:assets/Sonic Catalogue 2026.pdf#page=60",
+    image_status: "catalog_shared_group_pdf_crop", image_shared_group: "page60-wooden-worktops",
+  })),
+  ...[
+    ["47966", "NEXT MSS perforated back panel 613x30x1038mm", "Tấm lưng đục lỗ NEXT MSS 613 × 30 × 1038 mm", "613 × 30 × 1038 mm"],
+    ["47967", "NEXT MSS solid steel back panel 613x30x1038mm", "Tấm lưng thép liền NEXT MSS 613 × 30 × 1038 mm", "613 × 30 × 1038 mm"],
+    ["47969", "NEXT MSS perforated wide back panel 784x30x1038mm", "Tấm lưng đục lỗ bản rộng NEXT MSS 784 × 30 × 1038 mm", "784 × 30 × 1038 mm"],
+    ["47970", "NEXT MSS solid steel back panel 784x30x1038mm", "Tấm lưng thép liền NEXT MSS 784 × 30 × 1038 mm", "784 × 30 × 1038 mm"],
+    ["47968", "NEXT MSS solid steel low level back panel 613x30x148mm", "Tấm lưng thép liền thấp NEXT MSS 613 × 30 × 148 mm", "613 × 30 × 148 mm"],
+    ["47971", "NEXT MSS solid steel low level wide back panel 784x30x148mm", "Tấm lưng thép liền thấp bản rộng NEXT MSS 784 × 30 × 148 mm", "784 × 30 × 148 mm"],
+    ["47989", "NEXT MSS solid steel back panel for bridge unit 843x31x895mm", "Tấm lưng thép liền cho khoang cầu nối NEXT MSS 843 × 31 × 895 mm", "843 × 31 × 895 mm"],
+  ].map(([sku, name_en, name_vi, dimensions_display]) => createNextMssGate2BProduct({
+    sku, group: NEXT_MSS_GATE_2B_GROUPS.backPanels, name_en, name_vi, dimensions_display,
+    catalog_page: 60, image_file: "shared-page060-back-panels.png", source_image: "page060_img01.png",
+    image_status: "catalog_shared_group_image", image_shared_group: "page60-back-panels",
+  })),
+  ...[
+    ["47973", "NEXT MSS post 60x30x1914mm", "Trụ NEXT MSS 60 × 30 × 1914 mm", "60 × 30 × 1914 mm", "47973.png", "page060_img05.png"],
+    ["47972", "NEXT MSS post 30x30x1914mm", "Trụ NEXT MSS 30 × 30 × 1914 mm", "30 × 30 × 1914 mm", "47972.png", "page060_img04.png"],
+    ["47975", "NEXT MSS post 60x30x1020mm", "Trụ NEXT MSS 60 × 30 × 1020 mm", "60 × 30 × 1020 mm", "47975.png", "page060_img07.png"],
+    ["47974", "NEXT MSS post 30x30x1020mm", "Trụ NEXT MSS 30 × 30 × 1020 mm", "30 × 30 × 1020 mm", "47974.png", "page060_img06.png"],
+  ].map(([sku, name_en, name_vi, dimensions_display, image_file, source_image]) => createNextMssGate2BProduct({
+    sku, group: NEXT_MSS_GATE_2B_GROUPS.posts, name_en, name_vi, dimensions_display,
+    catalog_page: 60, image_file, source_image,
+  })),
+  createNextMssGate2BProduct({
+    sku: "49220", group: NEXT_MSS_GATE_2B_GROUPS.installationAccessories,
+    name_en: "NEXT MSS spacer for use in combination with extra deep worktops.",
+    name_vi: "Miếng đệm NEXT MSS dùng với mặt bàn sâu mở rộng",
+    specs_en: ["To fill space between back wall and base cabinets."],
+    specs_vi: ["Lấp khoảng trống giữa tường sau và tủ chân đế."], catalog_page: 60,
+    image_status: "placeholder_no_unambiguous_image",
+    warnings: ["Catalog page 60 does not provide an unambiguous standalone image for SKU 49220."],
+  }),
+  createNextMssGate2BProduct({
+    sku: "49221", group: NEXT_MSS_GATE_2B_GROUPS.installationAccessories,
+    name_en: "NEXT MSS decorative side panel for use in combination with extra deep worktops.",
+    name_vi: "Tấm ốp hông trang trí NEXT MSS dùng với mặt bàn sâu mở rộng",
+    specs_en: ["To fill space between back wall and tall cabinets."],
+    specs_vi: ["Lấp khoảng trống giữa tường sau và tủ cao."], catalog_page: 60,
+    image_status: "placeholder_no_unambiguous_image",
+    warnings: ["Catalog page 60 does not provide an unambiguous standalone image for SKU 49221."],
+  }),
+
+  ...[
+    ["5999201", "LED light, length 600mm", "Đèn LED dài 600 mm", "600 mm"],
+    ["5999202", "LED light, length 800mm", "Đèn LED dài 800 mm", "800 mm"],
+    ["5999204", "Adaptor for LED light, EU plug", "Bộ chuyển đổi cho đèn LED, phích cắm EU", ""],
+    ["5999205", "Connector with switch for LED light", "Đầu nối có công tắc cho đèn LED", ""],
+    ["5999206", "LED light 600mm (EU) with adaptor+connector", "Đèn LED 600 mm (EU) kèm bộ chuyển đổi và đầu nối", "600 mm"],
+    ["5999208", "LED light 800mm (EU) with adaptor+connector", "Đèn LED 800 mm (EU) kèm bộ chuyển đổi và đầu nối", "800 mm"],
+  ].map(([sku, name_en, name_vi, dimensions_display]) => createNextMssGate2BProduct({
+    sku, group: NEXT_MSS_GATE_2B_GROUPS.ledLighting, name_en, name_vi, dimensions_display,
+    catalog_page: 61,
+    image_file: ["5999204", "5999205"].includes(sku) ? null : "shared-page061-led-lighting.png",
+    source_image: ["5999204", "5999205"].includes(sku) ? null : "page061_img02.png",
+    image_status: ["5999204", "5999205"].includes(sku)
+      ? "placeholder_no_unambiguous_image"
+      : "catalog_shared_group_image",
+    image_shared_group: ["5999204", "5999205"].includes(sku) ? null : "page61-led-lighting",
+    warnings: ["5999204", "5999205"].includes(sku)
+      ? [`Catalog page 61 does not provide an unambiguous standalone image for SKU ${sku}.`]
+      : [],
+  })),
+  createNextMssGate2BProduct({
+    sku: "49138", group: NEXT_MSS_GATE_2B_GROUPS.installationAccessories,
+    name_en: "NEXT MSS bracket for adapter. Mounts (lighting) adapter to back panel.",
+    name_vi: "Giá gắn bộ chuyển đổi đèn NEXT MSS vào tấm lưng", dimensions_display: "122 × 93 × 47 mm",
+    catalog_page: 61, image_status: "placeholder_no_unambiguous_image",
+    warnings: ["Catalog page 61 lists SKU 49138 in the LED section but does not provide a distinct product image."],
+  }),
+  ...[
+    ["49229", "Tie wrap holder for NEXT MSS", "Giá đựng dây rút cho NEXT MSS"],
+    ["49228", "Tie wrap holder for NEXT MSS filled with:", "Giá đựng dây rút NEXT MSS kèm dây rút"],
+  ].map(([sku, name_en, name_vi]) => createNextMssGate2BProduct({
+    sku, group: NEXT_MSS_GATE_2B_GROUPS.cableTieStorage, name_en, name_vi,
+    catalog_page: 61, image_file: "shared-page061-tie-wrap-holder.png", source_image: "page061_img06.png",
+    image_status: "catalog_shared_group_image", image_shared_group: "page61-tie-wrap-holder",
+  })),
+  ...[
+    ["4821511", "2x tie wrap 3,6 x 140mm; 100 pcs in bag", "2 × dây rút 3,6 × 140 mm; 100 chiếc/túi", "3,6 × 140 mm"],
+    ["4821512", "2x tie wrap 3,6 x 180mm; 100 pcs in bag", "2 × dây rút 3,6 × 180 mm; 100 chiếc/túi", "3,6 × 180 mm"],
+    ["4821513", "2x tie wrap 4,8 x 220mm; 100 pcs in bag", "2 × dây rút 4,8 × 220 mm; 100 chiếc/túi", "4,8 × 220 mm"],
+    ["4821515", "2x tie wrap 4,8 x 280mm; 100 pcs in bag", "2 × dây rút 4,8 × 280 mm; 100 chiếc/túi", "4,8 × 280 mm"],
+    ["4821517", "2x tie wrap 4,8 x 370mm; 100 pcs in bag", "2 × dây rút 4,8 × 370 mm; 100 chiếc/túi", "4,8 × 370 mm"],
+  ].map(([sku, name_en, name_vi, dimensions_display]) => createNextMssGate2BProduct({
+    sku, group: NEXT_MSS_GATE_2B_GROUPS.cableTieStorage, name_en, name_vi, dimensions_display,
+    catalog_page: 61, image_status: "placeholder_no_unambiguous_image",
+    warnings: [`Catalog page 61 includes SKU ${sku} in the filled-holder table but does not provide a standalone bag image.`],
+  })),
+  ...[
+    ["4720101", "Empty tray, 5 compartments", "Khay trống 5 ngăn", "370 × 145 × 48 mm", "4720101.png", "page061_img04.png"],
+    ["4720102", "Empty tray, 5 compartments", "Khay trống 5 ngăn", "370 × 145 × 48 mm", "4720102.png", "page061_img05.png"],
+    ["4720103", "Empty tray, 8 compartments", "Khay trống 8 ngăn", "370 × 290 × 48 mm", "4720103.png", "page061_img07.png"],
+    ["4720104", "Empty tray, 12 compartments", "Khay trống 12 ngăn", "370 × 290 × 48 mm", "4720104.png", "page061_img08.png"],
+    ["4720105", "Empty tray, 18 compartments", "Khay trống 18 ngăn", "370 × 290 × 48 mm", "4720105.png", "page061_img09.png"],
+  ].map(([sku, name_en, name_vi, dimensions_display, image_file, source_image]) => createNextMssGate2BProduct({
+    sku, group: NEXT_MSS_GATE_2B_GROUPS.drawerOrganizers, name_en, name_vi, dimensions_display,
+    specs_en: ["Also suitable for S7, S8, S9, S10 toolbox"],
+    specs_vi: ["Cũng phù hợp với tủ đồ nghề S7, S8, S9 và S10"],
+    catalog_page: 61, image_file, source_image,
+  })),
+  createNextMssGate2BProduct({
+    sku: "49230", group: NEXT_MSS_GATE_2B_GROUPS.powerDistribution,
+    name_en: "NEXT powerbar EU version", name_vi: "Ổ cắm điện NEXT phiên bản EU",
+    specs_en: [
+      "EU powerbar with 4 grounded outlets", "3 USB ports (2x USB-C, 1x USB-A)",
+      "Illuminated reset/off switch", "Equipped with 5-meter cord",
+      "Nylon-moulded outlets and endcaps - protects and insulates the power supply",
+      "Available from Q2 2026",
+    ],
+    specs_vi: [
+      "4 ổ cắm EU có tiếp địa", "3 cổng USB (2 USB-C, 1 USB-A)",
+      "Công tắc đặt lại/tắt có đèn", "Dây điện dài 5 m",
+      "Ổ cắm và nắp đầu bằng nylon đúc, giúp bảo vệ và cách điện nguồn điện",
+      "Dự kiến có hàng từ quý 2 năm 2026",
+    ],
+    catalog_page: 61, image_file: "49230.png", source_image: "page061_img10.png",
+  }),
+  createNextMssGate2BProduct({
+    sku: "49137", group: NEXT_MSS_GATE_2B_GROUPS.installationAccessories,
+    name_en: "NEXT MSS powerbar bracket", name_vi: "Giá gắn ổ cắm điện NEXT MSS",
+    specs_en: ["Finished in matte RAL 7016 to perfectly match the setup.", "Easy installation with secure screw connection."],
+    specs_vi: ["Hoàn thiện màu RAL 7016 mờ, đồng bộ với bộ tủ.", "Lắp đặt dễ dàng bằng liên kết vít chắc chắn."],
+    catalog_page: 61, image_file: "49137.png", source_image: "page061_img01.png",
+    source_name: "NEXT MSS STEKKERDOOSBEUGEL",
+    warnings: ["Catalog heading is Dutch; name_en is a literal English normalization of the printed heading."],
+  }),
+  createNextMssGate2BProduct({
+    sku: "49147", group: NEXT_MSS_GATE_2B_GROUPS.wallCabinetAccessories,
+    name_en: "NEXT MSS top storage tray 674mm", name_vi: "Khay chứa đồ phía trên tủ treo tường NEXT MSS 674 mm",
+    dimensions_display: "674 × 301 × 130 mm",
+    specs_en: ["Expands storage space above wall cabinet #47963."],
+    specs_vi: ["Mở rộng không gian lưu trữ phía trên tủ treo tường mã 47963."],
+    catalog_page: 61, image_file: "49147.png",
+    source_image: "origin/catalog-temp:assets/Sonic Catalogue 2026.pdf#page=61",
+    image_status: "catalog_shared_group_pdf_crop", image_shared_group: "page61-top-storage-trays",
+    compatible_product_skus: ["47963"], source_name: "NEXT MSS OPBERGBAKKEN",
+    warnings: ["Catalog heading is Dutch; name_en is normalized from the printed heading, dimensions and description."],
+  }),
+  createNextMssGate2BProduct({
+    sku: "49148", group: NEXT_MSS_GATE_2B_GROUPS.wallCabinetAccessories,
+    name_en: "NEXT MSS top storage tray 845mm", name_vi: "Khay chứa đồ phía trên tủ treo tường NEXT MSS 845 mm",
+    dimensions_display: "845 × 301 × 130 mm",
+    specs_en: ["Expands storage space above wall cabinet #47964."],
+    specs_vi: ["Mở rộng không gian lưu trữ phía trên tủ treo tường mã 47964."],
+    catalog_page: 61, image_file: "49148.png",
+    source_image: "origin/catalog-temp:assets/Sonic Catalogue 2026.pdf#page=61",
+    image_status: "catalog_shared_group_pdf_crop", image_shared_group: "page61-top-storage-trays",
+    compatible_product_skus: ["47964"], source_name: "NEXT MSS OPBERGBAKKEN",
+    warnings: ["Catalog heading is Dutch; name_en is normalized from the printed heading, dimensions and description."],
+  }),
+
+  ...[
+    ["49139", "NEXT MSS power tool bracket", "Giá đỡ dụng cụ điện NEXT MSS", "", "49139.png", "page062_img05.png"],
+    ["49150", "NEXT MSS storage shelf 400x60mm", "Kệ chứa đồ NEXT MSS 400 × 60 mm", "400 × 60 mm", "49150.png", "page062_img07.png"],
+    ["49143", "NEXT MSS hook straight 75mm", "Móc thẳng NEXT MSS 75 mm", "75 mm", "49143.png", "page062_img08.png"],
+    ["49152", "NEXT MSS socket holder", "Giá giữ đầu tuýp NEXT MSS", "", "49152.png", "page062_img06.png"],
+    ["49140", "NEXT MSS hook single 90° 25mm", "Móc đơn 90° NEXT MSS 25 mm", "25 mm", "49140.png", "page062_img02.png"],
+    ["49144", "NEXT MSS hook U-shaped 25x35mm", "Móc chữ U NEXT MSS 25 × 35 mm", "25 × 35 mm", "49144.png", "page062_img10.png"],
+    ["49151", "NEXT MSS can holder for 4 (spray) cans", "Giá giữ 4 bình xịt NEXT MSS", "", "49151.png", "page062_img03.png"],
+    ["49141", "NEXT MSS hook single 90° 50mm", "Móc đơn 90° NEXT MSS 50 mm", "50 mm", "49141.png", "page062_img01.png"],
+    ["49145", "NEXT MSS hook rounded Ø40mm", "Móc tròn NEXT MSS Ø40 mm", "Ø40 mm", "49145.png", "page062_img11.png"],
+    ["49149", "NEXT MSS storage bin", "Khay chứa đồ NEXT MSS", "200 × 100 × 60 mm", "49149.png", "page062_img04.png"],
+    ["49142", "NEXT MSS hook single 90° 200mm", "Móc đơn 90° NEXT MSS 200 mm", "200 mm", "49142.png", "page062_img09.png"],
+    ["49146", "NEXT MSS hook bracket 30x60mm", "Móc giá đỡ NEXT MSS 30 × 60 mm", "30 × 60 mm", "49146.png", "page062_img12.png"],
+  ].map(([sku, name_en, name_vi, dimensions_display, image_file, source_image]) => createNextMssGate2BProduct({
+    sku, group: NEXT_MSS_GATE_2B_GROUPS.perforatedPanelAccessories,
+    name_en, name_vi, dimensions_display, catalog_page: 62, image_file,
+    source_image: "origin/catalog-temp:assets/Sonic Catalogue 2026.pdf#page=62",
+    image_status: "sku_mapped_pdf_crop",
+  })),
+
+  ...[
+    ["4930901", "NEXT MSS setup stainless steel worktop high 1958mm, perforated back panel", "Bộ tủ NEXT MSS cao 1958 mm, mặt bàn inox và tấm lưng đục lỗ"],
+    ["4930709", "NEXT MSS setup stainless steel worktop high 1958mm, solid back panel", "Bộ tủ NEXT MSS cao 1958 mm, mặt bàn inox và tấm lưng liền"],
+    ["4930801", "NEXT MSS setup wooden worktop high 1958mm, perforated back panel", "Bộ tủ NEXT MSS cao 1958 mm, mặt bàn gỗ và tấm lưng đục lỗ"],
+    ["4930601", "NEXT MSS setup wooden worktop 1958mm, solid back panel", "Bộ tủ NEXT MSS 1958 mm, mặt bàn gỗ và tấm lưng liền"],
+  ].map(([sku, name_en, name_vi]) => createNextMssGate2BProduct({
+    sku, group: NEXT_MSS_GATE_2B_GROUPS.setups, name_en, name_vi,
+    dimensions_display: "1958 × 2000 × 530 mm", catalog_page: 63,
+    image_file: "shared-page063-layout-1958.png", source_image: "page063_img05.png",
+    image_status: "catalog_shared_setup_layout", image_shared_group: "page63-layout-1958",
+    dimension_file: "shared-page063-layout-1958-dim.png", dimension_shared_group: "page63-layout-1958",
+    setup_layout_shared: true,
+  })),
+  ...[
+    ["4930902", "NEXT MSS setup stainless steel worktop high 2300mm, perforated back panel", "Bộ tủ NEXT MSS cao 2300 mm, mặt bàn inox và tấm lưng đục lỗ"],
+    ["4930710", "NEXT MSS setup stainless steel worktop high 2300mm, solid back panel", "Bộ tủ NEXT MSS cao 2300 mm, mặt bàn inox và tấm lưng liền"],
+    ["4930802", "NEXT MSS setup wooden worktop high 2300mm, perforated back panel", "Bộ tủ NEXT MSS cao 2300 mm, mặt bàn gỗ và tấm lưng đục lỗ"],
+    ["4930602", "NEXT MSS setup wooden worktop 2300mm, solid back panel", "Bộ tủ NEXT MSS 2300 mm, mặt bàn gỗ và tấm lưng liền"],
+  ].map(([sku, name_en, name_vi]) => createNextMssGate2BProduct({
+    sku, group: NEXT_MSS_GATE_2B_GROUPS.setups, name_en, name_vi,
+    dimensions_display: "2300 × 2000 × 530 mm", catalog_page: 63,
+    image_file: "shared-page063-layout-2300.png", source_image: "page063_img02.png",
+    image_status: "catalog_shared_setup_layout", image_shared_group: "page63-layout-2300",
+    dimension_file: "shared-page063-layout-2300-dim.png", dimension_shared_group: "page63-layout-2300",
+    setup_layout_shared: true,
+  })),
+  ...[
+    ["4930903", "NEXT MSS setup stainless steel worktop high 2803mm, bridge unit and perforated back panel", "Bộ tủ NEXT MSS cao 2803 mm, mặt bàn inox, khoang cầu nối và tấm lưng đục lỗ"],
+    ["4930711", "NEXT MSS setup stianless steel worktop high 2803mm, bridge unit and solid back panel", "Bộ tủ NEXT MSS cao 2803 mm, mặt bàn inox, khoang cầu nối và tấm lưng liền"],
+    ["4930803", "NEXT MSS setup wooden worktop high 2803mm, bridge unit and perforated back panel", "Bộ tủ NEXT MSS cao 2803 mm, mặt bàn gỗ, khoang cầu nối và tấm lưng đục lỗ"],
+    ["4930603", "NEXT MSS setup wooden worktop high 2803mm, bridge unit and solid back panel", "Bộ tủ NEXT MSS cao 2803 mm, mặt bàn gỗ, khoang cầu nối và tấm lưng liền"],
+  ].map(([sku, name_en, name_vi]) => createNextMssGate2BProduct({
+    sku, group: NEXT_MSS_GATE_2B_GROUPS.setups, name_en, name_vi,
+    dimensions_display: "2803 × 2000 × 530 mm", catalog_page: 63,
+    image_file: "shared-page063-layout-2803-a.png", source_image: "page063_img04.png",
+    image_status: "catalog_shared_setup_layout", image_shared_group: "page63-layout-2803-a",
+    dimension_file: "shared-page063-layout-2803-a-dim.png", dimension_shared_group: "page63-layout-2803-a",
+    setup_layout_shared: true,
+  })),
+  ...[
+    ["4930904", "NEXT MSS setup stainless steel worktop high 2803mm, bridge unit and perforated back panel", "Bộ tủ NEXT MSS cao 2803 mm, mặt bàn inox, khoang cầu nối và tấm lưng đục lỗ"],
+    ["4930712", "NEXT MSS setup stianless steel worktop high 2803mm, bridge unit and solid back panel", "Bộ tủ NEXT MSS cao 2803 mm, mặt bàn inox, khoang cầu nối và tấm lưng liền"],
+    ["4930804", "NEXT MSS setup wooden worktop high 2803mm, bridge unit and perforated back panel", "Bộ tủ NEXT MSS cao 2803 mm, mặt bàn gỗ, khoang cầu nối và tấm lưng đục lỗ"],
+    ["4930604", "NEXT MSS setup wooden worktop high 2803mm, bridge unit and solid back panel", "Bộ tủ NEXT MSS cao 2803 mm, mặt bàn gỗ, khoang cầu nối và tấm lưng liền"],
+  ].map(([sku, name_en, name_vi]) => createNextMssGate2BProduct({
+    sku, group: NEXT_MSS_GATE_2B_GROUPS.setups, name_en, name_vi,
+    dimensions_display: "2803 × 2000 × 530 mm", catalog_page: 63,
+    image_file: "shared-page063-layout-2803-b.png",
+    source_image: "origin/catalog-temp:assets/Sonic Catalogue 2026.pdf#page=63",
+    image_status: "catalog_shared_setup_layout_pdf_crop", image_shared_group: "page63-layout-2803-b",
+    dimension_file: "shared-page063-layout-2803-b-dim.png", dimension_shared_group: "page63-layout-2803-b",
+    setup_layout_shared: true,
+  })),
+  ...[
+    ["4930501", "NEXT MSS setup stainless steel worktop low 2193mm", "Bộ tủ NEXT MSS thấp 2193 mm, mặt bàn inox"],
+    ["4930401", "NEXT MSS setup wooden worktop low 2193mm", "Bộ tủ NEXT MSS thấp 2193 mm, mặt bàn gỗ"],
+  ].map(([sku, name_en, name_vi]) => createNextMssGate2BProduct({
+    sku, group: NEXT_MSS_GATE_2B_GROUPS.setups, name_en, name_vi,
+    dimensions_display: "2193 × 1110 × 530 mm", catalog_page: 63,
+    image_file: "shared-page063-layout-2193.png", source_image: "page063_img03.png",
+    image_status: "catalog_shared_setup_layout", image_shared_group: "page63-layout-2193",
+    dimension_file: "shared-page063-layout-2193-dim.png", dimension_shared_group: "page63-layout-2193",
+    setup_layout_shared: true,
+  })),
+  ...[
+    ["4930906", "NEXT MSS corner setup stainless steel worktop high 5026mm, bridge unit and perforated back panel", "Bộ tủ góc NEXT MSS cao 5026 mm, mặt bàn inox, khoang cầu nối và tấm lưng đục lỗ"],
+    ["4930714", "NEXT MSS corner setup stainless steel worktop high 5026mm, bridge unit and solid back panel", "Bộ tủ góc NEXT MSS cao 5026 mm, mặt bàn inox, khoang cầu nối và tấm lưng liền"],
+    ["4930806", "NEXT MSS corner setup wooden worktop high 5026mm, bridge unit and perforated back panel", "Bộ tủ góc NEXT MSS cao 5026 mm, mặt bàn gỗ, khoang cầu nối và tấm lưng đục lỗ"],
+    ["4930606", "NEXT MSS corner setup wooden worktop high 5026mm, bridge unit and solid back panel", "Bộ tủ góc NEXT MSS cao 5026 mm, mặt bàn gỗ, khoang cầu nối và tấm lưng liền"],
+  ].map(([sku, name_en, name_vi]) => createNextMssGate2BProduct({
+    sku, group: NEXT_MSS_GATE_2B_GROUPS.setups, name_en, name_vi,
+    dimensions_display: "5026 × 2000 × 530 mm", catalog_page: 63,
+    image_file: "shared-page063-layout-5026.png", source_image: "page063_img01.png",
+    image_status: "catalog_shared_setup_layout", image_shared_group: "page63-layout-5026",
+    dimension_file: "shared-page063-layout-5026-dim.png", dimension_shared_group: "page63-layout-5026",
+    setup_layout_shared: true,
+  })),
+];
+
 const NEXT_MSS_DATA = {
   line: {
     id: "next-mss",
     name: "NEXT MSS",
     title_vi: "Giải pháp lưu trữ chuyên nghiệp NEXT MSS",
     intro_vi: "Hệ tủ lưu trữ mô-đun dành cho xưởng chuyên nghiệp, giúp tổ chức không gian làm việc gọn gàng và linh hoạt.",
-    catalog_pages: [58, 59],
+    catalog_pages: [58, 59, 60, 61, 62, 63],
+    source_notes: [
+      "PDF page 61 contains 23 SKU while products.json and catalog_pages.json are incomplete for that page.",
+      "PDF page 63 contains 22 setup SKU while products.json and catalog_pages.json omit those setup records.",
+    ],
   },
   groups: [
     { id: "tall-storage-cabinets", name_en: "Tall storage cabinets", name_vi: "Tủ lưu trữ cao" },
@@ -20,6 +349,7 @@ const NEXT_MSS_DATA = {
     { id: "corner-base-cabinets", name_en: "Corner base cabinets", name_vi: "Tủ chân đế góc" },
     { id: "waste-bin-cabinets", name_en: "Waste-bin cabinets", name_vi: "Tủ chứa thùng rác" },
     { id: "wall-cabinets", name_en: "Wall cabinets", name_vi: "Tủ treo tường" },
+    ...Object.values(NEXT_MSS_GATE_2B_GROUPS),
   ],
   products: [
     {
@@ -284,6 +614,7 @@ const NEXT_MSS_DATA = {
       image_status: "sku_mapped_extracted_image", confidence: "high", verified: true,
       warnings: [], compatible_accessory_skus: [],
     },
+    ...NEXT_MSS_GATE_2B_PRODUCTS,
   ],
 };
 

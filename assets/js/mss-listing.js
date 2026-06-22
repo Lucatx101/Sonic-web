@@ -19,9 +19,25 @@
     return `contact.html?pid=${encodeURIComponent(product.sku)}&cfg=${encodeURIComponent(product.name_vi)}`;
   }
 
+  function mediaVariant(product) {
+    if (product.setup_layout_shared) return "setup";
+    if (product.group_id === "posts") return "post";
+    if (["installation-accessories", "led-lighting", "cable-tie-storage", "drawer-organizers",
+      "power-distribution", "wall-cabinet-accessories", "perforated-panel-accessories"].includes(product.group_id)) {
+      return "compact";
+    }
+    return "standard";
+  }
+
+  function dimensionsMarkup(product) {
+    if (!product.dimensions_display) return "";
+    return `<div><dt>Kích thước</dt><dd>${escapeHtml(product.dimensions_display)}</dd></div>`;
+  }
+
   function cardMarkup(product) {
-    return `<article class="mss-card" data-group="${escapeHtml(product.group_id)}">
-      <a class="mss-card__media" href="mss-product.html?id=${encodeURIComponent(product.sku)}"
+    const variant = mediaVariant(product);
+    return `<article class="mss-card mss-card--${variant}" data-group="${escapeHtml(product.group_id)}">
+      <a class="mss-card__media mss-card__media--${variant}" href="mss-product.html?id=${encodeURIComponent(product.sku)}"
          aria-label="Xem chi tiết ${escapeHtml(product.name_vi)}">
         ${imageMarkup(product)}
       </a>
@@ -30,7 +46,7 @@
         <h2><a href="mss-product.html?id=${encodeURIComponent(product.sku)}">${escapeHtml(product.name_vi)}</a></h2>
         <dl class="mss-card__facts">
           <div><dt>Mã sản phẩm</dt><dd>${escapeHtml(product.sku)}</dd></div>
-          <div><dt>Kích thước</dt><dd>${escapeHtml(product.dimensions_display)}</dd></div>
+          ${dimensionsMarkup(product)}
         </dl>
         <div class="mss-card__actions">
           <a class="mss-card__detail" href="mss-product.html?id=${encodeURIComponent(product.sku)}">Xem chi tiết</a>
@@ -51,14 +67,15 @@
     if (title) title.textContent = data.line.title_vi;
     if (intro) intro.textContent = data.line.intro_vi;
 
+    const publicProducts = data.products.filter(product => product.verified !== false);
     const availableGroups = data.groups.filter(group =>
-      data.products.some(product => product.group_id === group.id));
+      publicProducts.some(product => product.group_id === group.id));
     const filterItems = [{ id: "all", name_vi: "Tất cả" }, ...availableGroups];
 
     const render = groupId => {
       const products = groupId === "all"
-        ? data.products
-        : data.products.filter(product => product.group_id === groupId);
+        ? publicProducts
+        : publicProducts.filter(product => product.group_id === groupId);
       grid.innerHTML = products.length
         ? products.map(cardMarkup).join("")
         : '<p class="mss-empty">Chưa có sản phẩm trong nhóm này.</p>';
