@@ -566,27 +566,101 @@ a { color: inherit; text-decoration: none; }
   .section { padding: 60px 0; }
 }
 
-/* ===== NEXT MSS pilot ===== */
+/* ===== NEXT MSS landing & listing ===== */
 .mss-page { background: #fff; }
 .mss-hero {
-  position: relative; overflow: hidden; color: #fff;
-  padding: 76px 0 82px;
+  position: relative;
+  min-height: min(840px, calc(100vh - 108px));
+  overflow: hidden;
+  color: #fff;
   background:
-    radial-gradient(circle at 82% 24%, rgba(226, 0, 26, .24), transparent 28%),
-    linear-gradient(125deg, #0e1216 0%, #1b222a 68%, #11161b 100%);
+    linear-gradient(90deg, rgba(4, 6, 8, .18) 0%, rgba(4, 6, 8, 0) 58%),
+    linear-gradient(0deg, rgba(4, 6, 8, .94) 0%, rgba(4, 6, 8, .5) 28%, rgba(4, 6, 8, 0) 60%),
+    url("../products/next-mss/landing/next-mss-hero.png") center center / cover no-repeat;
 }
-.mss-hero::after {
-  content: ""; position: absolute; width: 320px; height: 320px;
-  right: -110px; bottom: -190px; border: 54px solid rgba(255,255,255,.035); border-radius: 50%;
+.mss-hero__inner {
+  position: relative;
+  display: flex;
+  min-height: min(840px, calc(100vh - 108px));
+  flex-direction: column;
+  padding-top: 30px;
+  padding-bottom: 66px;
 }
-.mss-hero .breadcrumb { color: #aab3bf; }
+.mss-hero .breadcrumb { color: #c1c7cf; }
 .mss-hero .breadcrumb a { color: #fff; }
-.mss-hero__eyebrow {
-  display: inline-block; margin-bottom: 12px; color: #ff7181;
-  font-size: 13px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase;
+.mss-hero__sr-title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
-.mss-hero h1 { max-width: 760px; font-size: clamp(36px, 5.8vw, 62px); line-height: 1.04; letter-spacing: -.035em; }
-.mss-hero p { max-width: 680px; margin-top: 18px; color: #c5ccd5; font-size: 17px; line-height: 1.7; }
+.mss-hero__copy { max-width: 620px; margin-top: auto; }
+.mss-hero__eyebrow, .mss-overview__eyebrow {
+  display: inline-block;
+  margin-bottom: 13px;
+  color: #ff5265;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.mss-hero__copy p { color: #e1e5e9; font-size: clamp(16px, 1.8vw, 19px); line-height: 1.7; }
+.mss-hero__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+
+.mss-overview { overflow: hidden; background: #050607; color: #fff; }
+.mss-feature { padding: 142px 0; }
+.mss-feature + .mss-feature { border-top: 1px solid rgba(255, 255, 255, .1); }
+.mss-feature__grid {
+  display: grid;
+  grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr);
+  align-items: center;
+  gap: clamp(54px, 8vw, 108px);
+}
+.mss-feature__media { overflow: hidden; background: #0a0c0e; }
+.mss-feature__media img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+.mss-feature__content { max-width: 540px; }
+.mss-feature__content h2,
+.mss-module-showcase__copy h2,
+.mss-system-showcase__copy h2,
+.mss-workshop-showcase__copy h2 {
+  color: #fff;
+  font-size: clamp(32px, 4.7vw, 58px);
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: -.045em;
+  line-height: 1.04;
+}
+.mss-feature__content p,
+.mss-module-showcase__copy p,
+.mss-system-showcase__copy p,
+.mss-workshop-showcase__copy p {
+  margin-top: 25px;
+  color: #b8bec6;
+  font-size: clamp(16px, 1.65vw, 19px);
+  line-height: 1.75;
+}
+.mss-feature__content .btn { margin-top: 32px; }
+.mss-feature--reverse .mss-feature__media { order: 2; }
+.mss-feature--reverse .mss-feature__content { order: 1; margin-left: auto; }
+
+.mss-module-showcase,
+.mss-system-showcase,
+.mss-workshop-showcase { border-top: 1px solid rgba(255, 255, 255, .1); padding: 148px 0; }
+.mss-module-showcase__copy { max-width: 860px; }
+.mss-module-showcase__copy p { max-width: 720px; }
+.mss-module-showcase__media { margin-top: 72px; }
+.mss-module-showcase__media img { width: min(100%, 1050px); margin: 0 auto; background: #fff; }
+.mss-system-showcase__media img,
+.mss-workshop-showcase__media img { width: 100%; }
+.mss-system-showcase__copy { max-width: 760px; margin-top: 60px; }
+.mss-workshop-showcase__copy { max-width: 760px; margin: 0 0 60px auto; }
+.mss-workshop-showcase__media { width: min(100%, 1120px); margin-left: auto; }
+
+.mss-products { scroll-margin-top: 88px; background: #fff; }
+.mss-products .section-head { max-width: 720px; }
 
 .mss-filter { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 34px; }
 .mss-filter__button {
@@ -697,17 +771,53 @@ a { color: inherit; text-decoration: none; }
   }
   .mss-page .nav__submenu { display: none; padding-left: 14px; }
   .mss-page .nav__dropdown-wrap.submenu-open .nav__submenu { display: flex; }
+  .mss-feature { padding: 104px 0; }
+  .mss-feature__grid { gap: 46px; }
+  .mss-module-showcase,
+  .mss-system-showcase,
+  .mss-workshop-showcase { padding: 110px 0; }
   .mss-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .mss-detail__grid { grid-template-columns: 1fr; gap: 34px; }
   .mss-detail__gallery { position: static; }
   .mss-detail__media { min-height: 420px; }
 }
 
+@media (max-width: 800px) {
+  .mss-feature__grid { grid-template-columns: 1fr; }
+  .mss-feature__media { width: min(100%, 560px); }
+  .mss-feature__content { max-width: 620px; }
+  .mss-feature--reverse .mss-feature__media { order: 2; margin-left: auto; }
+  .mss-feature--reverse .mss-feature__content { order: 1; margin-left: 0; }
+}
+
 @media (max-width: 680px) {
   .mss-page .nav__cta .btn--primary { display: none; }
   .mss-page .nav__cta { margin-left: auto; }
-  .mss-hero { padding: 56px 0 62px; }
-  .mss-hero p { font-size: 15.5px; }
+  .mss-hero {
+    min-height: 670px;
+    background-position: 41% center;
+  }
+  .mss-hero__inner { min-height: 670px; padding-top: 20px; padding-bottom: 38px; }
+  .mss-hero__copy p { font-size: 15.5px; }
+  .mss-hero__actions { align-items: stretch; flex-direction: column; }
+  .mss-hero__actions .btn { justify-content: center; }
+  .mss-feature { padding: 78px 0; }
+  .mss-feature__grid { gap: 38px; }
+  .mss-feature__content h2,
+  .mss-module-showcase__copy h2,
+  .mss-system-showcase__copy h2,
+  .mss-workshop-showcase__copy h2 { font-size: clamp(30px, 10vw, 42px); }
+  .mss-feature__content p,
+  .mss-module-showcase__copy p,
+  .mss-system-showcase__copy p,
+  .mss-workshop-showcase__copy p { margin-top: 19px; font-size: 15.5px; }
+  .mss-module-showcase,
+  .mss-system-showcase,
+  .mss-workshop-showcase { padding: 80px 0; }
+  .mss-module-showcase__media { margin-top: 42px; }
+  .mss-system-showcase__copy { margin-top: 38px; }
+  .mss-workshop-showcase__copy { margin: 0 0 38px; }
+  .mss-products .section-head { margin-bottom: 34px; }
   .mss-filter { flex-wrap: nowrap; margin-right: -20px; padding-right: 20px; overflow-x: auto; scrollbar-width: thin; }
   .mss-filter__button { flex: 0 0 auto; }
   .mss-grid { grid-template-columns: 1fr; gap: 20px; }

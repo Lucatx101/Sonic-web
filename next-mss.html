@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NEXT MSS — Sonic Việt Nam</title>
   <meta name="description" content="Khám phá hệ tủ, phụ kiện và bộ cấu hình NEXT MSS chính hãng Sonic dành cho xưởng chuyên nghiệp." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body class="mss-page">
@@ -61,17 +58,97 @@
   </header>
 
   <main>
-    <section class="mss-hero">
-      <div class="container">
+    <section class="mss-hero" aria-labelledby="mss-landing-title">
+      <div class="container mss-hero__inner">
         <div class="breadcrumb"><a href="index.html">Trang chủ</a> / Sản phẩm / NEXT MSS</div>
-        <span class="mss-hero__eyebrow">Sonic · Lưu trữ chuyên nghiệp</span>
-        <h1 id="mss-title">NEXT MSS</h1>
-        <p id="mss-intro"></p>
+        <h1 class="mss-hero__sr-title" id="mss-landing-title">NEXT MSS</h1>
+        <div class="mss-hero__copy">
+          <span class="mss-hero__eyebrow">Sonic · Lưu trữ chuyên nghiệp</span>
+          <p>Giải pháp lưu trữ sức chứa lớn dành cho xưởng chuyên nghiệp, giúp tổ chức dụng cụ gọn gàng và duy trì quy trình làm việc liền mạch.</p>
+          <div class="mss-hero__actions">
+            <a class="btn btn--primary" href="#mss-products">Khám phá sản phẩm</a>
+            <a class="btn btn--outline-light" href="contact.html?cfg=NEXT%20MSS">Yêu cầu tư vấn</a>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="section">
+    <div class="mss-overview">
+      <section class="mss-feature" aria-labelledby="mss-efficiency-title">
+        <div class="container mss-feature__grid">
+          <figure class="mss-feature__media">
+            <img src="assets/products/next-mss/landing/next-mss-efficiency.png" width="770" height="800" alt="Kỹ thuật viên sắp xếp vật tư trên hệ tủ NEXT MSS" loading="lazy" />
+          </figure>
+          <div class="mss-feature__content">
+            <span class="mss-overview__eyebrow">Sonic Foam System</span>
+            <h2 id="mss-efficiency-title">Tối ưu hiệu suất, dễ dàng hơn.</h2>
+            <p>Không gian lưu trữ sức chứa lớn được thiết kế để tích hợp liền mạch với Sonic Foam System, giúp sắp xếp dụng cụ khoa học và tối ưu quy trình làm việc. Lựa chọn từ hơn 200 khay foam định hình, mỗi khay được trang bị dụng cụ chất lượng cao để phù hợp với nhu cầu chuyên biệt của từng xưởng.</p>
+            <a class="btn btn--primary" href="#mss-products">Xem danh mục NEXT MSS</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="mss-feature mss-feature--reverse" aria-labelledby="mss-install-title">
+        <div class="container mss-feature__grid">
+          <figure class="mss-feature__media">
+            <img src="assets/products/next-mss/landing/next-mss-installation.png" width="780" height="800" alt="Kỹ thuật viên lắp đặt tủ ngăn kéo NEXT MSS" loading="lazy" />
+          </figure>
+          <div class="mss-feature__content">
+            <span class="mss-overview__eyebrow">Lắp đặt độc lập</span>
+            <h2 id="mss-install-title">Lắp đặt dễ dàng.</h2>
+            <p>Khung tự chịu lực chắc chắn không cần liên kết với tường và không phải khoan, giúp việc lắp đặt thuận tiện, đồng thời cho phép sử dụng độc lập trong mọi môi trường làm việc chuyên nghiệp.</p>
+            <a class="btn btn--primary" href="contact.html?cfg=NEXT%20MSS">Trao đổi cùng chuyên gia</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="mss-module-showcase" aria-labelledby="mss-floor-title">
+        <div class="container">
+          <div class="mss-module-showcase__copy">
+            <span class="mss-overview__eyebrow">Hoàn thiện chuyên nghiệp</span>
+            <h2 id="mss-floor-title">Cân chỉnh hoàn hảo trên mặt sàn không bằng phẳng.</h2>
+            <p>Sàn xưởng hiếm khi hoàn toàn phẳng. NEXT MSS sử dụng cặp tấm ốp chân để bù chênh lệch bề mặt, giúp hệ tủ cân chỉnh gọn gàng và tạo nên diện mạo liền mạch, chuyên nghiệp.</p>
+          </div>
+          <figure class="mss-module-showcase__media">
+            <img src="assets/products/next-mss/landing/next-mss-modules.png" width="1050" height="620" alt="Các module của hệ lưu trữ NEXT MSS" loading="lazy" />
+          </figure>
+        </div>
+      </section>
+
+      <section class="mss-system-showcase" aria-labelledby="mss-system-title">
+        <div class="container">
+          <figure class="mss-system-showcase__media">
+            <img src="assets/products/next-mss/landing/next-mss-complete-system.png" width="1550" height="900" alt="Hệ tủ NEXT MSS hoàn chỉnh bố trí theo góc xưởng" loading="lazy" />
+          </figure>
+          <div class="mss-system-showcase__copy">
+            <span class="mss-overview__eyebrow">NEXT MSS</span>
+            <h2 id="mss-system-title">Một hệ lưu trữ liền mạch cho xưởng.</h2>
+            <p>Sức chứa lớn cùng khả năng tích hợp với Sonic Foam System giúp dụng cụ được tổ chức rõ ràng trong một tổng thể đồng bộ và chuyên nghiệp.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="mss-workshop-showcase" aria-labelledby="mss-workshop-title">
+        <div class="container">
+          <div class="mss-workshop-showcase__copy">
+            <span class="mss-overview__eyebrow">Ứng dụng thực tế</span>
+            <h2 id="mss-workshop-title">Gọn gàng trong từng khu vực làm việc.</h2>
+            <p>Giải pháp lưu trữ độc lập cho môi trường chuyên nghiệp, với diện mạo đồng bộ và liền mạch.</p>
+          </div>
+          <figure class="mss-workshop-showcase__media">
+            <img src="assets/products/next-mss/landing/next-mss-workshop.png" width="1550" height="905" alt="Hệ tủ NEXT MSS được lắp đặt trong workshop" loading="lazy" />
+          </figure>
+        </div>
+      </section>
+    </div>
+
+    <section class="section mss-products" id="mss-products" aria-labelledby="mss-products-title">
       <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Danh mục NEXT MSS</span>
+          <h2 class="section-title" id="mss-products-title">Khám phá 106 sản phẩm NEXT MSS</h2>
+          <p class="section-lead">Lọc theo từng nhóm sản phẩm để tìm cấu hình và phụ kiện phù hợp cho không gian xưởng.</p>
+        </div>
         <div class="mss-filter" id="mss-filters" aria-label="Lọc sản phẩm NEXT MSS"></div>
         <div class="mss-grid" id="mss-product-grid" aria-live="polite"></div>
       </div>
