@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
-<body>
+<body class="next-page">
   <!-- Topbar liên hệ -->
   <div class="topbar">
     <div class="container topbar__row">
@@ -61,32 +61,74 @@
     </div>
   </header>
 
-  <section class="page-hero">
-    <div class="container">
-      <div class="breadcrumb"><a href="index.html">Trang chủ</a> / Sản phẩm</div>
-      <h1>Sản phẩm Sonic</h1>
-      <p>Toàn bộ danh mục dụng cụ và tủ đồ nghề Sonic. Chọn danh mục để lọc, bấm vào sản phẩm để xem chi tiết và yêu cầu báo giá.</p>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="filters" id="filters"></div>
-      <div class="product-grid" id="product-grid"></div>
-    </div>
-  </section>
-
-  <section class="section" style="padding-top:0">
-    <div class="container">
-      <div class="cta-band">
-        <div>
-          <h2>Không tìm thấy sản phẩm bạn cần?</h2>
-          <p>Sonic có hàng nghìn mã hàng. Liên hệ để chúng tôi tư vấn đúng bộ cho công việc của bạn.</p>
+  <main>
+    <!-- KHỐI 1 — Hero landing: ảnh thật + nút CTA đè đúng vị trí "LEARN MORE" trong ảnh -->
+    <section class="next-hero" aria-label="Dòng tủ đồ nghề Sonic NEXT">
+      <div class="container">
+        <div class="next-hero__frame">
+          <img src="assets/products/next-landing/next-landing-hero.jpg" width="2703" height="1407" alt="Dãy ba tủ đồ nghề Sonic NEXT (đen, đỏ, đen) trong xưởng cùng một chiếc xe" />
+          <a class="btn btn--primary next-hero__cta" href="#next-models">XEM MẪU TỦ</a>
         </div>
-        <a class="btn btn--light" href="contact.html">Liên hệ tư vấn</a>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- KHỐI 2 — Ảnh trái + chữ phải -->
+    <section class="eva-intro" aria-labelledby="next-b2-title">
+      <div class="container eva-split">
+        <figure class="eva-split__media">
+          <img src="assets/products/next-landing/next-landing-lifestyle.jpg" width="759" height="759" alt="Kỹ thuật viên thao tác với ngăn kéo foam của tủ Sonic NEXT trong xưởng" loading="lazy" />
+        </figure>
+        <div class="eva-split__content">
+          <h2 id="next-b2-title">Dòng tủ đồ nghề Sonic NEXT</h2>
+          <p>Dòng tủ đồ nghề Sonic NEXT là thế hệ tủ được làm mới hoàn toàn, đi kèm các bộ dụng cụ chất lượng cao, mang lại phong cách và hiệu quả cho kỹ thuật viên chuyên nghiệp trên toàn thế giới.</p>
+          <p>Dải sản phẩm trải từ bản nhỏ gọn NEXT S7 đến bản đầy đủ nhất NEXT S15. Tận hưởng không gian lưu trữ tối đa, di chuyển êm ái và độ bền vượt trội nhờ bánh xe chịu tải nặng cùng ray trượt ngăn kéo dạng ống lồng tải cao.</p>
+          <p>Dòng tủ NEXT được thiết kế tương thích hoàn hảo với Hệ khay Foam Sonic. Khám phá các cấu hình bán chạy được sắp đặt sẵn, với bộ dụng cụ đầy đủ nhất cho đúng nhu cầu của bạn.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- KHỐI 3 — Ảnh phải + chữ trái (đảo chiều) -->
+    <section class="eva-intro eva-intro--reverse eva-intro--soft" aria-labelledby="next-b3-title">
+      <div class="container eva-split">
+        <figure class="eva-split__media">
+          <img src="assets/products/next-landing/next-landing-s9red.jpg" width="640" height="695" alt="Tủ đồ nghề Sonic NEXT S9 màu đỏ cận cảnh trong xưởng" loading="lazy" />
+        </figure>
+        <div class="eva-split__content">
+          <span class="eyebrow">Phiên bản nổi bật</span>
+          <h2 id="next-b3-title">NEXT S9 — Phiên bản màu đỏ</h2>
+          <p>Một góc lưu trữ dụng cụ tốt không chỉ cần tiện dụng — nó còn phải đẹp. Vì vậy dòng tủ NEXT được mở rộng thêm hai tông màu nổi bật: đỏ mạnh mẽ và đen tinh tế. Dù bạn dựng xưởng từ đầu hay muốn đồng bộ tủ với nhận diện thương hiệu, những mẫu tủ này giúp bạn sắp xếp gọn gàng và đầy phong cách.</p>
+          <p>Có sẵn trên các bản chọn lọc: NEXT S9 nhỏ gọn, NEXT S12 linh hoạt và NEXT S12XD bản sâu mở rộng (chỉ có màu đen). Vẫn hiệu năng hàng đầu, nay với lớp hoàn thiện tạo dấu ấn — dành cho người làm nghề trân trọng công việc và không gian của mình.</p>
+          <div class="eva-split__actions">
+            <a class="btn btn--primary" href="contact.html">Yêu cầu báo giá</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHẦN DƯỚI — Grid CHỈ gồm tủ NEXT S7~S15 -->
+    <section class="section eva-products" id="next-models" aria-labelledby="next-models-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Danh mục Sonic NEXT</span>
+          <h2 class="section-title" id="next-models-title">Các mẫu tủ NEXT</h2>
+          <p class="section-lead">Chọn model để xem chi tiết cấu hình và yêu cầu báo giá.</p>
+        </div>
+        <div class="product-grid" id="product-grid"></div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="cta-band">
+          <div>
+            <h2>Cần tư vấn chọn đúng tủ NEXT?</h2>
+            <p>Liên hệ để chúng tôi tư vấn cấu hình tủ và bộ dụng cụ phù hợp với quy mô xưởng của bạn.</p>
+          </div>
+          <a class="btn btn--light" href="contact.html">Liên hệ tư vấn</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer class="site-footer">
     <div class="container footer-grid">
@@ -100,10 +142,9 @@
       <div class="footer-col">
         <h4>Sản phẩm</h4>
         <ul>
-          <li><a href="products.html#toolboxes">Tủ đồ nghề</a></li>
-          <li><a href="products.html#sfs">Sonic Foam System</a></li>
-          <li><a href="products.html#sockets">Đầu khẩu & tay vặn</a></li>
-          <li><a href="products.html#wrenches">Cờ lê & mỏ lết</a></li>
+          <li><a href="products.html">Tủ đồ nghề NEXT</a></li>
+          <li><a href="next-mss.html">NEXT MSS</a></li>
+          <li><a href="eva-foam.html">Hệ EVA Foam Sonic</a></li>
         </ul>
       </div>
       <div class="footer-col">
