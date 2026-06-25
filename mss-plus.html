@@ -119,6 +119,43 @@
         </div>
       </div>
     </section>
+
+    <section class="mss-plus-catalog mss-plus-setups" aria-labelledby="mss-plus-setups-title">
+      <div class="container">
+        <div class="mss-plus-catalog__head">
+          <span class="mss-plus-catalog__eyebrow">Sonic MSS+</span>
+          <h2 id="mss-plus-setups-title">Cấu hình MSS+</h2>
+        </div>
+        <div class="mss-plus-catalog__grid" id="mss-plus-setup-grid"></div>
+      </div>
+    </section>
+
+    <section class="mss-plus-catalog" id="mss-plus-catalog" aria-labelledby="mss-plus-catalog-title">
+      <div class="container">
+        <div class="mss-plus-catalog__head">
+          <span class="mss-plus-catalog__eyebrow">Danh mục Sonic MSS+</span>
+          <h2 id="mss-plus-catalog-title">Tìm module phù hợp cho cấu hình xưởng.</h2>
+          <p>Tìm theo tên hoặc SKU, sau đó lọc theo nhóm sản phẩm đã xác minh từ catalog Sonic.</p>
+        </div>
+        <div class="mss-plus-catalog__toolbar" role="search" aria-label="Tìm và lọc sản phẩm MSS+">
+          <label class="mss-plus-catalog__field">
+            <span>Tìm kiếm</span>
+            <input id="mss-plus-search" type="search" placeholder="Nhập tên hoặc SKU…" autocomplete="off" />
+          </label>
+          <label class="mss-plus-catalog__field">
+            <span>Nhóm sản phẩm</span>
+            <select id="mss-plus-group">
+              <option value="all">Tất cả nhóm sản phẩm</option>
+            </select>
+          </label>
+          <button class="btn btn--ghost mss-plus-catalog__reset" id="mss-plus-reset" type="button">Đặt lại</button>
+        </div>
+        <div class="mss-plus-catalog__summary">
+          <p id="mss-plus-result-count" aria-live="polite">Đang tải danh mục…</p>
+        </div>
+        <div class="mss-plus-catalog__grid" id="mss-plus-product-grid" aria-live="polite"></div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -161,6 +198,8 @@
   </footer>
 
   <script src="assets/js/config.js"></script>
+  <script src="data/mss-plus-data.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/mss-plus-listing.js"></script>
 </body>
 </html>
