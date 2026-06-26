@@ -13,13 +13,21 @@
   const introImage = document.getElementById("tools-intro-image");
   const categoryGrid = document.getElementById("tools-category-grid");
   const preview = document.getElementById("tools-category-preview");
-  const previewImage = document.getElementById("tools-preview-image");
-  const previewTitle = document.getElementById("tools-preview-title");
-  const previewDescription = document.getElementById("tools-preview-description");
-  const previewAction = document.getElementById("tools-preview-action");
 
   function setText(element, value) {
     if (element) element.textContent = value;
+  }
+
+  function createElement(tagName, className, text) {
+    const element = document.createElement(tagName);
+    if (className) element.className = className;
+    if (text !== undefined) element.textContent = text;
+    return element;
+  }
+
+  function contactHref(category, family) {
+    const context = family ? `${category.name} – ${family.name}` : category.name;
+    return `contact.html?cfg=${encodeURIComponent(context)}`;
   }
 
   function renderPageContent() {
@@ -101,6 +109,141 @@
     }
   }
 
+  function createFamilyTable(family) {
+    const wrapper = createElement("div", "tools-family-table-wrap");
+    const table = createElement("table", "tools-family-table");
+    const caption = createElement("caption", "sr-only", family.name);
+    const thead = document.createElement("thead");
+    const headerRow = document.createElement("tr");
+
+    family.columns.forEach((column) => {
+      const th = document.createElement("th");
+      th.scope = "col";
+      th.textContent = column.label;
+      headerRow.appendChild(th);
+    });
+
+    const tbody = document.createElement("tbody");
+    family.variants.forEach((variant) => {
+      const row = document.createElement("tr");
+      family.columns.forEach((column, index) => {
+        const td = document.createElement("td");
+        td.dataset.label = column.label;
+        td.dataset.column = column.key;
+        td.textContent = variant[index] || "—";
+        row.appendChild(td);
+      });
+      tbody.appendChild(row);
+    });
+
+    thead.appendChild(headerRow);
+    table.append(caption, thead, tbody);
+    wrapper.appendChild(table);
+    return wrapper;
+  }
+
+  function createFamilyCard(category, family, index) {
+    const article = createElement("article", "tools-family-card");
+    const summary = createElement("div", "tools-family-card__summary");
+    const media = createElement("figure", "tools-family-card__media");
+    const image = document.createElement("img");
+    const contentId = `tools-family-${family.id}`;
+
+    image.src = family.image;
+    image.alt = family.imageAlt;
+    image.width = 960;
+    image.height = 640;
+    image.loading = "lazy";
+    media.appendChild(image);
+
+    const copy = createElement("div", "tools-family-card__copy");
+    const title = createElement("h4", null, family.name);
+    const description = createElement("p", null, family.description);
+
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "tools-family__toggle";
+    toggle.dataset.familyToggle = family.id;
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-controls", contentId);
+
+    const toggleText = createElement(
+      "span",
+      "tools-family__toggle-text",
+      "Xem bảng chủng loại"
+    );
+    const toggleIcon = createElement("span", "tools-family__toggle-icon", "＋");
+    toggleIcon.setAttribute("aria-hidden", "true");
+    toggle.append(toggleText, toggleIcon);
+
+    copy.append(title, description, toggle);
+    summary.append(media, copy);
+
+    const details = createElement("div", "tools-family-card__details");
+    details.id = contentId;
+    details.hidden = true;
+
+    const tableIntro = createElement(
+      "p",
+      "tools-family-card__table-note",
+      "Bảng dưới đây hiển thị SKU và thông số đã xác minh, không bao gồm giá hoặc tồn kho."
+    );
+    const cta = document.createElement("a");
+    cta.className = "tools-family-card__cta";
+    cta.href = contactHref(category, family);
+    cta.textContent = "Yêu cầu báo giá";
+
+    details.append(tableIntro, createFamilyTable(family), cta);
+    article.style.setProperty("--family-index", String(index));
+    article.append(summary, details);
+    return article;
+  }
+
+  function renderFamilyPreview(category) {
+    if (!preview) return;
+    preview.className = "tools-preview tools-preview--families";
+    preview.setAttribute("aria-labelledby", "tools-preview-title");
+
+    const head = createElement("div", "tools-family-panel__head");
+    const title = createElement("h3", null, category.name);
+    title.id = "tools-preview-title";
+    const description = createElement("p", null, category.description);
+    head.append(title, description);
+
+    const familyList = createElement("div", "tools-family-list");
+    category.families.forEach((family, index) => {
+      familyList.appendChild(createFamilyCard(category, family, index));
+    });
+
+    preview.replaceChildren(head, familyList);
+  }
+
+  function renderFallbackPreview(category) {
+    if (!preview) return;
+    preview.className = "tools-preview";
+    preview.setAttribute("aria-labelledby", "tools-preview-title");
+
+    const media = createElement("figure", "tools-preview__media");
+    const image = document.createElement("img");
+    image.src = category.image;
+    image.alt = category.imageAlt;
+    image.width = 1200;
+    image.height = 800;
+    media.appendChild(image);
+
+    const copy = createElement("div", "tools-preview__copy");
+    const title = createElement("h3", null, category.name);
+    title.id = "tools-preview-title";
+    const description = createElement("p", null, category.description);
+    const action = document.createElement("a");
+    action.className = "tools-preview__action";
+    action.href = contactHref(category);
+    action.innerHTML = "Tư vấn nhóm dụng cụ <span aria-hidden=\"true\">→</span>";
+
+    copy.append(title, description, action);
+    preview.replaceChildren(media, copy);
+  }
+
   function renderPreview(categoryId, shouldScroll) {
     const activeCategory =
       categories.find((category) => category.id === categoryId) || categories[0];
@@ -116,14 +259,10 @@
       }
     });
 
-    if (previewImage) {
-      previewImage.src = activeCategory.image;
-      previewImage.alt = activeCategory.imageAlt;
-    }
-    setText(previewTitle, activeCategory.name);
-    setText(previewDescription, activeCategory.description);
-    if (previewAction) {
-      previewAction.href = `contact.html?cfg=${encodeURIComponent(activeCategory.name)}`;
+    if (activeCategory.families?.length) {
+      renderFamilyPreview(activeCategory);
+    } else {
+      renderFallbackPreview(activeCategory);
     }
 
     if (shouldScroll && preview) {
@@ -155,6 +294,25 @@
       } else {
         window.location.hash = categoryId;
       }
+    });
+  }
+
+  if (preview) {
+    preview.addEventListener("click", (event) => {
+      const toggle = event.target.closest("[data-family-toggle]");
+      if (!toggle) return;
+
+      const details = document.getElementById(toggle.getAttribute("aria-controls"));
+      if (!details) return;
+
+      const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!isExpanded));
+      details.hidden = isExpanded;
+
+      const text = toggle.querySelector(".tools-family__toggle-text");
+      const icon = toggle.querySelector(".tools-family__toggle-icon");
+      if (text) text.textContent = isExpanded ? "Xem bảng chủng loại" : "Thu gọn bảng";
+      if (icon) icon.textContent = isExpanded ? "＋" : "−";
     });
   }
 
