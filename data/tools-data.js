@@ -1402,14 +1402,335 @@ Bộ cờ lê bánh cóc 4 trong 1 trong túi||600203|2-pcs|Cờ lê X-ring 4 tr
       id: "tool-sets",
       name: "Bộ dụng cụ",
       description:
-        "Các bộ dụng cụ được cấu hình theo nhóm thao tác và đặt trong vali bảo vệ.",
-      scope: ["Bộ khẩu", "Bộ kết hợp", "Bộ dụng cụ kỹ thuật"],
+        "Bộ dụng cụ BMCS, VDE và các bộ thao tác độc lập cho kỹ thuật viên chuyên nghiệp.",
+      scope: ["BMCS", "VDE", "Bộ dụng cụ độc lập"],
       image: "assets/products/tools/categories/tool-sets.jpg",
       imageAlt: "Bộ khẩu và cần siết Sonic trong vali cứng",
       sourcePages: [98, 99, 100, 101],
       sourceImage: "page099_img03.png",
       sharedUsage: "category-card-and-preview",
       enabled: true,
+      items: [
+        {
+          id: "bmcs-quarter-inch",
+          type: "family",
+          name: "Bộ dụng cụ BMCS 1/4”",
+          description:
+            "Các bộ dụng cụ BMCS 1/4” nhỏ gọn cho thao tác lắp ráp, bảo dưỡng và bổ sung dụng cụ cơ bản.",
+          image: "assets/products/tools/toolsets/bmcs-46-pcs-quarter-inch.jpg",
+          imageAlt: "Bộ dụng cụ BMCS 1/4 inch 46 chi tiết Sonic",
+          sharedImage: true,
+          sourcePages: [98, 99],
+          sourceImage: "page098_img01.png",
+          products: [
+            {
+              sku: "104602",
+              name: "Bộ dụng cụ BMCS 1/4” 46 chi tiết",
+              details: "Cấu hình 1/4” trong vali BMCS."
+            },
+            {
+              sku: "104001",
+              name: "Bộ bit socket BMCS 1/4” 40 chi tiết",
+              details: "Bộ bit socket 1/4” trong vali BMCS."
+            },
+            {
+              sku: "107403",
+              name: "Bộ khẩu BMCS 1/4” 74 chi tiết",
+              details: "Bộ khẩu 1/4” trong vali BMCS."
+            }
+          ]
+        },
+        {
+          id: "bmcs-three-eighth-drive",
+          type: "family",
+          name: "Bộ dụng cụ BMCS 3/8”",
+          description:
+            "Các bộ khẩu, bit và cờ lê BMCS 3/8” cho dải công việc bảo dưỡng phổ biến.",
+          image: "assets/products/tools/toolsets/bmcs-61-pcs-socket-bit.jpg",
+          imageAlt: "Bộ khẩu và bit BMCS 3/8 inch 61 chi tiết Sonic",
+          sharedImage: true,
+          sourcePages: [98, 99],
+          sourceImage: "page098_img03.png",
+          products: [
+            {
+              sku: "204003",
+              name: "Bộ dụng cụ BMCS 3/8” 40 chi tiết",
+              details: "Cấu hình 3/8” trong vali BMCS."
+            },
+            {
+              sku: "206102",
+              name: "Bộ khẩu và bit BMCS 3/8” 61 chi tiết",
+              details: "Kết hợp khẩu và bit socket 3/8”."
+            },
+            {
+              sku: "202803",
+              name: "Bộ khẩu BMCS 3/8” 28 chi tiết",
+              details: "Bộ khẩu 3/8” trong vali BMCS."
+            },
+            {
+              sku: "203703",
+              name: "Bộ khẩu và cờ lê BMCS 3/8” 37 chi tiết",
+              details: "Bộ kết hợp khẩu và cờ lê 3/8”."
+            }
+          ]
+        },
+        {
+          id: "bmcs-half-inch-drive",
+          type: "family",
+          name: "Bộ dụng cụ BMCS 1/2”",
+          description:
+            "Các bộ khẩu và cờ lê BMCS 1/2” cho thao tác siết mở cần lực lớn hơn.",
+          image: "assets/products/tools/toolsets/bmcs-socket-wrench-half-inch.jpg",
+          imageAlt: "Bộ khẩu và cờ lê BMCS 1/2 inch Sonic",
+          sharedImage: true,
+          sourcePages: [98],
+          sourceImage: "page098_img05.png",
+          products: [
+            {
+              sku: "301904",
+              name: "Bộ khẩu BMCS 1/2” 19 chi tiết",
+              details: "Cấu hình khẩu 1/2” trong vali BMCS."
+            },
+            {
+              sku: "304501",
+              name: "Bộ khẩu và cờ lê BMCS 1/2” 45 chi tiết",
+              details: "Kết hợp khẩu 1/2” và cờ lê."
+            }
+          ]
+        },
+        {
+          id: "bmcs-multi-drive",
+          type: "family",
+          name: "Bộ dụng cụ BMCS đa cỡ",
+          description:
+            "Các bộ BMCS phối hợp nhiều đầu vuông, phù hợp khi cần một vali bao phủ nhiều tình huống.",
+          image: "assets/products/tools/toolsets/bmcs-99-pcs-three-drive.jpg",
+          imageAlt: "Bộ khẩu BMCS nhiều đầu vuông Sonic 99 chi tiết",
+          sharedImage: true,
+          sourcePages: [99],
+          sourceImage: "page099_img10.png",
+          products: [
+            {
+              sku: "307603",
+              name: "Bộ khẩu BMCS 1/4” và 1/2” 76 chi tiết",
+              details: "Bộ phối hợp hai đầu vuông."
+            },
+            {
+              sku: "309101",
+              name: "Bộ khẩu BMCS 1/4” và 1/2” 91 chi tiết",
+              details: "Bộ phối hợp hai đầu vuông."
+            },
+            {
+              sku: "309402",
+              name: "Bộ khẩu BMCS 1/4” và 1/2” 94 chi tiết",
+              details: "Bộ phối hợp hai đầu vuông."
+            },
+            {
+              sku: "309901",
+              name: "Bộ khẩu BMCS 1/4”, 3/8” và 1/2” 99 chi tiết",
+              details: "Bộ phối hợp ba đầu vuông."
+            }
+          ]
+        },
+        {
+          id: "bmcs-bit-socket-sets",
+          type: "family",
+          name: "Bộ bit socket BMCS 1/2”",
+          description:
+            "Các bộ bit socket 1/2” chuyên dụng cho đầu TX và spline, đóng trong vali BMCS riêng.",
+          image: "assets/products/tools/toolsets/bmcs-bit-socket-half-inch.jpg",
+          imageAlt: "Bộ bit socket BMCS 1/2 inch Sonic",
+          sharedImage: true,
+          sourcePages: [99],
+          sourceImage: "page099_img08.png",
+          products: [
+            {
+              sku: "300819",
+              name: "Bộ bit socket spline BMCS 1/2” 8 chi tiết",
+              details: "Bộ bit socket spline 1/2”."
+            },
+            {
+              sku: "301702",
+              name: "Bộ bit socket TX BMCS 1/2” 17 chi tiết",
+              details: "Bộ bit socket TX 1/2”."
+            }
+          ]
+        },
+        {
+          id: "vde-screwdrivers-kits",
+          type: "family",
+          name: "Tua vít và bộ VDE cách điện",
+          description:
+            "Tua vít VDE lẻ, bộ tua vít slim và bộ dụng cụ VDE gọn cho thao tác điện cần cách điện.",
+          image: "assets/products/tools/toolsets/vde-screwdriver-set-10-pcs.jpg",
+          imageAlt: "Bộ tua vít cách điện VDE slim Sonic 10 chi tiết",
+          sharedImage: true,
+          sourcePages: [100],
+          sourceImage: "page100_img09.png",
+          products: [
+            {
+              sku: "1610",
+              name: "Tua vít VDE PH.0",
+              details: "Tua vít cách điện VDE đầu PH.0."
+            },
+            {
+              sku: "1611",
+              name: "Tua vít VDE PH.1",
+              details: "Tua vít cách điện VDE đầu PH.1."
+            },
+            {
+              sku: "1612",
+              name: "Tua vít VDE PH.2",
+              details: "Tua vít cách điện VDE đầu PH.2."
+            },
+            {
+              sku: "16325",
+              name: "Tua vít dẹt VDE 2.5 mm",
+              details: "Tua vít cách điện VDE đầu dẹt 2.5 mm."
+            },
+            {
+              sku: "16304",
+              name: "Tua vít dẹt VDE 4 mm",
+              details: "Tua vít cách điện VDE đầu dẹt 4 mm."
+            },
+            {
+              sku: "16355",
+              name: "Tua vít dẹt VDE 5.5 mm",
+              details: "Tua vít cách điện VDE đầu dẹt 5.5 mm."
+            },
+            {
+              sku: "16365",
+              name: "Tua vít dẹt VDE 6.5 mm",
+              details: "Tua vít cách điện VDE đầu dẹt 6.5 mm."
+            },
+            {
+              sku: "601020",
+              name: "Bộ tua vít cách điện VDE slim 10 chi tiết",
+              details: "Bộ tua vít VDE slim trong ví mềm."
+            },
+            {
+              sku: "601115",
+              name: "Bộ dụng cụ VDE 11 chi tiết",
+              details: "Bộ dụng cụ VDE gọn cho thao tác điện."
+            }
+          ]
+        },
+        {
+          sku: "605003",
+          type: "product",
+          categoryId: "tool-sets",
+          name: "Bộ dụng cụ VDE 50 chi tiết",
+          description:
+            "Bộ dụng cụ cách điện VDE trong vali đỏ, gồm khẩu 3/8”, tua vít, kìm và phụ kiện bảo vệ cho thao tác điện.",
+          image: "assets/products/tools/toolsets/vde-tool-kit-50-pcs.jpg",
+          imageAlt: "Bộ dụng cụ VDE 50 chi tiết trong vali đỏ Sonic",
+          specs: {
+            "Số chi tiết": "50",
+            "Chuẩn": "VDE",
+            "Lưu trữ": "Vali đỏ bảo vệ"
+          },
+          features: [
+            "Cấu hình cho kỹ thuật viên cần dụng cụ cách điện VDE.",
+            "Vali đỏ giúp nhận diện nhanh và bảo vệ dụng cụ khi di chuyển.",
+            "Bao gồm nhóm khẩu, tua vít, kìm và phụ kiện bảo vệ đã được catalog xác minh."
+          ],
+          includedItems: [
+            "Bộ khẩu VDE 3/8”: 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22 mm",
+            "Đầu nối dài VDE 3/8”: 150 mm và 250 mm",
+            "Tua vít VDE PH.1 x 80 mm, PH.2 x 100 mm, PH.2 x 150 mm",
+            "Tua vít dẹt VDE 2.5 x 75 mm, 3 x 100 mm, 3.5 x 100 mm",
+            "Tua vít TX VDE T20 x 100 mm, T25 x 125 mm, T30 x 150 mm",
+            "Ống bảo vệ 100 mm: 5 x 18 mm và 5 x 24 mm"
+          ],
+          sourcePages: [100],
+          sourceImage: "page100_img06.png",
+          verified: true,
+          detailEnabled: true
+        },
+        {
+          id: "mixed-toolsets",
+          type: "family",
+          name: "Bộ khẩu, bit và đầu chuyển độc lập",
+          description:
+            "Các bộ dụng cụ đóng hộp riêng, phù hợp bổ sung nhanh cho xe dụng cụ hoặc vali kỹ thuật.",
+          image: "assets/products/tools/toolsets/socket-bit-set-36-pcs.jpg",
+          imageAlt: "Bộ khẩu và bit 1/4 inch 36 chi tiết Sonic",
+          sharedImage: true,
+          sourcePages: [101],
+          sourceImage: "page101_img05.png",
+          products: [
+            {
+              sku: "104101",
+              name: "Bộ bit 1/4” 41 chi tiết",
+              details: "Bộ bit 1/4” đóng hộp."
+            },
+            {
+              sku: "104601",
+              name: "Bộ khẩu flank 1/4” 6 cạnh 46 chi tiết",
+              details: "Bộ khẩu flank 1/4” 6 cạnh."
+            },
+            {
+              sku: "300603",
+              name: "Bộ đầu chuyển 6 chi tiết",
+              details: "Bộ đầu chuyển cho đầu vuông."
+            },
+            {
+              sku: "300605",
+              name: "Bộ đầu chuyển impact 6 chi tiết",
+              details: "Bộ đầu chuyển impact cho đầu vuông."
+            },
+            {
+              sku: "402001",
+              name: "Bộ khẩu 3/4” 12 cạnh 20 chi tiết",
+              details: "Khẩu bi-hex 19–50 mm, đầu nối dài 100–200 mm."
+            },
+            {
+              sku: "601408",
+              name: "Tay cóc nối dài 14 trong 1",
+              details: "Bộ tay cóc nối dài đa năng."
+            },
+            {
+              sku: "601906",
+              name: "Bộ vặn cổ dê linh hoạt 19 chi tiết",
+              details: "Bộ dụng cụ vặn cổ dê linh hoạt."
+            },
+            {
+              sku: "75214",
+              name: "Bộ khẩu và bit 1/4” 36 chi tiết",
+              details: "Bộ khẩu và bit 1/4” trong hộp."
+            }
+          ]
+        },
+        {
+          sku: "601510",
+          type: "product",
+          categoryId: "tool-sets",
+          name: "Bộ tua vít điện 15 chi tiết",
+          description:
+            "Bộ tua vít điện nhỏ gọn đi kèm đầu bit, phù hợp thao tác nhanh trong bảo dưỡng và lắp ráp nhẹ.",
+          image: "assets/products/tools/toolsets/electric-screwdriver-set.jpg",
+          imageAlt: "Bộ tua vít điện Sonic 15 chi tiết",
+          specs: {
+            "Số chi tiết": "15",
+            "Kích thước": "180 x 49 x 49 mm",
+            "Dạng bộ": "Tua vít điện kèm bit"
+          },
+          features: [
+            "Thiết kế nhỏ gọn cho thao tác cầm tay.",
+            "Bộ bit đi kèm đã được catalog xác minh.",
+            "Phù hợp công việc lắp ráp nhẹ và bảo dưỡng nhanh."
+          ],
+          includedItems: [
+            "Thân tua vít điện",
+            "Nhóm đầu bit đi kèm theo bộ",
+            "Phụ kiện lưu trữ trong hộp"
+          ],
+          sourcePages: [101],
+          sourceImage: "page101_img10.png",
+          verified: true,
+          detailEnabled: true
+        }
+      ],
       families: [],
       featuredProducts: []
     },
@@ -1417,14 +1738,217 @@ Bộ cờ lê bánh cóc 4 trong 1 trong túi||600203|2-pcs|Cờ lê X-ring 4 tr
       id: "mobile-tool-solutions",
       name: "Vali và giải pháp dụng cụ di động",
       description:
-        "Vali, hộp kéo, túi và ba lô dụng cụ dành cho công việc cần di chuyển.",
-      scope: ["Vali dụng cụ", "Hộp kéo di động", "Túi và ba lô"],
+        "Vali dụng cụ, hộp dụng cụ, vali có bánh xe và túi dụng cụ cho công việc cần di chuyển.",
+      scope: ["Vali dụng cụ", "Hộp dụng cụ", "Túi dụng cụ"],
       image: "assets/products/tools/categories/mobile-tool-solutions.jpg",
       imageAlt: "Ba lô dụng cụ Sonic mở trên khu vực đường đua",
       sourcePages: [103, 104, 105, 106, 107],
       sourceImage: "page107_img05.png",
       sharedUsage: "category-card-and-preview",
       enabled: true,
+      items: [
+        {
+          id: "carry-case-series",
+          type: "family",
+          name: "Vali dụng cụ Sonic",
+          description:
+            "Vali dụng cụ xách tay, có lựa chọn không kèm dụng cụ hoặc bộ hoàn chỉnh.",
+          image: "assets/products/tools/mobile-solutions/carry-case-filled.jpg",
+          imageAlt: "Vali dụng cụ Sonic kèm dụng cụ",
+          sharedImage: true,
+          sourcePages: [103],
+          sourceImage: "page103_img25.png",
+          products: [
+            {
+              sku: "49502",
+              name: "Vali dụng cụ không kèm dụng cụ",
+              details: "Kích thước W 410 x D 485 x H 215 mm, khối lượng 5.8 kg."
+            },
+            {
+              sku: "713203",
+              name: "Vali dụng cụ hoàn chỉnh",
+              details: "Kích thước W 410 x D 485 x H 215 mm, khối lượng 6.8 kg."
+            }
+          ]
+        },
+        {
+          id: "portable-case-trolley-series",
+          type: "family",
+          name: "Vali dụng cụ có bánh xe",
+          description:
+            "Giải pháp vali kéo dành cho kỹ thuật viên cần di chuyển dụng cụ giữa nhiều khu vực làm việc.",
+          image: "assets/products/tools/mobile-solutions/portable-case-trolley.jpg",
+          imageAlt: "Vali dụng cụ Sonic có bánh xe",
+          sharedImage: true,
+          sourcePages: [103],
+          sourceImage: "page103_img13.png",
+          products: [
+            {
+              sku: "49503",
+              name: "Vali dụng cụ có bánh xe không kèm dụng cụ",
+              details: "Phiên bản vali kéo không kèm dụng cụ."
+            },
+            {
+              sku: "713204",
+              name: "Vali dụng cụ có bánh xe hoàn chỉnh",
+              details: "Phiên bản vali kéo kèm dụng cụ."
+            }
+          ]
+        },
+        {
+          id: "topbox-filled-series",
+          type: "family",
+          name: "Hộp dụng cụ Sonic kèm dụng cụ",
+          description:
+            "Các cấu hình hộp dụng cụ kèm dụng cụ, có lựa chọn nắp đậy tùy nhu cầu lưu trữ.",
+          image: "assets/products/tools/mobile-solutions/topbox-filled-with-lid.jpg",
+          imageAlt: "Hộp dụng cụ Sonic kèm dụng cụ và nắp đậy",
+          sharedImage: true,
+          sourcePages: [104],
+          sourceImage: "page104_img10.png",
+          products: [
+            {
+              sku: "704721",
+              name: "Hộp dụng cụ 47 chi tiết",
+              details: "Phiên bản kèm dụng cụ 47 chi tiết."
+            },
+            {
+              sku: "704771",
+              name: "Hộp dụng cụ có nắp 47 chi tiết",
+              details: "Phiên bản có nắp, kèm dụng cụ 47 chi tiết."
+            },
+            {
+              sku: "709601",
+              name: "Hộp dụng cụ 96 chi tiết",
+              details: "Phiên bản kèm dụng cụ 96 chi tiết."
+            },
+            {
+              sku: "709671",
+              name: "Hộp dụng cụ có nắp 96 chi tiết",
+              details: "Phiên bản có nắp, kèm dụng cụ 96 chi tiết."
+            }
+          ]
+        },
+        {
+          sku: "708971",
+          type: "product",
+          categoryId: "mobile-tool-solutions",
+          name: "Hộp dụng cụ có nắp 89 chi tiết",
+          description:
+            "Hộp dụng cụ có nắp, kèm cấu hình 89 chi tiết cho nhu cầu sửa chữa và bảo dưỡng lưu động.",
+          image: "assets/products/tools/mobile-solutions/topbox-drawer-set.jpg",
+          imageAlt: "Hộp dụng cụ Sonic có nắp kèm 89 chi tiết",
+          specs: {
+            "Số chi tiết": "89",
+            "Dạng sản phẩm": "Hộp dụng cụ có nắp",
+            "Tình trạng": "Kèm dụng cụ"
+          },
+          features: [
+            "Cấu hình kèm dụng cụ được catalog xác minh.",
+            "Dạng hộp có nắp giúp bảo vệ dụng cụ khi di chuyển.",
+            "Phù hợp gara, xe dịch vụ hoặc khu vực làm việc tạm thời."
+          ],
+          includedItems: [
+            "Nhóm khẩu và phụ kiện siết mở",
+            "Nhóm cờ lê",
+            "Nhóm tua vít và dụng cụ cầm tay"
+          ],
+          sourcePages: [105],
+          sourceImage: "page105_img04.png",
+          verified: true,
+          detailEnabled: true
+        },
+        {
+          sku: "706201",
+          type: "product",
+          categoryId: "mobile-tool-solutions",
+          name: "Hộp dụng cụ di động 62 chi tiết",
+          description:
+            "Hộp dụng cụ di động kèm 62 chi tiết, thiết kế dạng xách tay cho công việc ngoài vị trí cố định.",
+          image: "assets/products/tools/mobile-solutions/portable-toolbox-filled.jpg",
+          imageAlt: "Hộp dụng cụ di động Sonic kèm 62 chi tiết",
+          specs: {
+            "Số chi tiết": "62",
+            "Dạng sản phẩm": "Hộp dụng cụ di động",
+            "Tình trạng": "Kèm dụng cụ"
+          },
+          features: [
+            "Dạng hộp xách tay dễ mang theo.",
+            "Kèm bộ dụng cụ 62 chi tiết đã được catalog xác minh.",
+            "Phù hợp kỹ thuật viên cần bộ dụng cụ cơ bản tại hiện trường."
+          ],
+          includedItems: [
+            "Nhóm khẩu và phụ kiện siết mở",
+            "Nhóm tua vít",
+            "Nhóm cờ lê và dụng cụ cầm tay cơ bản"
+          ],
+          sourcePages: [105],
+          sourceImage: "page105_img05.png",
+          verified: true,
+          detailEnabled: true
+        },
+        {
+          sku: "712404",
+          type: "product",
+          categoryId: "mobile-tool-solutions",
+          name: "Vali dụng cụ mô-đun 124 chi tiết",
+          description:
+            "Vali dụng cụ mô-đun dạng trolley, kèm 124 chi tiết và tay kéo mở rộng 990 mm cho công việc lưu động.",
+          image: "assets/products/tools/mobile-solutions/modular-tool-case-124-pcs.jpg",
+          imageAlt: "Vali dụng cụ mô-đun Sonic 124 chi tiết",
+          specs: {
+            "Số chi tiết": "124",
+            "Dạng sản phẩm": "Vali dụng cụ mô-đun có bánh xe",
+            "Tay kéo": "Mở rộng 990 mm",
+            "Cấu hình": "Automotive 124 chi tiết"
+          },
+          features: [
+            "Cấu hình 124 chi tiết cho sửa chữa ô tô và bảo dưỡng lưu động.",
+            "Tay kéo trolley mở rộng 990 mm giúp di chuyển dễ hơn.",
+            "Ngăn kéo có chặn tự giữ, hạn chế trượt ra ngoài ngoài ý muốn.",
+            "Kèm nhiều nhóm dụng cụ: khẩu, cờ lê, kìm, búa và tua vít."
+          ],
+          includedItems: [
+            "Bộ búa và kìm 13 chi tiết",
+            "Bộ cờ lê 17 chi tiết",
+            "Bộ khẩu 1/4” và 1/2” 79 chi tiết",
+            "Bộ tua vít 15 chi tiết"
+          ],
+          sourcePages: [106],
+          sourceImage: "page106_img07.png",
+          verified: true,
+          detailEnabled: true
+        },
+        {
+          id: "toolbag-series",
+          type: "family",
+          name: "Túi dụng cụ Sonic",
+          description:
+            "Túi dụng cụ dạng ba lô với đế nhựa, có lựa chọn không kèm dụng cụ hoặc bộ hoàn chỉnh.",
+          image: "assets/products/tools/mobile-solutions/toolbag-series.jpg",
+          imageAlt: "Túi dụng cụ Sonic dạng ba lô mở cùng khay dụng cụ",
+          sharedImage: true,
+          sourcePages: [107],
+          sourceImage: "page107_img05.png",
+          products: [
+            {
+              sku: "47799",
+              name: "Túi dụng cụ không kèm dụng cụ",
+              details: "Kích thước 33 x 24 x 47 cm, khối lượng rỗng 2.6 kg, tải tối đa 20 kg."
+            },
+            {
+              sku: "708401",
+              name: "Túi dụng cụ 84 chi tiết",
+              details: "Phiên bản kèm bộ dụng cụ cơ bản 84 chi tiết."
+            },
+            {
+              sku: "711201",
+              name: "Túi dụng cụ 112 chi tiết",
+              details: "Phiên bản kèm bộ dụng cụ nâng cao 112 chi tiết."
+            }
+          ]
+        }
+      ],
       families: [],
       featuredProducts: []
     },
