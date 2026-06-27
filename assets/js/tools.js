@@ -13,7 +13,15 @@
   const introImage = document.getElementById("tools-intro-image");
   const categoryGrid = document.getElementById("tools-category-grid");
   const preview = document.getElementById("tools-category-preview");
+  const searchForm = document.getElementById("tools-search-form");
+  const searchInput = document.getElementById("tools-search-input");
+  const searchReset = document.getElementById("tools-search-reset");
+  const searchResults = document.getElementById("tools-search-results");
   const specialtyGroupState = new Map();
+  const SEARCH_RESULT_LIMIT = 16;
+  let searchIndex = [];
+  let activeSearchResults = [];
+  let searchDebounce = 0;
 
   function setText(element, value) {
     if (element) element.textContent = value;
@@ -39,6 +47,394 @@
 
   function productDetailHref(product) {
     return `tool-product.html?id=${encodeURIComponent(product.sku)}`;
+  }
+
+  function normalizeSearchText(value) {
+    return String(value ?? "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[đĐ]/g, "d")
+      .toLowerCase()
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function flattenSearchFields(value) {
+    if (value === null || value === undefined) return [];
+    if (Array.isArray(value)) return value.flatMap(flattenSearchFields);
+    if (typeof value === "object") return Object.values(value).flatMap(flattenSearchFields);
+    return [String(value)];
+  }
+
+  function escapeSelector(value) {
+    if (window.CSS?.escape) return window.CSS.escape(String(value));
+    return String(value).replace(/["\\]/g, "\\$&");
+  }
+
+  function getFamilySkuIndex(family) {
+    return family.columns?.findIndex((column) => column.key === "sku" || column.label === "SKU") ?? -1;
+  }
+
+  function getFamilyVariantSku(family, variant) {
+    const skuIndex = getFamilySkuIndex(family);
+    return skuIndex >= 0 ? String(variant[skuIndex] || "").trim() : "";
+  }
+
+  function addSearchEntry(entries, entry, fields) {
+    const haystack = normalizeSearchText(flattenSearchFields(fields).join(" "));
+    if (!haystack) return;
+
+    entries.push({
+      ...entry,
+      haystack,
+      titleNormalized: normalizeSearchText(entry.title),
+      skuNormalized: normalizeSearchText(entry.sku)
+    });
+  }
+
+  function productSearchFields(product) {
+    return [
+      product.sku,
+      product.name,
+      product.description,
+      product.details,
+      product.aliases,
+      product.imageAlt,
+      product.features,
+      product.includedItems,
+      product.specs
+    ];
+  }
+
+  function buildSearchIndex() {
+    const entries = [];
+
+    categories.forEach((category) => {
+      addSearchEntry(
+        entries,
+        {
+          type: "category",
+          label: "Danh mục",
+          title: category.name,
+          categoryId: category.id,
+          meta: "Danh mục dụng cụ"
+        },
+        [category.name, category.description, category.scope, category.imageAlt]
+      );
+
+      category.families?.forEach((family) => {
+        addSearchEntry(
+          entries,
+          {
+            type: "family",
+            label: "Nhóm sản phẩm",
+            title: family.name,
+            categoryId: category.id,
+            familyId: family.id,
+            meta: category.name
+          },
+          [
+            category.name,
+            category.description,
+            family.name,
+            family.description,
+            family.imageAlt,
+            family.columns?.map((column) => column.label),
+            family.variants
+          ]
+        );
+
+        family.variants?.forEach((variant) => {
+          const sku = getFamilyVariantSku(family, variant);
+          addSearchEntry(
+            entries,
+            {
+              type: "sku",
+              label: "Chủng loại",
+              title: sku ? `${family.name} — SKU ${sku}` : family.name,
+              categoryId: category.id,
+              familyId: family.id,
+              sku,
+              meta: `${category.name} / ${family.name}`
+            },
+            [category.name, family.name, family.description, sku, variant]
+          );
+        });
+      });
+
+      category.items?.forEach((item) => {
+        collectItemSearchEntries(entries, category, item);
+      });
+
+      category.groups?.forEach((group) => {
+        addSearchEntry(
+          entries,
+          {
+            type: "group",
+            label: "Nhóm ứng dụng",
+            title: group.name,
+            categoryId: category.id,
+            groupId: group.id,
+            meta: category.name
+          },
+          [category.name, category.description, group.name, group.description, group.imageAlt]
+        );
+
+        group.items?.forEach((item) => {
+          collectItemSearchEntries(entries, category, item, group);
+        });
+      });
+    });
+
+    return entries;
+  }
+
+  function collectItemSearchEntries(entries, category, item, group) {
+    const itemMeta = [category.name, group?.name].filter(Boolean).join(" / ");
+
+    if (item.type === "product") {
+      addSearchEntry(
+        entries,
+        {
+          type: "product",
+          label: "Sản phẩm",
+          title: item.name,
+          categoryId: category.id,
+          groupId: group?.id,
+          itemId: item.sku,
+          sku: item.sku,
+          detailUrl: item.detailEnabled ? productDetailHref(item) : "",
+          meta: itemMeta || category.name
+        },
+        [category.name, category.description, group?.name, group?.description, productSearchFields(item)]
+      );
+      return;
+    }
+
+    addSearchEntry(
+      entries,
+      {
+        type: "family",
+        label: "Nhóm sản phẩm",
+        title: item.name,
+        categoryId: category.id,
+        groupId: group?.id,
+        familyId: item.id,
+        meta: itemMeta || category.name
+      },
+      [
+        category.name,
+        category.description,
+        group?.name,
+        group?.description,
+        item.name,
+        item.description,
+        item.imageAlt,
+        item.products
+      ]
+    );
+
+    item.products?.forEach((product) => {
+      addSearchEntry(
+        entries,
+        {
+          type: "sku",
+          label: "Chủng loại",
+          title: product.name,
+          categoryId: category.id,
+          groupId: group?.id,
+          familyId: item.id,
+          sku: product.sku,
+          detailUrl: product.detailEnabled ? productDetailHref(product) : "",
+          meta: [category.name, group?.name, item.name].filter(Boolean).join(" / ")
+        },
+        [
+          category.name,
+          category.description,
+          group?.name,
+          group?.description,
+          item.name,
+          item.description,
+          item.imageAlt,
+          productSearchFields(product)
+        ]
+      );
+    });
+  }
+
+  function getSearchScore(entry, query, tokens) {
+    let score = 0;
+    if (entry.skuNormalized && entry.skuNormalized === query) score += 120;
+    if (entry.skuNormalized && entry.skuNormalized.startsWith(query)) score += 70;
+    if (entry.titleNormalized === query) score += 65;
+    if (entry.titleNormalized.startsWith(query)) score += 38;
+    if (entry.titleNormalized.includes(query)) score += 24;
+    tokens.forEach((token) => {
+      if (entry.skuNormalized?.includes(token)) score += 20;
+      if (entry.titleNormalized.includes(token)) score += 12;
+    });
+    if (entry.type === "product") score += 8;
+    if (entry.type === "sku") score += 6;
+    if (entry.detailUrl) score += 4;
+    return score;
+  }
+
+  function findSearchMatches(query) {
+    const normalizedQuery = normalizeSearchText(query);
+    if (!normalizedQuery) return [];
+
+    const tokens = normalizedQuery.split(" ").filter(Boolean);
+    return searchIndex
+      .filter((entry) => tokens.every((token) => entry.haystack.includes(token)))
+      .map((entry) => ({
+        ...entry,
+        score: getSearchScore(entry, normalizedQuery, tokens)
+      }))
+      .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title, "vi"))
+      .slice(0, SEARCH_RESULT_LIMIT);
+  }
+
+  function clearSearchHighlights() {
+    document.querySelectorAll(".is-search-highlight").forEach((element) => {
+      element.classList.remove("is-search-highlight");
+    });
+  }
+
+  function renderSearchResults(query) {
+    if (!searchResults || !searchReset) return;
+
+    const trimmedQuery = query.trim();
+    searchReset.hidden = !trimmedQuery;
+    searchResults.replaceChildren();
+
+    if (!trimmedQuery) {
+      searchResults.hidden = true;
+      activeSearchResults = [];
+      clearSearchHighlights();
+      return;
+    }
+
+    activeSearchResults = findSearchMatches(trimmedQuery);
+    searchResults.hidden = false;
+
+    if (!activeSearchResults.length) {
+      const empty = createElement(
+        "p",
+        "tools-search__empty",
+        "Không tìm thấy dụng cụ phù hợp. Thử nhập SKU hoặc tên nhóm khác."
+      );
+      searchResults.appendChild(empty);
+      return;
+    }
+
+    const intro = createElement(
+      "p",
+      "tools-search__summary",
+      "Chọn một kết quả để mở đúng nhóm hoặc trang chi tiết."
+    );
+    const list = createElement("ul", "tools-search__list");
+
+    activeSearchResults.forEach((entry, index) => {
+      const item = createElement("li", "tools-search__item");
+      const control = entry.detailUrl ? document.createElement("a") : document.createElement("button");
+      control.className = "tools-search__result";
+      control.dataset.searchIndex = String(index);
+
+      if (entry.detailUrl) {
+        control.href = entry.detailUrl;
+      } else {
+        control.type = "button";
+      }
+
+      const label = createElement("span", "tools-search__result-label", entry.label);
+      const title = createElement("span", "tools-search__result-title", entry.title);
+      const meta = createElement("span", "tools-search__result-meta", entry.meta);
+      control.append(label, title, meta);
+
+      if (entry.sku) {
+        control.appendChild(createElement("span", "tools-search__result-sku", `SKU ${entry.sku}`));
+      }
+
+      item.appendChild(control);
+      list.appendChild(item);
+    });
+
+    searchResults.append(intro, list);
+  }
+
+  function openToggleForEntry(entry) {
+    if (!preview) return;
+    const selectors = [];
+    if (entry.familyId) {
+      selectors.push(`[data-family-toggle="${escapeSelector(entry.familyId)}"]`);
+      selectors.push(`[data-tool-family-toggle="${escapeSelector(entry.familyId)}"]`);
+    }
+
+    const toggle = selectors.length ? preview.querySelector(selectors.join(",")) : null;
+    if (toggle && toggle.getAttribute("aria-expanded") !== "true") {
+      toggle.click();
+    }
+  }
+
+  function findSearchTarget(entry) {
+    if (!preview) return null;
+    if (entry.sku) {
+      const skuTarget = preview.querySelector(`[data-search-sku="${escapeSelector(entry.sku)}"]`);
+      if (skuTarget) return skuTarget;
+    }
+
+    if (entry.familyId) {
+      const familyTarget = preview.querySelector(`[data-search-family="${escapeSelector(entry.familyId)}"]`);
+      if (familyTarget) return familyTarget;
+    }
+
+    if (entry.itemId) {
+      const itemTarget = preview.querySelector(`[data-search-item="${escapeSelector(entry.itemId)}"]`);
+      if (itemTarget) return itemTarget;
+    }
+
+    if (entry.groupId) {
+      return document.getElementById("tools-specialty-group-panel");
+    }
+
+    return preview;
+  }
+
+  function activateSearchResult(entry) {
+    if (!entry?.categoryId) return;
+
+    clearSearchHighlights();
+    if (entry.groupId) specialtyGroupState.set(entry.categoryId, entry.groupId);
+
+    if (readHash() !== entry.categoryId) {
+      window.location.hash = entry.categoryId;
+    }
+
+    renderPreview(entry.categoryId, true);
+
+    window.setTimeout(() => {
+      openToggleForEntry(entry);
+
+      window.setTimeout(() => {
+        const target = findSearchTarget(entry);
+        if (!target) return;
+
+        target.classList.add("is-search-highlight");
+        target.scrollIntoView({
+          behavior: reducedMotion.matches ? "auto" : "smooth",
+          block: "center"
+        });
+      }, 60);
+    }, 80);
+  }
+
+  function updateSearchResults() {
+    renderSearchResults(searchInput?.value || "");
+  }
+
+  function queueSearchUpdate() {
+    window.clearTimeout(searchDebounce);
+    searchDebounce = window.setTimeout(updateSearchResults, 120);
   }
 
   function renderPageContent() {
@@ -126,6 +522,7 @@
     const caption = createElement("caption", "sr-only", family.name);
     const thead = document.createElement("thead");
     const headerRow = document.createElement("tr");
+    const skuIndex = getFamilySkuIndex(family);
 
     family.columns.forEach((column) => {
       const th = document.createElement("th");
@@ -137,6 +534,9 @@
     const tbody = document.createElement("tbody");
     family.variants.forEach((variant) => {
       const row = document.createElement("tr");
+      if (skuIndex >= 0 && variant[skuIndex]) {
+        row.dataset.searchSku = String(variant[skuIndex]).trim();
+      }
       family.columns.forEach((column, index) => {
         const td = document.createElement("td");
         td.dataset.label = column.label;
@@ -155,6 +555,7 @@
 
   function createFamilyCard(category, family, index) {
     const article = createElement("article", "tools-family-card");
+    article.dataset.searchFamily = family.id;
     const summary = createElement("div", "tools-family-card__summary");
     const media = createElement("figure", "tools-family-card__media");
     const image = document.createElement("img");
@@ -215,6 +616,7 @@
 
     item.products.forEach((product) => {
       const row = createElement("li", "tools-family-products__item");
+      row.dataset.searchSku = product.sku;
       const copy = createElement("div", "tools-family-products__copy");
       const title = createElement("h5", null, product.name);
       const sku = createElement("span", "tools-family-products__sku", `SKU ${product.sku}`);
@@ -250,6 +652,9 @@
   function createToolItemCard(category, item, index, group) {
     const article = createElement("article", `tools-item-card tools-item-card--${item.type}`);
     const contentId = item.type === "family" ? `tools-item-family-${item.id}` : "";
+    article.dataset.searchItem = item.id || item.sku || "";
+    if (item.type === "family") article.dataset.searchFamily = item.id;
+    if (item.sku) article.dataset.searchSku = item.sku;
 
     const media = createElement("figure", "tools-item-card__media");
     const image = document.createElement("img");
@@ -553,9 +958,43 @@
     });
   }
 
+  if (searchForm && searchInput && searchResults && searchReset) {
+    searchForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (activeSearchResults[0]?.detailUrl) {
+        window.location.href = activeSearchResults[0].detailUrl;
+      } else {
+        activateSearchResult(activeSearchResults[0]);
+      }
+    });
+
+    searchInput.addEventListener("input", queueSearchUpdate);
+
+    searchReset.addEventListener("click", () => {
+      searchInput.value = "";
+      searchInput.focus();
+      renderSearchResults("");
+    });
+
+    searchResults.addEventListener("click", (event) => {
+      const control = event.target.closest("[data-search-index]");
+      if (!control) return;
+
+      const entry = activeSearchResults[Number(control.dataset.searchIndex)];
+      if (!entry) return;
+
+      if (control.tagName !== "A") {
+        event.preventDefault();
+        activateSearchResult(entry);
+      }
+    });
+  }
+
   window.addEventListener("hashchange", () => syncFromHash(true));
 
   renderPageContent();
   renderCategoryGrid();
+  searchIndex = buildSearchIndex();
+  renderSearchResults("");
   syncFromHash(false);
 })();

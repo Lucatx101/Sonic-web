@@ -1,12 +1,6 @@
 # Prompt cho Claude Code — Module "Hệ EVA Foam Sonic"
 
-⚙️ THIẾT LẬP TRƯỚC KHI CHẠY (anh làm thủ công trên UI Claude Code):
-   Model: Claude Opus 4.8 — Effort: Max
-   Giữ nguyên cài đặt này cho toàn bộ task, không đổi giữa chừng.
 
-> Dán toàn bộ phần bên dưới dòng kẻ vào Claude Code (VS Code extension).
-
----
 
 Repo Sonic-web, branch claude/epic-knuth-rtyfc5. Đọc CLAUDE.md trước khi làm.
 Tham khảo cấu trúc next-mss.html (Codex đã làm xong, đã push) để kế thừa

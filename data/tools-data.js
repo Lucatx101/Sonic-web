@@ -1046,7 +1046,7 @@ const TOOLS_DATA = {
       enabled: true,
       families: [
         {
-          id: "wrenches",
+          id: "wrenches-family",
           name: "Cờ lê và bộ cờ lê",
           description:
             "Cờ lê hai đầu miệng, vòng miệng, vòng miệng ngắn, TX, vòng lệch, ống dầu, bánh cóc và các bộ cờ lê trong túi.",
@@ -1215,7 +1215,7 @@ Bộ cờ lê bánh cóc 4 trong 1 trong túi||600203|2-pcs|Cờ lê X-ring 4 tr
       enabled: true,
       families: [
         {
-          id: "pliers-cutters",
+          id: "pliers-cutters-family",
           name: "Kìm và dụng cụ cắt",
           description:
             "Kìm bộ, kìm mũi dài, kìm cắt chéo, kìm tổ hợp, kìm mỏ quạ, kìm phe, kìm bấm chết, kìm lọc dầu và kìm tuốt dây.",

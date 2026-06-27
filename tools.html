@@ -38,7 +38,7 @@
                 <span>MSS - Lưu trữ chuyên nghiệp</span><span class="nav__chevron-right" aria-hidden="true">›</span>
               </button>
               <a class="nav__dropdown-link" href="eva-foam.html">Hệ EVA Foam Sonic</a>
-              <span class="nav__dropdown-link is-disabled">Dụng cụ</span>
+              <a class="nav__dropdown-link active" href="tools.html" aria-current="page">Dụng cụ</a>
             </div>
             <div class="nav__submenu">
               <div class="nav__submenu-header"><span>MSS - Lưu trữ chuyên nghiệp</span><span class="nav__chevron-right" aria-hidden="true">›</span></div>
@@ -98,6 +98,15 @@
           <h2 id="tools-categories-title">Khám phá danh mục.</h2>
           <p class="tools-categories__lead">Chọn một nhóm để xem phạm vi sản phẩm và định hướng ứng dụng.</p>
         </div>
+        <form class="tools-search" id="tools-search-form" role="search" aria-labelledby="tools-search-label">
+          <label class="tools-search__label" id="tools-search-label" for="tools-search-input">Tìm dụng cụ theo tên hoặc SKU</label>
+          <div class="tools-search__bar">
+            <input id="tools-search-input" class="tools-search__input" type="search" name="tools-search" placeholder="Ví dụ: 829004, tay cóc, kìm bấm cos" autocomplete="off" />
+            <button class="tools-search__reset" id="tools-search-reset" type="button" hidden>Xóa</button>
+          </div>
+          <p class="tools-search__hint">Tìm trong toàn bộ danh mục dụng cụ, nhóm sản phẩm và các chủng loại đã xác minh.</p>
+          <div class="tools-search__results" id="tools-search-results" role="status" aria-live="polite" hidden></div>
+        </form>
         <div class="tools-category-grid" id="tools-category-grid"></div>
         <noscript>
           <p>Vui lòng bật JavaScript để xem và tương tác với danh mục dụng cụ.</p>
@@ -138,9 +147,11 @@
       <div class="footer-col">
         <h4>Sản phẩm</h4>
         <ul>
-          <li><a href="products.html">Tủ đồ nghề NEXT</a></li>
-          <li><a href="next-mss.html">NEXT MSS</a></li>
-          <li><a href="products.html#sfs">Sonic Foam System</a></li>
+          <li><a href="products.html">Tủ đồ nghề</a></li>
+          <li><a href="next-mss.html">MSS NEXT</a></li>
+          <li><a href="mss-plus.html">MSS+</a></li>
+          <li><a href="eva-foam.html">SFS</a></li>
+          <li><a href="tools.html">Dụng cụ</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -153,15 +164,15 @@
       <div class="footer-col">
         <h4>Liên hệ</h4>
         <ul>
-          <li>📞 <a data-cfg="hotline" href="tel:"></a></li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px"><path d="M21 11.5a8.4 8.4 0 0 1-12 7.6L3 21l1.9-6A8.4 8.4 0 1 1 21 11.5z"/></svg> <a href="https://zalo.me/0843555566" target="_blank" rel="noopener">0843 55 55 66</a></li>
-          <li>✉️ <a data-cfg="email" href="mailto:"></a></li>
-          <li>📍 <span data-cfg="showroom"></span></li>
+          <li><span class="footer-ico">📞</span><a data-cfg="hotline" href="tel:"></a></li>
+          <li><span class="footer-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px"><path d="M21 11.5a8.4 8.4 0 0 1-12 7.6L3 21l1.9-6A8.4 8.4 0 1 1 21 11.5z"/></svg></span><a href="https://zalo.me/0843555566" target="_blank" rel="noopener">0843 55 55 66</a></li>
+          <li><span class="footer-ico">✉️</span><a data-cfg="email" href="mailto:"></a></li>
+          <li><span class="footer-ico">📍</span><span data-cfg="showroom"></span></li>
         </ul>
       </div>
     </div>
     <div class="container footer-bottom">
-      <span>© <span data-year></span> Sonic Việt Nam. Sonic Equipment là thương hiệu của Sonic Equipment B.V. (Hà Lan).</span>
+      <span>Sonic Equipment là thương hiệu của Sonic Equipment B.V. (Hà Lan)</span>
       <span>Website giới thiệu sản phẩm.</span>
     </div>
   </footer>
