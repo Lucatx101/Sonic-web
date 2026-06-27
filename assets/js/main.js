@@ -569,14 +569,6 @@ function applyConfig() {
     <a class="is-zalo" href="${zaloUrl}" target="_blank" rel="noopener">${ICON_CHAT}<span>Chat Zalo</span></a>
     <a href="contact.html">${ICON_QUOTE}<span>Báo giá</span></a>`;
   document.body.appendChild(dock);
-
-  // Nút nổi (desktop) — Hotline + Zalo.
-  const fab = document.createElement("div");
-  fab.className = "fab";
-  fab.innerHTML = `
-    <a class="fab-zalo" href="${zaloUrl}" target="_blank" rel="noopener">${ICON_CHAT}<span>Zalo</span></a>
-    <a class="fab-hotline" href="${telUrl}">${ICON_PHONE}<span>${CONFIG.hotline}</span></a>`;
-  document.body.appendChild(fab);
 }
 
 /* --- Năm hiện tại ở footer --- */

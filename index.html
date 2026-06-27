@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
-<body data-limit="6">
+<body class="home-page" data-limit="6">
   <!-- Topbar liên hệ -->
   <div class="topbar">
     <div class="container topbar__row">
@@ -19,18 +19,14 @@
         <a data-cfg="showroom" data-cfg-href-only href="#" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> <span data-cfg="showroom"></span></a>
         <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> <span data-cfg="hours"></span></span>
       </div>
-      <span class="topbar__badge">Đại lý <b>chính hãng</b> Sonic Equipment</span>
+      <span class="topbar__badge">Sonic Equipment <b>Vietnam</b></span>
     </div>
   </div>
   <!-- Header -->
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="index.html">
-        <span class="brand__mark">S</span>
-        <span>
-          <span class="brand__name">SONIC</span><br />
-          <span class="brand__sub">Việt Nam</span>
-        </span>
+      <a class="brand" href="index.html" aria-label="Sonic Việt Nam — Trang chủ">
+        <img class="brand__logo" src="assets/img/logo-sonic.png" alt="Sonic" width="692" height="165" />
       </a>
       <ul class="nav__links">
         <li><a href="index.html" class="active">Trang chủ</a></li>
@@ -58,34 +54,27 @@
         <li><a href="contact.html">Liên hệ</a></li>
       </ul>
       <div class="nav__cta">
-        <a class="btn btn--ghost" href="products.html">Xem sản phẩm</a>
-        <a class="btn btn--primary" href="contact.html">Yêu cầu báo giá</a>
+        <a class="nav__icon" href="products.html" aria-label="Tìm kiếm sản phẩm">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </a>
+        <a class="nav__icon" href="https://www.facebook.com/Sonictoolsvietnam/" target="_blank" rel="noopener" aria-label="Facebook Sonic Việt Nam">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a class="nav__icon" href="https://www.instagram.com/sonic.equipment/" target="_blank" rel="noopener" aria-label="Instagram Sonic Equipment">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
         <button class="nav__toggle" aria-label="Menu"><span></span><span></span><span></span></button>
       </div>
     </div>
   </header>
 
   <!-- Hero -->
-  <section class="hero">
-    <div class="container hero__grid">
-      <div class="hero__copy">
-        <span class="hero__tag">★ Đại lý / Nhà phân phối chính hãng Sonic tại Việt Nam</span>
-        <h1>Dụng cụ &amp; tủ đồ nghề <span>Sonic</span> chính hãng cho xưởng chuyên nghiệp.</h1>
-        <p class="hero__lead">
-          Chuyên cung cấp dụng cụ cầm tay, tủ đồ nghề, hệ thống khay mút (Foam System) và giải pháp
-          lưu trữ Sonic cho gara ô tô, tiệm xe máy, xưởng cơ khí và thợ chuyên nghiệp trên toàn quốc.
-        </p>
-        <div class="hero__actions">
-          <a class="btn btn--primary" href="products.html">Xem sản phẩm</a>
-          <a class="btn btn--outline-light" href="contact.html">Nhận báo giá</a>
-        </div>
-        <div class="hero__stats">
-          <div class="hero__stat"><strong>S7–S15</strong><span>Dòng tủ NEXT</span></div>
-          <div class="hero__stat"><strong>SFS</strong><span>Khay mút định hình</span></div>
-          <div class="hero__stat"><strong>100%</strong><span>Ngăn kéo mở hết</span></div>
-        </div>
-      </div>
-      <div class="hero__art" id="hero-art"></div>
+  <section class="hero hero--home">
+    <img class="hero__bg" src="assets/img/home/hero.jpg" alt="" aria-hidden="true" />
+    <div class="hero__overlay" aria-hidden="true"></div>
+    <div class="container hero__inner">
+      <h1 class="hp-display hero__title">Sắp xếp thông minh<br />làm việc hiệu quả</h1>
+      <a class="btn btn--primary hero__cta" href="mss-plus.html">Khám phá hệ MSS+</a>
     </div>
   </section>
 
@@ -93,98 +82,80 @@
   <div class="usp">
     <div class="container usp__grid">
       <div class="usp__item">
-        <span class="usp__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <span class="usp__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span>
         <div><strong>Hàng chính hãng 100%</strong><span>Nhập khẩu trực tiếp, đầy đủ chứng từ (CO/CQ).</span></div>
       </div>
       <div class="usp__item">
-        <span class="usp__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg></span>
-        <div><strong>Bảo hành chính hãng</strong><span>Chế độ bảo hành &amp; hỗ trợ kỹ thuật tận nơi.</span></div>
+        <span class="usp__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <div><strong>Bảo hành chính hãng 10 năm</strong><span>Chế độ bảo hành &amp; hỗ trợ kỹ thuật tận nơi.</span></div>
       </div>
       <div class="usp__item">
-        <span class="usp__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7M5.5 19a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM18.5 19a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg></span>
+        <span class="usp__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7M5.5 19a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM18.5 19a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg></span>
         <div><strong>Giao hàng toàn quốc</strong><span>Vận chuyển an toàn đến tận xưởng trên cả nước.</span></div>
       </div>
     </div>
   </div>
 
-  <!-- Danh mục -->
-  <section class="section">
+  <!-- Showcase A | B -->
+  <section class="hp-showcase">
+    <div class="container hp-showcase__grid">
+      <a class="hp-card" href="products.html">
+        <img class="hp-card__bg" src="assets/img/home/showcase-next.jpg" alt="" aria-hidden="true" />
+        <span class="hp-card__overlay" aria-hidden="true"></span>
+        <span class="hp-card__body">
+          <span class="hp-card__eyebrow">Dòng tủ NEXT</span>
+          <span class="hp-display hp-card__title">Tủ đồ nghề di động</span>
+          <span class="hp-card__sub">Giải pháp chuyên nghiệp cho xưởng của bạn.</span>
+          <span class="hp-card__cta">Khám phá NEXT ›</span>
+        </span>
+      </a>
+      <a class="hp-card" href="eva-foam.html">
+        <img class="hp-card__bg" src="assets/img/home/showcase-sfs.jpg" alt="" aria-hidden="true" />
+        <span class="hp-card__overlay" aria-hidden="true"></span>
+        <span class="hp-card__body">
+          <span class="hp-card__eyebrow">Sonic Foam System</span>
+          <span class="hp-display hp-card__title">Khay mút định hình SFS</span>
+          <span class="hp-card__sub">Làm việc hiệu quả, bộ dụng cụ luôn đầy đủ.</span>
+          <span class="hp-card__cta">Khám phá SFS ›</span>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Showcase C -->
+  <section class="hp-showcase hp-showcase--wide">
+    <div class="container">
+      <a class="hp-card hp-card--wide" href="next-mss.html">
+        <img class="hp-card__bg" src="assets/img/home/showcase-mss.jpg" alt="" aria-hidden="true" />
+        <span class="hp-card__overlay" aria-hidden="true"></span>
+        <span class="hp-card__body">
+          <span class="hp-card__eyebrow">Storage · MSS</span>
+          <span class="hp-display hp-card__title">Giải pháp lưu trữ xưởng</span>
+          <span class="hp-card__sub">Kiến tạo không gian làm việc hoàn hảo.</span>
+          <span class="hp-card__cta">Khám phá ›</span>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Team Sonic gallery -->
+  <section class="section hp-team">
     <div class="container">
       <div class="section-head section-head--center">
-        <span class="eyebrow">Danh mục sản phẩm</span>
-        <h2 class="section-title">Giải pháp dụng cụ toàn diện cho xưởng</h2>
-        <p class="section-lead">Từ tủ đồ nghề cao cấp đến từng bộ dụng cụ cầm tay — tất cả đều đạt tiêu chuẩn chuyên nghiệp của Sonic.</p>
+        <span class="eyebrow">Thế giới Sonic</span>
+        <h2 class="section-title hp-display">Team Sonic</h2>
+        <p class="section-lead">Đội ngũ Sonic Việt Nam đồng hành cùng xưởng của bạn.</p>
       </div>
-      <div class="cat-grid" id="cat-grid"></div>
-    </div>
-  </section>
-
-  <!-- Sản phẩm nổi bật -->
-  <section class="section section--soft">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Nổi bật</span>
-        <h2 class="section-title">Tủ đồ nghề & bộ dụng cụ bán chạy</h2>
-        <p class="section-lead">Một số sản phẩm tiêu biểu trong danh mục. Xem đầy đủ tại trang sản phẩm.</p>
-      </div>
-      <div class="product-grid" id="product-grid"></div>
-      <div style="text-align:center;margin-top:38px">
-        <a class="btn btn--ghost" href="products.html">Xem tất cả sản phẩm →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sonic Foam System -->
-  <section class="section" id="sfs">
-    <div class="container">
-      <div class="feature">
-        <div>
-          <span class="eyebrow">Sonic Foam System</span>
-          <h2 class="section-title">Dụng cụ ngăn nắp, năng suất tối đa</h2>
-          <p class="section-lead">Mọi xe tủ dụng cụ của Sonic đều trang bị hệ thống khay mút SFS. Bộ dụng cụ được định hình sẵn trong mút giúp bạn làm việc nhanh hơn, không thất lạc và luôn đầy đủ.</p>
-          <ul class="feature__list">
-            <li>
-              <span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
-              <div><h4>Nhìn là biết thiếu gì</h4><p>Khay mút định hình giúp kiểm tra dụng cụ chỉ trong vài giây.</p></div>
-            </li>
-            <li>
-              <span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
-              <div><h4>Làm việc nhanh hơn</h4><p>Mỗi dụng cụ có vị trí riêng — lấy và cất đều tức thì.</p></div>
-            </li>
-            <li>
-              <span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
-              <div><h4>Bộ luôn đầy đủ</h4><p>Giảm thất lạc dụng cụ, tiết kiệm chi phí thay thế cho xưởng.</p></div>
-            </li>
-          </ul>
-        </div>
-        <div class="feature__art" id="feature-art"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Lý do chọn -->
-  <section class="section section--dark">
-    <div class="container">
-      <div class="section-head section-head--center">
-        <span class="eyebrow">Tại sao chọn Sonic</span>
-        <h2 class="section-title">Chất lượng được kỹ thuật viên tin dùng toàn cầu</h2>
-      </div>
-      <div class="why-grid">
-        <div class="why-card">
-          <div class="why-card__icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg></div>
-          <h3>Thương hiệu Hà Lan</h3>
-          <p>Sonic Equipment là nhà sản xuất dụng cụ cầm tay và hệ thống tủ cao cấp hàng đầu thế giới.</p>
-        </div>
-        <div class="why-card">
-          <div class="why-card__icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <h3>Độ bền vượt trội</h3>
-          <p>Thép Chrome Vanadium, thân tủ thép nguyên khối và sơn tĩnh điện chống ăn mòn.</p>
-        </div>
-        <div class="why-card">
-          <div class="why-card__icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
-          <h3>Hỗ trợ tại Việt Nam</h3>
-          <p>Tư vấn, giao hàng và bảo hành bởi đại lý phân phối ngay trong nước.</p>
-        </div>
+      <div class="hp-team__masonry">
+        <figure class="hp-team__item"><img src="assets/img/home/team/team-01.jpg" alt="Team Sonic" loading="lazy" /></figure>
+        <figure class="hp-team__item"><img src="assets/img/home/team/team-02.jpg" alt="Team Sonic" loading="lazy" /></figure>
+        <figure class="hp-team__item"><img src="assets/img/home/team/team-09.jpg" alt="Team Sonic" loading="lazy" /></figure>
+        <figure class="hp-team__item"><img src="assets/img/home/team/team-03.jpg" alt="Team Sonic" loading="lazy" /></figure>
+        <figure class="hp-team__item"><img src="assets/img/home/team/team-04.jpg" alt="Team Sonic" loading="lazy" /></figure>
+        <figure class="hp-team__item"><img src="assets/img/home/team/team-05.jpg" alt="Team Sonic" loading="lazy" /></figure>
+        <figure class="hp-team__item"><img src="assets/img/home/team/team-06.jpg" alt="Team Sonic" loading="lazy" /></figure>
+        <figure class="hp-team__item"><img src="assets/img/home/team/team-07.jpg" alt="Team Sonic" loading="lazy" /></figure>
+        <figure class="hp-team__item"><img src="assets/img/home/team/team-08.jpg" alt="Team Sonic" loading="lazy" /></figure>
       </div>
     </div>
   </section>
@@ -209,6 +180,7 @@
           <p class="sub">Để lại thông tin, đội ngũ của chúng tôi sẽ liên hệ trong vòng 24 giờ làm việc.</p>
           <a class="btn btn--primary" href="contact.html" style="width:100%;justify-content:center">Yêu cầu báo giá ngay</a>
           <p style="margin-top:18px;font-size:14px;color:var(--grey)">Hoặc gọi <strong data-cfg="hotline" style="color:var(--black)"></strong> trong giờ hành chính.</p>
+          <p style="margin-top:8px;font-size:14px;color:var(--grey);display:flex;align-items:center;gap:6px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-12 7.6L3 21l1.9-6A8.4 8.4 0 1 1 21 11.5z"/></svg><a href="https://zalo.me/0843555566" target="_blank" rel="noopener" style="color:var(--black);font-weight:600">Zalo: 0843 55 55 66</a></p>
         </div>
       </div>
     </div>
@@ -231,11 +203,8 @@
   <footer class="site-footer">
     <div class="container footer-grid">
       <div class="footer-col footer-brand">
-        <a class="brand" href="index.html">
-          <span class="brand__mark">S</span>
-          <span><span class="brand__name" style="color:#fff">SONIC</span><br/><span class="brand__sub">Việt Nam</span></span>
-        </a>
-        <p>Đại lý phân phối chính thức dụng cụ và tủ đồ nghề Sonic Equipment tại Việt Nam.</p>
+        <p class="footer-brand__name">Sonic Equipment Vietnam</p>
+        <p class="footer-brand__tagline">Thương hiệu dụng cụ chuyên nghiệp từ Hà Lan.</p>
       </div>
       <div class="footer-col">
         <h4>Sản phẩm</h4>
@@ -258,6 +227,7 @@
         <h4>Liên hệ</h4>
         <ul>
           <li>📞 <a data-cfg="hotline" href="tel:"></a></li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px"><path d="M21 11.5a8.4 8.4 0 0 1-12 7.6L3 21l1.9-6A8.4 8.4 0 1 1 21 11.5z"/></svg> <a href="https://zalo.me/0843555566" target="_blank" rel="noopener">0843 55 55 66</a></li>
           <li>✉️ <a data-cfg="email" href="mailto:"></a></li>
           <li>📍 <span data-cfg="showroom"></span></li>
         </ul>

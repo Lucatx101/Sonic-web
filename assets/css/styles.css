@@ -142,6 +142,176 @@ a { color: inherit; text-decoration: none; }
 .nav__chevron { font-size: 11px; transition: transform .2s ease; }
 .nav__item--dropdown.is-open .nav__chevron { transform: rotate(180deg); }
 
+/* ===== Homepage redesign — HEADER (scope .home-page, không đụng global trang khác) ===== */
+/* Header chuẩn (wordmark + nav đậm) — GLOBAL, áp mọi trang đã đồng bộ header */
+.brand:has(.brand__logo) { gap: 0; }
+.brand__logo { display: block; height: 30px; width: auto; }
+.nav__links a,
+.nav__link--trigger { font-weight: 800; color: var(--black); }
+.nav__links a:hover,
+.nav__links a.active,
+.nav__link--trigger:hover,
+.nav__link--trigger.active,
+.nav__item--dropdown.is-open .nav__link--trigger { color: var(--red); }
+
+/* ===== Homepage redesign — display font (Be Vietnam Pro 900 italic, IN HOA) ===== */
+.home-page .hp-display {
+  font-family: 'Be Vietnam Pro', 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.02;
+}
+/* Khoá transform cho CTA pill trang chủ — nút đứng yên tuyệt đối khi hover/active/focus */
+.home-page .btn--primary:hover,
+.home-page .btn--primary:active,
+.home-page .btn--primary:focus { transform: none; }
+
+/* ===== Homepage redesign — HERO full-bleed ảnh tối ===== */
+.home-page .hero--home {
+  position: relative;
+  display: flex;
+  align-items: flex-end; /* dồn cụm chữ xuống đáy */
+  min-height: clamp(440px, 72vh, 720px);
+  background: #0f1317;
+  overflow: hidden;
+}
+.home-page .hero--home::after { display: none; } /* tắt lớp trang trí của .hero global */
+.home-page .hero__bg {
+  position: absolute; inset: 0; z-index: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+}
+.home-page .hero__overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(10,12,15,.50) 0%, rgba(10,12,15,.18) 38%, rgba(10,12,15,.78) 100%),
+    linear-gradient(90deg, rgba(10,12,15,.62) 0%, rgba(10,12,15,0) 62%);
+}
+.home-page .hero__inner {
+  position: relative; z-index: 2;
+  width: 100%;
+  padding-bottom: clamp(36px, 7vh, 68px); /* neo gần đáy, chừa lề dưới */
+}
+.home-page .hero__title {
+  color: #fff;
+  font-size: clamp(17px, 2.8vw, 30px); /* giảm thêm ~37% so với bản trước, lộ ảnh nhiều hơn */
+  margin: 0 0 18px;
+  max-width: 18ch;
+  text-shadow: 0 2px 22px rgba(0,0,0,.45);
+}
+.home-page .hero__sub {
+  color: #eef1f5;
+  font-size: clamp(16px, 1.9vw, 20px);
+  font-weight: 500;
+  line-height: 1.5;
+  max-width: 46ch;
+  margin: 0 0 30px;
+  text-shadow: 0 1px 12px rgba(0,0,0,.5);
+}
+.home-page .hero__cta {
+  font-size: 16px; /* GIỮ cỡ chữ */
+  padding: 10px 22px; /* thu nhỏ khung — oval ôm sát chữ hơn */
+  border-color: #fff; /* viền trắng mảnh quanh pill đỏ */
+}
+.home-page .hero__cta:hover,
+.home-page .hero__cta:active,
+.home-page .hero__cta:focus { border-color: #fff; } /* giữ viền trắng, chỉ đổi màu nền */
+
+/* ===== HEADER icon (Search/Facebook/Instagram) — GLOBAL, áp mọi trang ===== */
+.nav__icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px;
+  color: var(--black);
+  transition: color .15s ease; /* chỉ đổi màu, KHÔNG transform */
+}
+.nav__icon:hover,
+.nav__icon:focus { color: var(--red); }
+
+/* ===== Homepage redesign — USP band: tiêu đề đỏ ===== */
+.home-page .usp__item strong { color: var(--red); }
+
+/* ===== Homepage redesign — SHOWCASE (A|B + C) ảnh full-bleed + overlay ===== */
+.home-page .hp-showcase { background: #fff; padding: 18px 0; }
+.home-page .hp-showcase--wide { padding-top: 0; }
+.home-page .hp-showcase__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.home-page .hp-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 8px;
+  min-height: 440px;
+  color: #fff;
+}
+.home-page .hp-card--wide { min-height: 360px; }
+.home-page .hp-card__bg {
+  position: absolute; inset: 0; z-index: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  transition: transform .5s ease;
+}
+.home-page .hp-card:hover .hp-card__bg { transform: scale(1.04); }
+.home-page .hp-card__overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, rgba(10,12,15,.12) 0%, rgba(10,12,15,.04) 38%, rgba(10,12,15,.82) 100%);
+}
+.home-page .hp-card__body {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+  display: flex; flex-direction: column; align-items: flex-start;
+  padding: 30px 32px;
+}
+.home-page .hp-card__eyebrow {
+  color: var(--red); font-weight: 800; font-size: 12.5px;
+  letter-spacing: .14em; text-transform: uppercase; margin-bottom: 10px;
+  text-shadow: 0 1px 8px rgba(0,0,0,.5);
+}
+.home-page .hp-card__title {
+  color: #fff; font-size: clamp(24px, 2.6vw, 34px);
+  margin: 0 0 8px; text-shadow: 0 2px 16px rgba(0,0,0,.5);
+}
+.home-page .hp-card__sub {
+  color: #e9ecf1; font-size: 15.5px; font-weight: 500; line-height: 1.45;
+  margin: 0 0 16px; max-width: 36ch; text-shadow: 0 1px 8px rgba(0,0,0,.55);
+}
+.home-page .hp-card__cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: #fff; font-weight: 800; font-size: 15px;
+  border-bottom: 2px solid var(--red); padding-bottom: 2px;
+  transition: color .2s ease;
+}
+.home-page .hp-card:hover .hp-card__cta { color: var(--red); }
+@media (max-width: 860px) {
+  .home-page .hp-showcase__grid { grid-template-columns: 1fr; }
+  .home-page .hp-card { min-height: 340px; }
+}
+
+/* ===== Homepage redesign — Team Sonic gallery (masonry giữ tỉ lệ ảnh) ===== */
+.home-page .hp-team .section-title { color: var(--black); }
+.home-page .hp-team__masonry {
+  column-count: 3;
+  column-gap: 16px;
+  margin-top: 36px;
+}
+.home-page .hp-team__item {
+  break-inside: avoid;
+  margin: 0 0 16px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--bg-soft);
+}
+.home-page .hp-team__item img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 900px) { .home-page .hp-team__masonry { column-count: 2; } }
+@media (max-width: 480px) { .home-page .hp-team__masonry { column-count: 1; } }
+
 .nav__dropdown-wrap {
   display: none; position: absolute; top: calc(100% + 22px); left: -18px;
   align-items: flex-start; z-index: 60;
@@ -389,12 +559,14 @@ a { color: inherit; text-decoration: none; }
 /* ===== Thanh tiện ích trên cùng (hotline + showroom) ===== */
 .topbar { background: var(--black); color: #cfd6df; font-size: 13.5px; }
 .topbar__row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 8px 0; flex-wrap: wrap; }
-.topbar a { display: inline-flex; align-items: center; gap: 7px; color: #cfd6df; font-weight: 600; }
+.topbar a { display: inline-flex; align-items: center; gap: 7px; color: #cfd6df; font-weight: 600; white-space: nowrap; }
 .topbar a:hover { color: #fff; }
-.topbar svg { color: var(--red); }
-.topbar__left { display: flex; gap: 22px; flex-wrap: wrap; }
+.topbar svg { color: var(--red); flex: 0 0 auto; }
+.topbar__left { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+/* Cụm giờ làm việc (span trần) căn hàng cùng icon, không xuống dòng */
+.topbar__left > span { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
 .topbar__badge { color: #fff; font-weight: 700; }
-.topbar__badge b { color: #ff5b6e; }
+.topbar__badge b { color: #E2231A; }
 
 /* ===== Dải 3 USP ===== */
 .usp { background: #fff; border-bottom: 1px solid var(--line); }
@@ -447,9 +619,23 @@ a { color: inherit; text-decoration: none; }
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 34px; }
 .footer-col h4 { color: #fff; font-size: 15px; margin-bottom: 16px; }
 .footer-col ul { list-style: none; display: grid; gap: 10px; }
+.footer-col ul li { display: flex; align-items: center; gap: 7px; }
+.footer-col ul li svg { flex: 0 0 auto; }
 .footer-col a, .footer-col li { font-size: 14px; color: #97a0ac; }
 .footer-col a:hover { color: #fff; }
 .footer-brand p { font-size: 14px; margin: 14px 0; max-width: 280px; }
+/* Footer brand dạng text (thay logo "S") — áp mọi trang */
+.footer-brand__name {
+  font-family: 'Be Vietnam Pro', 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-weight: 900;
+  color: #fff;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  margin: 0 0 8px;
+  max-width: none;
+}
+.footer-brand__tagline { font-size: 14px; color: #8b94a0; margin: 0; max-width: 280px; }
 .footer-bottom {
   margin-top: 44px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.08);
   display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
@@ -1962,3 +2148,18 @@ a { color: inherit; text-decoration: none; }
     text-align: center;
   }
 }
+
+/* ===== Be Vietnam Pro (self-host) — chỉ dùng cho heading homepage redesign ===== */
+/* Weight 800/900 + italic, subset vietnamese/latin-ext/latin. Khai báo local để chạy file://. */
+@font-face{font-family:'Be Vietnam Pro';font-style:normal;font-weight:800;font-display:swap;src:url(../fonts/bvp-800-normal-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}
+@font-face{font-family:'Be Vietnam Pro';font-style:normal;font-weight:800;font-display:swap;src:url(../fonts/bvp-800-normal-latinext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Be Vietnam Pro';font-style:normal;font-weight:800;font-display:swap;src:url(../fonts/bvp-800-normal-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Be Vietnam Pro';font-style:normal;font-weight:900;font-display:swap;src:url(../fonts/bvp-900-normal-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}
+@font-face{font-family:'Be Vietnam Pro';font-style:normal;font-weight:900;font-display:swap;src:url(../fonts/bvp-900-normal-latinext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Be Vietnam Pro';font-style:normal;font-weight:900;font-display:swap;src:url(../fonts/bvp-900-normal-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Be Vietnam Pro';font-style:italic;font-weight:800;font-display:swap;src:url(../fonts/bvp-800-italic-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}
+@font-face{font-family:'Be Vietnam Pro';font-style:italic;font-weight:800;font-display:swap;src:url(../fonts/bvp-800-italic-latinext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Be Vietnam Pro';font-style:italic;font-weight:800;font-display:swap;src:url(../fonts/bvp-800-italic-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Be Vietnam Pro';font-style:italic;font-weight:900;font-display:swap;src:url(../fonts/bvp-900-italic-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}
+@font-face{font-family:'Be Vietnam Pro';font-style:italic;font-weight:900;font-display:swap;src:url(../fonts/bvp-900-italic-latinext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Be Vietnam Pro';font-style:italic;font-weight:900;font-display:swap;src:url(../fonts/bvp-900-italic-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
