@@ -22,7 +22,11 @@
   }
 
   function contactHref(product) {
-    const context = `${product.category.name} – ${product.name} (SKU ${product.sku})`;
+    const context = [
+      product.category.name,
+      product.group?.name,
+      `${product.name} (SKU ${product.sku})`
+    ].filter(Boolean).join(" – ");
     return `contact.html?cfg=${encodeURIComponent(context)}`;
   }
 
@@ -47,6 +51,28 @@
             });
           });
         }
+      });
+
+      category.groups?.forEach((group) => {
+        group.items?.forEach((item) => {
+          if (item.type === "product" && item.detailEnabled) {
+            products.push({ ...item, category, group });
+          }
+
+          if (item.type === "family") {
+            item.products?.forEach((product) => {
+              if (!product.detailEnabled) return;
+              products.push({
+                ...product,
+                category,
+                group,
+                family: item,
+                image: product.image || item.image || group.image,
+                imageAlt: product.imageAlt || item.imageAlt || group.imageAlt
+              });
+            });
+          }
+        });
       });
     });
 
@@ -116,7 +142,11 @@
 
     const content = createElement("div", "tool-product__content");
     content.appendChild(
-      createElement("p", "tool-product__breadcrumb", `Dụng cụ / ${product.category.name}`)
+      createElement(
+        "p",
+        "tool-product__breadcrumb",
+        ["Dụng cụ", product.category.name, product.group?.name].filter(Boolean).join(" / ")
+      )
     );
 
     const title = createElement("h1", null, product.name);

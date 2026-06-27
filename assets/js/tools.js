@@ -13,6 +13,7 @@
   const introImage = document.getElementById("tools-intro-image");
   const categoryGrid = document.getElementById("tools-category-grid");
   const preview = document.getElementById("tools-category-preview");
+  const specialtyGroupState = new Map();
 
   function setText(element, value) {
     if (element) element.textContent = value;
@@ -25,11 +26,14 @@
     return element;
   }
 
-  function contactHref(category, subject) {
+  function contactHref(category, subject, group) {
     const subjectLabel = subject?.sku
       ? `${subject.name} (SKU ${subject.sku})`
       : subject?.name;
-    const context = subjectLabel ? `${category.name} – ${subjectLabel}` : category.name;
+    const contextParts = [category.name];
+    if (group?.name) contextParts.push(group.name);
+    if (subjectLabel) contextParts.push(subjectLabel);
+    const context = contextParts.join(" – ");
     return `contact.html?cfg=${encodeURIComponent(context)}`;
   }
 
@@ -206,7 +210,7 @@
     return article;
   }
 
-  function createItemProductList(category, item) {
+  function createItemProductList(category, item, group) {
     const list = createElement("ul", "tools-family-products");
 
     item.products.forEach((product) => {
@@ -232,7 +236,7 @@
 
       const quote = document.createElement("a");
       quote.className = "tools-family-products__quote";
-      quote.href = contactHref(category, product);
+      quote.href = contactHref(category, product, group);
       quote.textContent = "Yêu cầu báo giá";
       actions.appendChild(quote);
 
@@ -243,7 +247,7 @@
     return list;
   }
 
-  function createToolItemCard(category, item, index) {
+  function createToolItemCard(category, item, index, group) {
     const article = createElement("article", `tools-item-card tools-item-card--${item.type}`);
     const contentId = item.type === "family" ? `tools-item-family-${item.id}` : "";
 
@@ -280,7 +284,7 @@
 
       const quote = document.createElement("a");
       quote.className = "tools-item-card__quote";
-      quote.href = contactHref(category, item);
+      quote.href = contactHref(category, item, group);
       quote.textContent = "Yêu cầu báo giá";
       actions.appendChild(quote);
     } else {
@@ -300,7 +304,7 @@
 
       const quote = document.createElement("a");
       quote.className = "tools-item-card__quote";
-      quote.href = contactHref(category, item);
+      quote.href = contactHref(category, item, group);
       quote.textContent = "Tư vấn lựa chọn";
 
       actions.append(toggle, quote);
@@ -313,12 +317,86 @@
       const details = createElement("div", "tools-item-card__details");
       details.id = contentId;
       details.hidden = true;
-      details.appendChild(createItemProductList(category, item));
+      details.appendChild(createItemProductList(category, item, group));
       article.appendChild(details);
     }
 
     article.style.setProperty("--item-index", String(index));
     return article;
+  }
+
+  function createSpecialtyGroupNav(category, activeGroup) {
+    const nav = createElement("div", "tools-specialty-nav");
+    nav.setAttribute("role", "tablist");
+    nav.setAttribute("aria-label", "Nhóm ứng dụng dụng cụ chuyên dụng ô tô");
+
+    category.groups.forEach((group) => {
+      const button = document.createElement("button");
+      const isActive = group.id === activeGroup.id;
+      button.type = "button";
+      button.className = "tools-specialty-nav__button";
+      button.dataset.specialtyGroup = group.id;
+      button.setAttribute("role", "tab");
+      button.setAttribute("aria-selected", String(isActive));
+      button.setAttribute("aria-controls", "tools-specialty-group-panel");
+      button.textContent = group.name;
+      nav.appendChild(button);
+    });
+
+    return nav;
+  }
+
+  function renderSpecialtyPreview(category) {
+    if (!preview) return;
+
+    const activeGroupId = specialtyGroupState.get(category.id) || category.groups[0]?.id;
+    const activeGroup =
+      category.groups.find((group) => group.id === activeGroupId) || category.groups[0];
+    if (!activeGroup) {
+      renderFallbackPreview(category);
+      return;
+    }
+
+    preview.className = "tools-preview tools-preview--specialty";
+    preview.dataset.toolsPreviewCategory = category.id;
+    preview.setAttribute("aria-labelledby", "tools-preview-title");
+
+    const head = createElement("div", "tools-family-panel__head");
+    const title = createElement("h3", null, category.name);
+    title.id = "tools-preview-title";
+    const description = createElement("p", null, category.description);
+    head.append(title, description);
+
+    const nav = createSpecialtyGroupNav(category, activeGroup);
+
+    const panel = createElement("div", "tools-specialty-panel");
+    panel.id = "tools-specialty-group-panel";
+    panel.setAttribute("role", "tabpanel");
+
+    const groupHeader = createElement("div", "tools-specialty-panel__head");
+    const groupMedia = createElement("figure", "tools-specialty-panel__media");
+    const image = document.createElement("img");
+    image.src = activeGroup.image;
+    image.alt = activeGroup.imageAlt;
+    image.width = 960;
+    image.height = 640;
+    image.loading = "lazy";
+    groupMedia.appendChild(image);
+
+    const groupCopy = createElement("div", "tools-specialty-panel__copy");
+    groupCopy.append(
+      createElement("h4", null, activeGroup.name),
+      createElement("p", null, activeGroup.description)
+    );
+    groupHeader.append(groupMedia, groupCopy);
+
+    const itemGrid = createElement("div", "tools-item-grid tools-item-grid--specialty");
+    activeGroup.items.forEach((item, index) => {
+      itemGrid.appendChild(createToolItemCard(category, item, index, activeGroup));
+    });
+
+    panel.append(groupHeader, itemGrid);
+    preview.replaceChildren(head, nav, panel);
   }
 
   function renderItemPreview(category) {
@@ -400,7 +478,9 @@
       }
     });
 
-    if (activeCategory.items?.length) {
+    if (activeCategory.groups?.length) {
+      renderSpecialtyPreview(activeCategory);
+    } else if (activeCategory.items?.length) {
       renderItemPreview(activeCategory);
     } else if (activeCategory.families?.length) {
       renderFamilyPreview(activeCategory);
@@ -442,6 +522,18 @@
 
   if (preview) {
     preview.addEventListener("click", (event) => {
+      const groupButton = event.target.closest("[data-specialty-group]");
+      if (groupButton) {
+        const category = categories.find(
+          (item) => item.id === preview.dataset.toolsPreviewCategory
+        );
+        if (!category) return;
+
+        specialtyGroupState.set(category.id, groupButton.dataset.specialtyGroup);
+        renderSpecialtyPreview(category);
+        return;
+      }
+
       const toggle = event.target.closest("[data-family-toggle], [data-tool-family-toggle]");
       if (!toggle) return;
 

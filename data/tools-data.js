@@ -1632,7 +1632,7 @@ Bộ cờ lê bánh cóc 4 trong 1 trong túi||600203|2-pcs|Cờ lê X-ring 4 tr
           features: [
             "Cấu hình cho kỹ thuật viên cần dụng cụ cách điện VDE.",
             "Vali đỏ giúp nhận diện nhanh và bảo vệ dụng cụ khi di chuyển.",
-            "Bao gồm nhóm khẩu, tua vít, kìm và phụ kiện bảo vệ đã được catalog xác minh."
+            "Bao gồm nhóm khẩu, tua vít, kìm và phụ kiện bảo vệ đã được xác minh."
           ],
           includedItems: [
             "Bộ khẩu VDE 3/8”: 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22 mm",
@@ -1717,7 +1717,7 @@ Bộ cờ lê bánh cóc 4 trong 1 trong túi||600203|2-pcs|Cờ lê X-ring 4 tr
           },
           features: [
             "Thiết kế nhỏ gọn cho thao tác cầm tay.",
-            "Bộ bit đi kèm đã được catalog xác minh.",
+            "Bộ bit đi kèm đã được xác minh.",
             "Phù hợp công việc lắp ráp nhẹ và bảo dưỡng nhanh."
           ],
           includedItems: [
@@ -1844,7 +1844,7 @@ Bộ cờ lê bánh cóc 4 trong 1 trong túi||600203|2-pcs|Cờ lê X-ring 4 tr
             "Tình trạng": "Kèm dụng cụ"
           },
           features: [
-            "Cấu hình kèm dụng cụ được catalog xác minh.",
+            "Cấu hình kèm dụng cụ đã được xác minh.",
             "Dạng hộp có nắp giúp bảo vệ dụng cụ khi di chuyển.",
             "Phù hợp gara, xe dịch vụ hoặc khu vực làm việc tạm thời."
           ],
@@ -1874,7 +1874,7 @@ Bộ cờ lê bánh cóc 4 trong 1 trong túi||600203|2-pcs|Cờ lê X-ring 4 tr
           },
           features: [
             "Dạng hộp xách tay dễ mang theo.",
-            "Kèm bộ dụng cụ 62 chi tiết đã được catalog xác minh.",
+            "Kèm bộ dụng cụ 62 chi tiết đã được xác minh.",
             "Phù hợp kỹ thuật viên cần bộ dụng cụ cơ bản tại hiện trường."
           ],
           includedItems: [
@@ -1956,14 +1956,910 @@ Bộ cờ lê bánh cóc 4 trong 1 trong túi||600203|2-pcs|Cờ lê X-ring 4 tr
       id: "automotive-specialty",
       name: "Dụng cụ chuyên dụng ô tô",
       description:
-        "Dụng cụ phục vụ tháo lắp, kiểm tra và bảo dưỡng ô tô theo từng ứng dụng.",
-      scope: ["Tháo lắp", "Kiểm tra", "Bảo dưỡng ô tô"],
+        "Dụng cụ chuyên dụng được nhóm theo công việc sửa chữa thực tế trong gara.",
+      scope: ["Tháo lắp", "Phanh", "Động cơ", "Đo kiểm"],
       image: "assets/products/tools/categories/automotive-specialty-tools.jpg",
       imageAlt: "Bộ dụng cụ tách vòng bi chuyên dụng cho ô tô",
       sourcePages: [108, 109, 110, 111, 112],
       sourceImage: "page110_img03.png",
       sharedUsage: "category-card-and-preview",
       enabled: true,
+      groups: [
+        {
+          id: "interior-body-removal",
+          name: "Tháo lắp nội thất và chi tiết thân xe",
+          description:
+            "Bộ tháo nẹp, thanh nạy, móc, dao cạo và dụng cụ hỗ trợ tháo lắp chi tiết trang trí, gioăng hoặc cụm nhỏ trên thân xe.",
+          image: "assets/products/tools/specialty/interior-body-removal.jpg",
+          imageAlt: "Bộ dụng cụ tháo nội thất và nạy chi tiết thân xe Sonic",
+          sourcePages: [108, 111],
+          sourceImage: "page108_img18.png",
+          items: [
+            {
+              sku: "821001",
+              type: "product",
+              categoryId: "automotive-specialty",
+              name: "Bộ tháo nội thất master 27 chi tiết",
+              description:
+                "Bộ nạy nhựa chuyên dụng cho thao tác tháo nẹp, gioăng, tap-lô, ốp cửa và chi tiết trang trí cần hạn chế trầy xước.",
+              image: "assets/products/tools/specialty/interior-body-removal.jpg",
+              imageAlt: "Bộ tháo nội thất master Sonic 27 chi tiết",
+              specs: {
+                "Số chi tiết": "27",
+                "Ứng dụng": "Tháo nẹp, gioăng, ốp cửa và chi tiết trang trí"
+              },
+              features: [
+                "Thiết kế cho thao tác nạy và tháo chi tiết nội thất.",
+                "Phù hợp công việc cần hạn chế làm hư hại bề mặt hoàn thiện.",
+                "Bộ nhiều đầu nạy giúp xử lý nhiều vị trí trên thân xe."
+              ],
+              includedItems: [
+                "Các dụng cụ nạy nhựa nhiều kiểu đầu",
+                "Túi lưu trữ theo bộ"
+              ],
+              sourcePages: [108],
+              sourceImage: "page108_img18.png",
+              verified: true,
+              detailEnabled: true
+            },
+            {
+              id: "trim-removal-kits",
+              type: "family",
+              name: "Bộ tháo nẹp, gioăng và chi tiết trang trí",
+              description:
+                "Các bộ nạy và bộ tháo chi tiết trang trí dùng cho nẹp, gioăng, tap-lô, ốp cửa, công tắc và nút bịt.",
+              image: "assets/products/tools/specialty/interior-body-removal.jpg",
+              imageAlt: "Các dụng cụ tháo nẹp và chi tiết trang trí Sonic",
+              sharedImage: true,
+              sourcePages: [108],
+              sourceImage: "page108_img16.png",
+              products: [
+                {
+                  sku: "819011",
+                  name: "Bộ tháo lắp 16 chi tiết",
+                  details: "Dùng để tháo chi tiết trim, O-ring, gioăng, cạo và nạy."
+                },
+                {
+                  sku: "803004",
+                  name: "Bộ nạy tháo 11 chi tiết",
+                  details: "Bộ nạy cho chi tiết trang trí và gioăng."
+                },
+                {
+                  sku: "803005",
+                  name: "Bộ nạy tháo 5 chi tiết",
+                  details: "Dùng cho nẹp trang trí, gioăng cao su, tap-lô, ốp cửa, công tắc và nút bịt."
+                },
+                {
+                  sku: "600506",
+                  name: "Bộ nêm tháo lắp 5 chi tiết",
+                  details: "Bộ nêm hỗ trợ tháo lắp chi tiết nhạy cảm."
+                }
+              ]
+            },
+            {
+              id: "pry-bars",
+              type: "family",
+              name: "Thanh nạy và thanh cạy chuyên dụng",
+              description:
+                "Các thanh nạy thẳng, cong, tay dài hoặc có đầu linh hoạt cho thao tác tháo lắp cần lực.",
+              image: "assets/products/tools/specialty/interior-body-removal.jpg",
+              imageAlt: "Thanh nạy và bộ thanh nạy Sonic",
+              sharedImage: true,
+              sourcePages: [108],
+              sourceImage: "page108_img13.png",
+              products: [
+                {
+                  sku: "600436",
+                  name: "Bộ thanh nạy tải nặng 4 chi tiết",
+                  details: "Gồm thanh nạy thẳng 890 mm, 45° 890 mm, 75° 635 mm và 90° 635 mm."
+                },
+                {
+                  sku: "600403",
+                  name: "Bộ thanh nạy 4 chi tiết",
+                  details: "Gồm thanh nạy cong 8”, 12”, 18” và thanh nạy dài 24”."
+                },
+                {
+                  sku: "805003",
+                  name: "Bộ thanh nạy bánh cóc 3 chi tiết",
+                  details: "Đầu linh hoạt khóa được 8 vị trí, dùng cho vòng bi, puly, phớt, moay-ơ bánh xe và khe hẹp."
+                },
+                {
+                  sku: "48212380",
+                  name: "Thanh nạy 380 mm",
+                  details: "Thanh nạy dài 380 mm."
+                },
+                {
+                  sku: "48212530",
+                  name: "Thanh nạy 530 mm",
+                  details: "Thanh nạy dài 530 mm."
+                },
+                {
+                  sku: "48212650",
+                  name: "Thanh nạy 650 mm",
+                  details: "Thanh nạy dài 650 mm."
+                },
+                {
+                  sku: "48222500",
+                  name: "Thanh nạy bọc nhựa 500 mm",
+                  details: "Thanh nạy 500 mm có lớp bọc nhựa."
+                }
+              ]
+            },
+            {
+              id: "hooks-scrapers-adaptors",
+              type: "family",
+              name: "Móc, dao cạo và phụ kiện tháo lắp",
+              description:
+                "Dụng cụ hỗ trợ tháo lắp lò xo, gioăng, tem dán, miếng đệm và phụ kiện dùng với máy khoan.",
+              image: "assets/products/tools/specialty/interior-body-removal.jpg",
+              imageAlt: "Móc, dao cạo và đầu chuyển Sonic",
+              sharedImage: true,
+              sourcePages: [108, 111],
+              sourceImage: "page108_img03.png",
+              products: [
+                {
+                  sku: "47816",
+                  name: "Móc tháo lắp",
+                  details: "Dùng tháo/lắp lò xo phanh, đèn pha, giảm thanh xe máy và nhiều chi tiết nhỏ."
+                },
+                {
+                  sku: "600320",
+                  name: "Bộ dao cạo 3 chi tiết",
+                  details: "Tay cầm nhựa; gồm dao cạo cong, dao cạo gioăng và dao cạo tem dán."
+                },
+                {
+                  sku: "600437",
+                  name: "Bộ móc 4 chi tiết",
+                  details: "Bộ móc thao tác chi tiết nhỏ."
+                },
+                {
+                  sku: "100301",
+                  name: "Bộ đầu chuyển cho máy khoan 1/4” 3 chi tiết",
+                  details: "Đầu vuông 1/4”, 3/8”, 1/2” và đầu lục giác 1/4” dùng với đầu kẹp máy khoan."
+                },
+                {
+                  sku: "812001",
+                  name: "Bộ tháo cần gạt mưa",
+                  details: "Bộ tháo cần gạt mưa trên thân xe."
+                }
+              ]
+            },
+            {
+              id: "ball-joint-separators",
+              type: "family",
+              name: "Dụng cụ tháo khớp cầu",
+              description:
+                "Dụng cụ tách khớp cầu dạng càng, chọn theo cỡ ngàm.",
+              image: "assets/products/tools/specialty/interior-body-removal.jpg",
+              imageAlt: "Dụng cụ tháo khớp cầu Sonic",
+              sharedImage: true,
+              sourcePages: [108],
+              sourceImage: "page108_img05.png",
+              products: [
+                {
+                  sku: "47403",
+                  name: "Dụng cụ tháo khớp cầu ngàm 22 mm",
+                  details: "Cỡ ngàm 22 mm."
+                },
+                {
+                  sku: "47401",
+                  name: "Dụng cụ tháo khớp cầu ngàm 20 mm",
+                  details: "Cỡ ngàm 20 mm."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: "oil-filter-lines",
+          name: "Dầu, lọc dầu và đường ống",
+          description:
+            "Dụng cụ tháo lọc dầu, mở ốc xả dầu, hứng dầu và kẹp/bịt đường ống khi bảo dưỡng chất lỏng.",
+          image: "assets/products/tools/specialty/oil-filter-lines.jpg",
+          imageAlt: "Bộ dụng cụ tháo lọc dầu và xả dầu Sonic",
+          sourcePages: [108, 109, 112],
+          sourceImage: "page109_img09.png",
+          items: [
+            {
+              sku: "811002",
+              type: "product",
+              categoryId: "automotive-specialty",
+              name: "Bộ cốc lọc dầu 30 chi tiết",
+              description:
+                "Bộ cốc lọc dầu dùng cho đầu vuông 3/8” và 1/2”, phù hợp gara cần nhiều cỡ cốc lọc dầu trong một bộ.",
+              image: "assets/products/tools/specialty/oil-filter-lines.jpg",
+              imageAlt: "Bộ cốc lọc dầu Sonic 30 chi tiết",
+              specs: {
+                "Số chi tiết": "30",
+                "Đầu vuông": "3/8” và 1/2”",
+                "Ứng dụng": "Tháo lắp cốc lọc dầu"
+              },
+              features: [
+                "Bộ nhiều cỡ cốc lọc dầu trong một hộp.",
+                "Dùng được với đầu vuông 3/8” và 1/2”.",
+                "Phù hợp bảo dưỡng nhanh trong gara."
+              ],
+              includedItems: [
+                "Các cốc lọc dầu nhiều cỡ",
+                "Phụ kiện dùng với đầu vuông 3/8” và 1/2”"
+              ],
+              sourcePages: [109],
+              sourceImage: "page109_img18.png",
+              verified: true,
+              detailEnabled: true
+            },
+            {
+              id: "oil-filter-and-drain",
+              type: "family",
+              name: "Dụng cụ tháo lọc dầu và ốc xả dầu",
+              description:
+                "Các bộ tháo lọc dầu, dây xích lọc dầu, cốc lọc dầu và bộ đầu mở ốc xả dầu.",
+              image: "assets/products/tools/specialty/oil-filter-lines.jpg",
+              imageAlt: "Dụng cụ tháo lọc dầu Sonic",
+              sharedImage: true,
+              sourcePages: [109],
+              sourceImage: "page109_img09.png",
+              products: [
+                {
+                  sku: "812008",
+                  name: "Dụng cụ dây xích tháo lọc dầu",
+                  details: "Dụng cụ tháo lọc dầu dạng dây xích có khớp."
+                },
+                {
+                  sku: "302001",
+                  name: "Bộ xả dầu 1/2” 20 chi tiết",
+                  details: "Bộ 20 chi tiết, kèm dây đai kim loại tháo lọc dầu Ø60–120 mm."
+                },
+                {
+                  sku: "4830801",
+                  name: "Dụng cụ tháo lọc dầu 3 chấu 63–102 mm",
+                  details: "Dải kẹp 63–102 mm."
+                },
+                {
+                  sku: "802214",
+                  name: "Bộ đầu mở ốc xả dầu 3/8” 14 chi tiết",
+                  details: "Bộ đầu mở ốc xả dầu dùng đầu vuông 3/8”."
+                },
+                {
+                  sku: "803003",
+                  name: "Bộ cốc lọc dầu 15 chi tiết",
+                  details: "Dùng với đầu vuông 3/8” và 1/2”."
+                },
+                {
+                  sku: "4830802",
+                  name: "Dụng cụ tháo lọc dầu 3 chấu 65–120 mm",
+                  details: "Dải kẹp 65–120 mm."
+                }
+              ]
+            },
+            {
+              id: "fluid-handling",
+              type: "family",
+              name: "Kẹp đường ống, khay hứng và bơm chất lỏng",
+              description:
+                "Dụng cụ kiểm soát dòng dầu/chất lỏng trong đường ống và thao tác bơm/hút chất lỏng khi bảo dưỡng.",
+              image: "assets/products/tools/specialty/oil-filter-lines.jpg",
+              imageAlt: "Dụng cụ kẹp đường ống và xử lý chất lỏng Sonic",
+              sharedImage: true,
+              sourcePages: [108, 109, 112],
+              sourceImage: "page109_img21.png",
+              products: [
+                {
+                  sku: "48112",
+                  name: "Khay hứng dầu tải nặng 15.9 lít",
+                  details: "Khay hứng dầu dung tích 15.9 lít."
+                },
+                {
+                  sku: "820023",
+                  name: "Bộ kẹp đường ống 8 chi tiết",
+                  details: "Dừng dòng dầu hoặc chất lỏng trong ống khi bảo dưỡng mà không làm hư vật liệu ống."
+                },
+                {
+                  sku: "820024",
+                  name: "Bộ bịt đường ống chất lỏng 4 chi tiết",
+                  details: "Bịt nhanh đường ống mở khi bảo dưỡng, hạn chế rò rỉ và nhiễm bẩn."
+                },
+                {
+                  sku: "600308",
+                  name: "Bộ kẹp ống 3 chi tiết",
+                  details: "Bộ kẹp đường ống."
+                },
+                {
+                  sku: "820019",
+                  name: "Bơm hút/đẩy đa dụng 500 ml",
+                  details: "Xi lanh đa dụng dung tích 500 ml."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: "brake-service",
+          name: "Hệ thống phanh",
+          description:
+            "Dụng cụ ép piston, bảo dưỡng cùm phanh, đầu chuyển phanh, xử lý ống phanh và kiểm tra dầu phanh.",
+          image: "assets/products/tools/specialty/brake-service.jpg",
+          imageAlt: "Bộ bảo dưỡng cùm phanh Sonic",
+          sourcePages: [109, 110, 111, 112],
+          sourceImage: "page109_img16.png",
+          items: [
+            {
+              sku: "801018",
+              type: "product",
+              categoryId: "automotive-specialty",
+              name: "Bộ bảo dưỡng cùm phanh 18 chi tiết",
+              description:
+                "Bộ dụng cụ bảo dưỡng cùm phanh 18 chi tiết cho thao tác ép và xoay piston phanh trong quá trình thay bố phanh.",
+              image: "assets/products/tools/specialty/brake-service.jpg",
+              imageAlt: "Bộ bảo dưỡng cùm phanh Sonic 18 chi tiết",
+              specs: {
+                "Số chi tiết": "18",
+                "Ứng dụng": "Bảo dưỡng cùm phanh"
+              },
+              features: [
+                "Dùng cho thao tác đưa piston phanh về vị trí lắp bố mới.",
+                "Bộ đầu chuyển giúp xử lý nhiều cấu hình cùm phanh.",
+                "Phù hợp khu vực dịch vụ phanh trong gara."
+              ],
+              includedItems: [
+                "Cụm dụng cụ ép/xoay piston",
+                "Các đầu chuyển theo bộ"
+              ],
+              sourcePages: [109],
+              sourceImage: "page109_img07.png",
+              verified: true,
+              detailEnabled: true
+            },
+            {
+              id: "brake-caliper-tools",
+              type: "family",
+              name: "Bộ ép piston và bảo dưỡng cùm phanh",
+              description:
+                "Các bộ cùm phanh nhiều chi tiết, cube xoay piston và bộ khí nén cho thao tác phanh.",
+              image: "assets/products/tools/specialty/brake-service.jpg",
+              imageAlt: "Bộ ép piston và đầu chuyển cùm phanh Sonic",
+              sharedImage: true,
+              sourcePages: [109],
+              sourceImage: "page109_img16.png",
+              products: [
+                {
+                  sku: "805002",
+                  name: "Bộ cùm phanh 27 chi tiết",
+                  details: "Gồm 2 dụng cụ xoay piston ren trái/phải, 22 đầu chuyển và 2 calliper."
+                },
+                {
+                  sku: "812006",
+                  name: "Cube xoay piston phanh",
+                  details: "Dùng phổ thông để xoay piston phanh trên cùm phanh có phanh tay."
+                },
+                {
+                  sku: "801016",
+                  name: "Bộ bảo dưỡng cùm phanh khí nén 16 chi tiết",
+                  details: "Bộ bảo dưỡng cùm phanh dùng khí nén."
+                },
+                {
+                  sku: "809007",
+                  name: "Bộ cùm phanh 40 chi tiết",
+                  details: "Bộ dụng cụ cùm phanh 40 chi tiết."
+                },
+                {
+                  sku: "829001",
+                  name: "Bộ đầu chuyển phanh 3 chi tiết",
+                  details: "Đầu chuyển phanh loại điều chỉnh được."
+                }
+              ]
+            },
+            {
+              id: "brake-test-and-clean",
+              type: "family",
+              name: "Kiểm tra và xử lý phanh",
+              description:
+                "Dụng cụ hỗ trợ xử lý ống phanh, xả gió phanh và kiểm tra chất lượng dầu phanh.",
+              image: "assets/products/tools/specialty/brake-service.jpg",
+              imageAlt: "Dụng cụ kiểm tra và bảo dưỡng phanh Sonic",
+              sharedImage: true,
+              sourcePages: [110, 111, 112],
+              sourceImage: "page111_img18.png",
+              products: [
+                {
+                  sku: "829005",
+                  name: "Dụng cụ xử lý ăn mòn ống phanh",
+                  details: "Dụng cụ chuyên dùng cho ống phanh."
+                },
+                {
+                  sku: "829113",
+                  name: "Bộ cờ lê xả gió phanh 6 cạnh 6 chi tiết",
+                  details: "Bộ cờ lê xả gió phanh 6 cạnh."
+                },
+                {
+                  sku: "47023",
+                  name: "Bút kiểm tra dầu phanh",
+                  details: "Kiểm tra hàm lượng nước trong dầu phanh DOT-3, DOT-4, DOT-5.1; IP44, dài 150 mm."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: "engine-injector-pulley-bearing",
+          name: "Động cơ, kim phun, puly và vòng bi",
+          description:
+            "Dụng cụ tháo kim phun, vệ sinh đế kim phun, puly máy phát, cảo, vòng bi, khớp trục và căn chỉnh ly hợp.",
+          image: "assets/products/tools/specialty/engine-injector-bearing.jpg",
+          imageAlt: "Bộ tháo kim phun và dụng cụ động cơ Sonic",
+          sourcePages: [108, 109, 110, 111],
+          sourceImage: "page111_img11.png",
+          items: [
+            {
+              sku: "805012",
+              type: "product",
+              categoryId: "automotive-specialty",
+              name: "Bộ tháo lắp kim phun",
+              description:
+                "Bộ dụng cụ chuyên nghiệp cho tháo và lắp kim phun, van phun và cụm bơm-vòi phun.",
+              image: "assets/products/tools/specialty/engine-injector-bearing.jpg",
+              imageAlt: "Bộ tháo lắp kim phun Sonic",
+              specs: {
+                "Ứng dụng": "Tháo/lắp kim phun và van phun",
+                "Dạng bộ": "Bộ dụng cụ chuyên dụng"
+              },
+              features: [
+                "Dùng cho tháo lắp chuyên nghiệp kim phun hoặc van phun.",
+                "Phù hợp công việc trên hệ thống phun nhiên liệu.",
+                "Hỗ trợ thao tác với cụm bơm-vòi phun theo dữ liệu đã xác minh."
+              ],
+              includedItems: [
+                "Cảo trượt và phụ kiện tháo kim phun",
+                "Các đầu/adapter theo bộ"
+              ],
+              sourcePages: [111],
+              sourceImage: "page111_img11.png",
+              verified: true,
+              detailEnabled: true
+            },
+            {
+              id: "pulley-and-sensor-tools",
+              type: "family",
+              name: "Dụng cụ puly, máy phát và cảm biến oxy",
+              description:
+                "Bộ tháo puly máy phát, puly giảm chấn, cờ lê puly và dụng cụ cảm biến oxy.",
+              image: "assets/products/tools/specialty/engine-injector-bearing.jpg",
+              imageAlt: "Dụng cụ puly và động cơ Sonic",
+              sharedImage: true,
+              sourcePages: [109, 110, 111],
+              sourceImage: "page111_img03.png",
+              products: [
+                {
+                  sku: "818007",
+                  name: "Bộ puly máy phát 18 chi tiết",
+                  details: "Dùng lắp puly đai tự do."
+                },
+                {
+                  sku: "806001",
+                  name: "Bộ dụng cụ máy phát 13 chi tiết",
+                  details: "Dùng lắp puly đai tự do."
+                },
+                {
+                  sku: "805015",
+                  name: "Bộ cờ lê puly 15 chi tiết",
+                  details: "Cờ lê 12 cạnh 12–19 mm, E10–E18; dùng nhả bulông puly cam, tăng đai và puly phụ."
+                },
+                {
+                  sku: "812002",
+                  name: "Bộ giữ và cảo puly giảm chấn 5 chi tiết",
+                  details: "Dùng cho tăng đai hoặc puly cam/phụ; gồm cỡ 13, 15, 16, 17, 19 mm, dài 470 mm."
+                },
+                {
+                  sku: "818002",
+                  name: "Cờ lê cảm biến oxy",
+                  details: "Cờ lê 6 cạnh 22 mm đầu linh hoạt, dùng tháo/lắp cảm biến oxy bị kẹt."
+                },
+                {
+                  sku: "301302",
+                  name: "Bộ cờ lê crowfoot 1/2” 13 chi tiết",
+                  details: "Cỡ 20, 21, 22, 23, 24, 25, 26, 27, 28, 30, 32 mm; kèm tay và đầu nối dài."
+                }
+              ]
+            },
+            {
+              id: "pullers-and-bearing-tools",
+              type: "family",
+              name: "Cảo, vòng bi và khớp trục",
+              description:
+                "Cảo 2–3 chấu, búa giật, bộ tách bánh răng/vòng bi, cảo vòng bi lỗ mù và dụng cụ khớp trục.",
+              image: "assets/products/tools/specialty/engine-injector-bearing.jpg",
+              imageAlt: "Cảo và bộ dụng cụ vòng bi Sonic",
+              sharedImage: true,
+              sourcePages: [108, 109, 110, 111],
+              sourceImage: "page110_img03.png",
+              products: [
+                {
+                  sku: "4830703",
+                  name: "Cảo đảo chiều 2–3 chấu 3”",
+                  details: "Cảo 2–3 chấu cỡ 3”."
+                },
+                {
+                  sku: "4830704",
+                  name: "Cảo đảo chiều 2–3 chấu 4”",
+                  details: "Cảo 2–3 chấu cỡ 4”."
+                },
+                {
+                  sku: "4830706",
+                  name: "Cảo đảo chiều 2–3 chấu 6”",
+                  details: "Cảo 2–3 chấu cỡ 6”."
+                },
+                {
+                  sku: "808001",
+                  name: "Bộ cảo búa giật",
+                  details: "Bộ búa giật dùng cho thao tác kéo/tháo."
+                },
+                {
+                  sku: "816001",
+                  name: "Bộ tách bánh răng và vòng bi",
+                  details: "Hai bộ dụng cụ tách bánh răng và vòng bi."
+                },
+                {
+                  sku: "818021",
+                  name: "Bộ cảo vòng bi lỗ mù 16 chi tiết",
+                  details: "Bộ cảo vòng bi lỗ mù 16 chi tiết."
+                },
+                {
+                  sku: "820006",
+                  name: "Bộ dụng cụ khớp trục 30–45 mm",
+                  details: "Dải làm việc 30–45 mm."
+                }
+              ]
+            },
+            {
+              id: "injector-cleaning-clutch",
+              type: "family",
+              name: "Vệ sinh kim phun, căn ly hợp và phụ trợ truyền động",
+              description:
+                "Bộ vệ sinh đế kim phun, bàn chải làm sạch, căn chỉnh ly hợp và dụng cụ kẹp chụp bụi láp.",
+              image: "assets/products/tools/specialty/engine-injector-bearing.jpg",
+              imageAlt: "Bộ vệ sinh kim phun và căn chỉnh ly hợp Sonic",
+              sharedImage: true,
+              sourcePages: [108, 109, 110, 111],
+              sourceImage: "page110_img09.png",
+              products: [
+                {
+                  sku: "829002",
+                  name: "Bộ vệ sinh đế kim phun diesel 14 chi tiết",
+                  details: "Bộ vệ sinh đế kim phun diesel 14 chi tiết."
+                },
+                {
+                  sku: "820007",
+                  name: "Bộ bàn chải làm sạch 38 chi tiết",
+                  details: "Bộ bàn chải làm sạch 38 chi tiết."
+                },
+                {
+                  sku: "818008",
+                  name: "Bộ căn chỉnh ly hợp 38 chi tiết",
+                  details: "Bộ dụng cụ căn chỉnh ly hợp 38 chi tiết."
+                },
+                {
+                  sku: "818004",
+                  name: "Bộ vệ sinh đế kim phun diesel 7 chi tiết",
+                  details: "Bộ vệ sinh đế kim phun diesel 7 chi tiết."
+                },
+                {
+                  sku: "805018",
+                  name: "Dụng cụ siết đai chụp bụi láp",
+                  details: "Dụng cụ căng/siết đai chụp bụi láp CV."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: "wheel-tire-service",
+          name: "Bánh xe và lốp",
+          description:
+            "Bộ tháo ốc chống trộm, dụng cụ bánh xe, đo lốp, sửa lốp và thao tác với chì cân bằng.",
+          image: "assets/products/tools/specialty/wheel-tire-service.jpg",
+          imageAlt: "Bộ tháo ốc chống trộm bánh xe Sonic",
+          sourcePages: [110, 111, 112],
+          sourceImage: "page110_img07.png",
+          items: [
+            {
+              sku: "829004",
+              type: "product",
+              categoryId: "automotive-specialty",
+              name: "Bộ tháo ốc chống trộm bánh xe VAG 23 chi tiết",
+              description:
+                "Bộ tháo bulông khóa bánh xe phù hợp VAG, dùng khi xe không có adapter khóa bánh đi kèm khi vào gara.",
+              image: "assets/products/tools/specialty/wheel-tire-service.jpg",
+              imageAlt: "Bộ tháo ốc chống trộm bánh xe VAG Sonic 23 chi tiết",
+              specs: {
+                "Số chi tiết": "23",
+                "Phù hợp": "VAG",
+                "Adapter": "21 mm với đầu vuông 1/2”",
+                "Tham chiếu OEM": "T40073"
+              },
+              features: [
+                "Thiết kế cho tình huống thiếu adapter khóa bánh xe.",
+                "Kèm adapter 21 mm với đầu vuông 1/2”.",
+                "Phù hợp OEM T40073 theo dữ liệu đã xác minh."
+              ],
+              includedItems: [
+                "Các đầu tháo khóa bánh VAG",
+                "Adapter 21 mm đầu vuông 1/2”"
+              ],
+              sourcePages: [110],
+              sourceImage: "page110_img07.png",
+              verified: true,
+              detailEnabled: true
+            },
+            {
+              id: "wheel-lock-and-key-tools",
+              type: "family",
+              name: "Bộ khóa và đầu tháo ốc bánh xe",
+              description:
+                "Các bộ tháo ốc/bulông khóa bánh xe theo ứng dụng hãng xe đã xác minh.",
+              image: "assets/products/tools/specialty/wheel-tire-service.jpg",
+              imageAlt: "Bộ khóa ốc bánh xe Sonic",
+              sharedImage: true,
+              sourcePages: [110],
+              sourceImage: "page110_img07.png",
+              products: [
+                {
+                  sku: "829006",
+                  name: "Bộ khóa ốc bánh xe Audi 22 chi tiết",
+                  details: "Phù hợp Audi, 22 chi tiết."
+                }
+              ]
+            },
+            {
+              id: "tire-service-tools",
+              type: "family",
+              name: "Dụng cụ đo và sửa lốp",
+              description:
+                "Dụng cụ sửa lốp, đo áp suất, đo độ sâu gai lốp và tháo chì cân bằng dán.",
+              image: "assets/products/tools/specialty/wheel-tire-service.jpg",
+              imageAlt: "Dụng cụ đo và sửa lốp Sonic",
+              sharedImage: true,
+              sourcePages: [110, 111, 112],
+              sourceImage: "page111_img08.png",
+              products: [
+                {
+                  sku: "4822504",
+                  name: "Thước đo độ sâu gai lốp",
+                  details: "Dụng cụ đo độ sâu gai lốp."
+                },
+                {
+                  sku: "824002",
+                  name: "Đồng hồ đo áp suất lốp 60 psi",
+                  details: "Đồng hồ đo áp suất lốp thang 60 psi."
+                },
+                {
+                  sku: "828001",
+                  name: "Bộ sửa lốp 45 chi tiết",
+                  details: "Bộ dụng cụ sửa lốp 45 chi tiết."
+                },
+                {
+                  sku: "4474002",
+                  name: "Kìm tháo chì cân bằng dán",
+                  details: "Dùng tháo chì cân bằng dán trên mâm hợp kim, hạn chế làm hư mâm."
+                }
+              ]
+            },
+            {
+              sku: "822003",
+              type: "product",
+              categoryId: "automotive-specialty",
+              name: "Dụng cụ nong vỏ ổ bi bánh xe",
+              description:
+                "Dụng cụ nong vỏ ổ bi bánh xe dùng khi thao tác với cụm moay-ơ hoặc ổ bi bánh xe.",
+              image: "assets/products/tools/specialty/wheel-tire-service.jpg",
+              imageAlt: "Dụng cụ nong vỏ ổ bi bánh xe Sonic",
+              specs: {
+                "Ứng dụng": "Vỏ ổ bi bánh xe"
+              },
+              features: [],
+              includedItems: [],
+              sourcePages: [110],
+              sourceImage: "page110_img13.png",
+              verified: true,
+              detailEnabled: false
+            }
+          ]
+        },
+        {
+          id: "testing-diagnostics",
+          name: "Kiểm tra, đo lường và chẩn đoán",
+          description:
+            "Bộ đo áp suất, kiểm tra độ nén, mạch điện, common rail, chân không, khúc xạ kế và chất lỏng.",
+          image: "assets/products/tools/specialty/testing-diagnostics.jpg",
+          imageAlt: "Bộ kiểm tra mạch điện Sonic 92 chi tiết",
+          sourcePages: [110, 111],
+          sourceImage: "page111_img13.png",
+          items: [
+            {
+              sku: "818023",
+              type: "product",
+              categoryId: "automotive-specialty",
+              name: "Bộ kiểm tra mạch điện 92 chi tiết",
+              description:
+                "Bộ dụng cụ kiểm tra mạch điện 92 chi tiết cho thao tác chẩn đoán điện trên xe.",
+              image: "assets/products/tools/specialty/testing-diagnostics.jpg",
+              imageAlt: "Bộ kiểm tra mạch điện Sonic 92 chi tiết",
+              specs: {
+                "Số chi tiết": "92",
+                "Ứng dụng": "Kiểm tra mạch điện"
+              },
+              features: [
+                "Bộ nhiều phụ kiện phục vụ kiểm tra điện trên xe.",
+                "Phù hợp nhóm công việc chẩn đoán điện trong gara.",
+                "Số chi tiết đã được xác minh."
+              ],
+              includedItems: [
+                "Dây đo và đầu kẹp",
+                "Các đầu dò và phụ kiện kiểm tra mạch"
+              ],
+              sourcePages: [111],
+              sourceImage: "page111_img13.png",
+              verified: true,
+              detailEnabled: true
+            },
+            {
+              sku: "818010",
+              type: "product",
+              categoryId: "automotive-specialty",
+              name: "Bộ kiểm tra độ nén master 37 chi tiết",
+              description:
+                "Bộ kiểm tra độ nén master 37 chi tiết cho nhóm công việc đo kiểm động cơ.",
+              image: "assets/products/tools/specialty/testing-diagnostics.jpg",
+              imageAlt: "Bộ kiểm tra độ nén master Sonic 37 chi tiết",
+              specs: {
+                "Số chi tiết": "37",
+                "Ứng dụng": "Kiểm tra độ nén động cơ"
+              },
+              features: [
+                "Bộ đo kiểm độ nén nhiều chi tiết.",
+                "Phù hợp chẩn đoán tình trạng động cơ.",
+                "Số chi tiết đã được xác minh."
+              ],
+              includedItems: [],
+              sourcePages: [110],
+              sourceImage: "page110_img04.png",
+              verified: true,
+              detailEnabled: true
+            },
+            {
+              id: "pressure-fluid-diagnostic-tools",
+              type: "family",
+              name: "Bộ đo áp suất, chất lỏng và chẩn đoán phụ trợ",
+              description:
+                "Các bộ kiểm tra áp suất, độ nén, common rail, chân không, nhiên liệu, điều hòa và khúc xạ kế.",
+              image: "assets/products/tools/specialty/testing-diagnostics.jpg",
+              imageAlt: "Bộ dụng cụ đo kiểm và chẩn đoán Sonic",
+              sharedImage: true,
+              sourcePages: [110, 111],
+              sourceImage: "page111_img06.png",
+              products: [
+                {
+                  sku: "818014",
+                  name: "Bộ kiểm tra áp suất két nước 18 chi tiết",
+                  details: "Bộ kiểm tra áp suất két nước 18 chi tiết."
+                },
+                {
+                  sku: "818011",
+                  name: "Bộ kiểm tra áp suất dầu 14 chi tiết",
+                  details: "Bộ kiểm tra áp suất dầu 14 chi tiết."
+                },
+                {
+                  sku: "818015",
+                  name: "Bộ kiểm tra độ nén động cơ xăng 8 chi tiết",
+                  details: "Bộ kiểm tra độ nén động cơ xăng 8 chi tiết."
+                },
+                {
+                  sku: "818009",
+                  name: "Bộ đo lưu lượng common rail cho 8 xy-lanh",
+                  details: "Bộ đo lưu lượng common rail cho 8 xy-lanh."
+                },
+                {
+                  sku: "818025",
+                  name: "Bộ dụng cụ nhiên liệu và điều hòa 22 chi tiết",
+                  details: "Bộ dụng cụ nhiên liệu và điều hòa 22 chi tiết."
+                },
+                {
+                  sku: "826001",
+                  name: "Bộ bơm chân không",
+                  details: "Bộ bơm chân không."
+                },
+                {
+                  sku: "822001",
+                  name: "Khúc xạ kế AdBlue",
+                  details: "Dùng kiểm tra tỷ lệ pha AdBlue, phụ gia rửa kính gốc alcohol và ethanol."
+                },
+                {
+                  sku: "822002",
+                  name: "Khúc xạ kế",
+                  details: "Dùng kiểm tra nồng độ dung dịch chống đông và axit ắc quy."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: "electrical-crimp-rivet",
+          name: "Điện, bấm cos và tán rive",
+          description:
+            "Bộ kìm bấm cos đầu thay thế, kìm tán rive, kìm tán đai ốc và dụng cụ xử lý đầu nối.",
+          image: "assets/products/tools/specialty/electrical-crimp-rivet.jpg",
+          imageAlt: "Bộ kìm bấm cos và tán rive Sonic",
+          sourcePages: [112],
+          sourceImage: "page112_img05.png",
+          items: [
+            {
+              sku: "813002",
+              type: "product",
+              categoryId: "automotive-specialty",
+              name: "Bộ kìm bấm cos đầu thay thế 11 chi tiết",
+              description:
+                "Bộ kìm bấm cos có cơ cấu bánh cóc, kèm 10 đầu bấm thay thế cho nhiều chuẩn đầu nối.",
+              image: "assets/products/tools/specialty/electrical-crimp-rivet.jpg",
+              imageAlt: "Bộ kìm bấm cos Sonic 11 chi tiết",
+              specs: {
+                "Số chi tiết": "11",
+                "Cơ cấu": "Bánh cóc",
+                "Đầu bấm": "10 đầu thay thế"
+              },
+              features: [
+                "Kìm bấm cos có cơ cấu bánh cóc.",
+                "Hàm điều chỉnh và đầu bấm thay thế.",
+                "Phù hợp nhiều loại terminal theo dữ liệu đã xác minh."
+              ],
+              includedItems: [
+                "Đầu cos cách điện DIN 0.5–6 mm²",
+                "Đầu cos không cách điện DIN 1.5–10 mm²",
+                "Open barrel terminal DIN 0.5–4.0 mm²",
+                "Cord-end terminal DIN 0.5–6 mm²",
+                "Open barrel terminal & D-SUB V3.5",
+                "Cable connector BNC, 4P4C, 6P6C, 8P8C"
+              ],
+              sourcePages: [112],
+              sourceImage: "page112_img05.png",
+              verified: true,
+              detailEnabled: true
+            },
+            {
+              id: "crimp-rivet-tools",
+              type: "family",
+              name: "Kìm bấm cos và kìm tán",
+              description:
+                "Các bộ bấm cos nhỏ hơn và kìm tán rive/đai ốc theo dải khả năng đã xác minh.",
+              image: "assets/products/tools/specialty/electrical-crimp-rivet.jpg",
+              imageAlt: "Kìm bấm cos và kìm tán Sonic",
+              sharedImage: true,
+              sourcePages: [112],
+              sourceImage: "page112_img09.png",
+              products: [
+                {
+                  sku: "813001",
+                  name: "Bộ kìm bấm cos đầu thay thế 6 chi tiết",
+                  details: "Dùng cho đầu cos cách điện DIN 0.5–6 mm², không cách điện DIN 1.5–10 mm² và open barrel terminal DIN 0.5–4.0 mm²."
+                },
+                {
+                  sku: "4411001",
+                  name: "Kìm tán đai ốc",
+                  details: "Khả năng M6 thép, M5 inox; kèm đai ốc thép M3, M4, M5, M6."
+                },
+                {
+                  sku: "4411002",
+                  name: "Kìm tán rive đai ốc",
+                  details: "Khả năng rive nhôm Ø6.4 mm, rive thép Ø6 mm; kèm 5 đầu 2.4, 3.2, 4.0, 4.8, 6.4 mm."
+                },
+                {
+                  sku: "4411003",
+                  name: "Kìm tán rive",
+                  details: "Khả năng nhôm Ø5 mm, thép Ø4 mm; kèm 4 đầu 2.4, 3.2, 4.0, 4.8 mm."
+                }
+              ]
+            }
+          ]
+        }
+      ],
       families: [],
       featuredProducts: []
     }
