@@ -156,9 +156,9 @@ assets/
 | EVA Foam | eva-foam.html | ✅ HOÀN CHỈNH |
 | Navigation dropdown | tất cả trang | ✅ HOÀN CHỈNH |
 | Header đồng bộ | tất cả trang | ✅ HOÀN CHỈNH |
-| MSS+ | mss-product.html | 🔄 Codex đang làm |
-| NEXT MSS | next-mss.html | 🔄 Codex đang làm |
-| Tools catalog | chưa có file | ❌ Chưa bắt đầu |
+| MSS+ | mss-product.html | ✅ HOÀN CHỈNH (Codex) |
+| NEXT MSS | next-mss.html | ✅ HOÀN CHỈNH (Codex) |
+| Dụng cụ (Tools catalog) | tools.html (tên file tạm) | 🔄 Codex gần xong |
 
 ---
 
