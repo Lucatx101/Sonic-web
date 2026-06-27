@@ -1042,7 +1042,7 @@ a { color: inherit; text-decoration: none; }
   position: relative; min-height: 75vh; display: flex; align-items: center;
   background: #16191e url("../products/eva-foam/eva-foam-hero.jpg") center / cover no-repeat;
 }
-.eva-hero::before { content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, .55); }
+.eva-hero::before { content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, 0); }
 .eva-hero__inner { position: relative; z-index: 1; padding: 96px 0; }
 .eva-hero .breadcrumb { margin-bottom: 18px; color: rgba(255, 255, 255, .72); }
 .eva-hero .breadcrumb a { color: rgba(255, 255, 255, .72); }
