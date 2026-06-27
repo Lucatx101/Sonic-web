@@ -6,6 +6,16 @@
   <title>MSS+ — Hệ lưu trữ cho xưởng hiệu suất cao | Sonic Việt Nam</title>
   <meta name="description" content="Khám phá Sonic MSS+ — hệ lưu trữ cao cấp, bền bỉ và linh hoạt dành cho gara, trung tâm dịch vụ và xưởng chuyên nghiệp." />
   <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    /* Hero MSS+ — override scoped, KHÔNG sửa styles.css (Hướng B: giữ hero cao cố định + cover) */
+    .mss-plus-page .mss-plus-hero__media img { object-fit: cover; }
+    .mss-plus-page .mss-plus-hero__actions {
+      position: absolute; left: 2.5rem; bottom: 2.5rem; z-index: 3;
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+    .mss-plus-page .mss-plus-hero__actions .btn { border: 2px solid #FFFFFF; }
+    .mss-plus-page .mss-plus-hero__actions .btn:hover { transform: none; }
+  </style>
 </head>
 <body class="mss-plus-page">
   <div class="topbar">
@@ -67,9 +77,13 @@
   <main>
     <section class="mss-plus-hero" aria-labelledby="mss-plus-title">
       <figure class="mss-plus-hero__media">
-        <img src="assets/products/mss-plus/landing/mss-plus-hero.webp" width="1327" height="960" alt="Hệ lưu trữ Sonic MSS+ hoàn chỉnh với tủ, ngăn kéo và bàn làm việc" fetchpriority="high" />
+        <img src="assets/img/mss-plus-hero.jpg" width="1920" height="1080" alt="Kỹ thuật viên kéo ngăn kéo tủ Sonic MSS đầy dụng cụ trong xưởng dịch vụ" fetchpriority="high" />
       </figure>
       <h1 id="mss-plus-title">MSS+</h1>
+      <div class="mss-plus-hero__actions">
+        <a class="btn btn--primary" href="#mss-plus-catalog">Khám phá MSS+</a>
+        <a class="btn btn--outline-light" href="contact.html">Yêu cầu tư vấn</a>
+      </div>
     </section>
 
     <section class="mss-plus-story" aria-labelledby="mss-plus-story-title">
