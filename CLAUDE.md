@@ -62,3 +62,123 @@ Website TĨNH dạng CATALOG TRƯNG BÀY cho đại lý chính hãng Sonic Equip
 - Branch website: `claude/epic-knuth-rtyfc5`. Branch dữ liệu (chỉ đọc): `catalog-temp`.
 - Workflow: `git add .` → `git commit -m "..."` → `git push` (chỉ sau khi chủ dự án duyệt).
 - Commit cập nhật CLAUDE.md TÁCH RIÊNG khỏi commit feature.
+
+## HOMEPAGE (index.html) — HOÀN CHỈNH (Chat 8)
+
+### Kiến trúc section (từ trên xuống)
+1. Utility bar (top bar): Hotline · Địa chỉ · Giờ làm việc (thẳng hàng, no wrap) · "Sonic Equipment **Vietnam**" (Vietnam = đỏ #E2231A)
+2. Header: wordmark logo PNG (`assets/img/logo-sonic.png`) + nav 4 mục + 3 icon inline SVG bên phải (Search → products.html; Facebook → facebook.com/Sonictoolsvietnam/ _blank; Instagram → instagram.com/sonic.equipment/ _blank). KHÔNG có nút "Xem sản phẩm" hay "Yêu cầu báo giá" ở header.
+3. Hero: ảnh tối full-bleed (`assets/img/home/hero.jpg`) + 2 dòng chữ IN HOA đậm nghiêng góc dưới-trái + nút pill đỏ viền trắng "Khám phá hệ MSS+" → mss-plus.html (trang landing MSS+; mss-product.html là trang chi tiết cần ?id)
+4. USP band: 3 cột (Hàng chính hãng 100% · Bảo hành chính hãng 10 năm · Giao hàng toàn quốc)
+5. Showcase A (trái): ảnh NEXT paddock → products.html
+6. Showcase B (phải): ảnh SFS → eva-foam.html
+7. Showcase C (full-width): ảnh MSS → next-mss.html
+8. Gallery "Team Sonic": 9 ảnh masonry (team-01..09.jpg), giữ tỉ lệ gốc (ảnh người, không crop mặt)
+9. Về chúng tôi + box báo giá (có thêm dòng Zalo 0843 55 55 66)
+10. CTA đỏ cuối trang
+11. Footer: "Sonic Equipment Vietnam" (chữ đậm) + "Thương hiệu dụng cụ chuyên nghiệp từ Hà Lan." (tagline xám) + cột Sản phẩm/Công ty/Liên hệ (có thêm Zalo 0843 55 55 66)
+
+### Ảnh homepage (nguồn local, KHÔNG từ PDF catalog)
+Tất cả ảnh homepage nằm trong `assets/img/home/`:
+- `hero.jpg` — ảnh cảnh MSS+ showroom tối
+- `showcase-next.jpg` — ảnh NEXT paddock/racing
+- `showcase-sfs.jpg` — ảnh S9 lifestyle
+- `showcase-mss.jpg` — ảnh MSS dãy tủ xưởng
+- `team/team-01..09.jpg` — gallery Team Sonic (9 ảnh)
+
+### Nút nổi (floating buttons)
+ĐÃ XÓA hoàn toàn 2 nút nổi Zalo (xanh) và 0888 23 23 66 (đỏ) khỏi MỌI TRANG.
+
+---
+
+## DESIGN SYSTEM (ngôn ngữ thị giác — áp từ Chat 8)
+
+### Font
+- **Heading homepage**: Be Vietnam Pro Black/ExtraBold italic, IN HOA. Self-hosted: `assets/fonts/` (woff2). Scope qua class riêng (`.hp-display`, không đổi h1/h2 global để không phá products.html / eva-foam.html).
+- **Body toàn site**: font hiện tại giữ nguyên.
+
+### Màu
+- Đỏ chính: `#E2231A`
+- Đen text: `#1C1C1C`
+- Trắng nền header: `#FFFFFF`
+
+### Nút pill đỏ
+- Hover: CHỈ đổi màu nền (đỏ đậm hơn). TUYỆT ĐỐI KHÔNG transform/translate/scale ở :hover/:active/:focus.
+- Viền trắng: chỉ áp cho nút đè lên hero (không phải mọi nút đỏ).
+
+### Ảnh landing/showcase/hero
+- `object-fit: cover` CHỈ được dùng khi: container có chiều cao CỐ ĐỊNH + ảnh đã xác nhận là CẢNH/lifestyle (không phải sản phẩm nền trắng).
+- Ảnh SẢN PHẨM NỀN TRẮNG (tủ đơn, foam...): TUYỆT ĐỐI KHÔNG cover — dùng `contain` hoặc auto height.
+- Gate bắt buộc: trước khi crop/layout ảnh mới, xác nhận loại ảnh (cảnh vs sản phẩm) + kiểm tra chữ Anh nung.
+
+### Icon header (inline SVG)
+3 icon đơn sắc đen, hover → đỏ #E2231A, kích thước nhỏ gọn. Copy từ index.html khi đồng bộ trang khác.
+
+---
+
+## PHÂN CÔNG AGENT (cập nhật từ Chat 8)
+
+| Agent | Sở hữu |
+|---|---|
+| Claude Code | index.html, products.html, product.html, eva-foam.html, contact.html |
+| Codex | mss-product.html, next-mss.html |
+
+**Quy tắc cứng**: Claude Code CHỈ ĐỌC 2 file Codex (để lấy URL/selector khi cần đồng bộ header/footer). TUYỆT ĐỐI KHÔNG sửa nội dung sản phẩm MSS trong 2 file đó.
+Khi làm việc trên phần dùng chung (header/footer/top bar): TẠM DỪNG Codex để tránh conflict.
+
+---
+
+## CẤU TRÚC FILE (bổ sung sau Chat 8)
+
+```
+assets/
+├── img/
+│   ├── logo-sonic.png          ← wordmark PNG nền trong suốt
+│   └── home/
+│       ├── hero.jpg
+│       ├── showcase-next.jpg
+│       ├── showcase-sfs.jpg
+│       ├── showcase-mss.jpg
+│       └── team/
+│           └── team-01..09.jpg
+└── fonts/
+    └── (woff2 Be Vietnam Pro Black/ExtraBold + italic)
+```
+
+---
+
+## TRẠNG THÁI MODULE (cập nhật Chat 8)
+
+| Module | File | Trạng thái |
+|---|---|---|
+| Trang chủ | index.html | ✅ HOÀN CHỈNH |
+| Tủ NEXT S7–S15 | products.html + product.html | ✅ HOÀN CHỈNH |
+| EVA Foam | eva-foam.html | ✅ HOÀN CHỈNH |
+| Navigation dropdown | tất cả trang | ✅ HOÀN CHỈNH |
+| Header đồng bộ | tất cả trang | ✅ HOÀN CHỈNH |
+| MSS+ | mss-product.html | 🔄 Codex đang làm |
+| NEXT MSS | next-mss.html | 🔄 Codex đang làm |
+| Tools catalog | chưa có file | ❌ Chưa bắt đầu |
+
+---
+
+## KINH NGHIỆM BỔ SUNG (từ Chat 8 — Homepage)
+
+### Tham chiếu thẩm mỹ
+Học từ sonic-equipment.com: chữ IN HOA đậm nghiêng, ảnh tối full-bleed tràn viền, CTA pill đỏ duy nhất, tối giản — KHÔNG card bo tròn xám kiểu SaaS.
+
+### Quy tắc viết prompt ảnh local (không từ PDF)
+- Bọc mọi đường dẫn có dấu cách trong nháy kép khi thao tác shell.
+- Gate BƯỚC 1: ls + dimension + phân loại cảnh/sản phẩm + kiểm tra chữ Anh nung → DỪNG chờ duyệt trước khi Pillow.
+- Pillow: jpg quality 90; hero ~1920w; showcase ~1200–1600w; team gallery ~900–1200w.
+
+### Quy tắc xóa section (thao tác phá hủy)
+- Gate riêng: liệt kê TỪNG section trong vùng xóa + đánh [XÓA]/[GIỮ] → DỪNG chờ duyệt.
+- KHÔNG xóa file ảnh sản phẩm (trang khác còn dùng).
+- JS/CSS dùng chung → KHÔNG sửa file đó, BÁO lại.
+
+### Quy tắc đồng bộ header toàn site
+- Site file:// → header nhúng trực tiếp trong từng HTML, không fetch/include.
+- Khi copy header: verify đường dẫn tương đối (href/src) đúng với vị trí file (root hay subdir).
+- Nav active: set đúng class active cho từng trang (products → "Sản phẩm" đỏ, contact → "Liên hệ" đỏ...).
+- Làm từng file 1 bước, có gate sau mỗi file.
