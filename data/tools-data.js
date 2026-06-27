@@ -2826,11 +2826,11 @@ Bộ cờ lê bánh cóc 4 trong 1 trong túi||600203|2-pcs|Cờ lê X-ring 4 tr
             {
               id: "crimp-rivet-tools",
               type: "family",
-              name: "Kìm bấm cos và kìm tán",
+              name: "Kìm bấm cos và kìm tán rive",
               description:
                 "Các bộ bấm cos nhỏ hơn và kìm tán rive/đai ốc theo dải khả năng đã xác minh.",
               image: "assets/products/tools/specialty/electrical-crimp-rivet.jpg",
-              imageAlt: "Kìm bấm cos và kìm tán Sonic",
+              imageAlt: "Kìm bấm cos và kìm tán rive Sonic",
               sharedImage: true,
               sourcePages: [112],
               sourceImage: "page112_img09.png",
