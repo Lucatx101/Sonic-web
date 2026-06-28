@@ -6,6 +6,17 @@
   <title>NEXT MSS — Sonic Việt Nam</title>
   <meta name="description" content="Khám phá hệ tủ, phụ kiện và bộ cấu hình NEXT MSS chính hãng Sonic dành cho xưởng chuyên nghiệp." />
   <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    /* Hero NEXT MSS — override scoped, KHÔNG sửa styles.css (ảnh thật full-width, KHÔNG crop + tắt hover transform) */
+    .mss-hero { background: none; min-height: 0; height: auto; }
+    .mss-hero__media-img { width: 100%; height: auto; display: block; }
+    .next-hero-cta {
+      position: absolute; left: 9%; bottom: 2.5rem; z-index: 2;
+      display: flex; flex-direction: row; gap: 1rem; flex-wrap: wrap;
+    }
+    .next-hero-cta .btn { border: 2px solid #FFFFFF; }
+    .next-hero-cta .btn:hover { transform: none; }
+  </style>
 </head>
 <body class="mss-page">
   <div class="topbar">
@@ -64,18 +75,11 @@
   </header>
 
   <main>
-    <section class="mss-hero" aria-labelledby="mss-landing-title">
-      <div class="container mss-hero__inner">
-        <div class="breadcrumb"><a href="index.html">Trang chủ</a> / Sản phẩm / NEXT MSS</div>
-        <h1 class="mss-hero__sr-title" id="mss-landing-title">NEXT MSS</h1>
-        <div class="mss-hero__copy">
-          <span class="mss-hero__eyebrow">Sonic · Lưu trữ chuyên nghiệp</span>
-          <p>Giải pháp lưu trữ sức chứa lớn dành cho xưởng chuyên nghiệp, giúp tổ chức dụng cụ gọn gàng và duy trì quy trình làm việc liền mạch.</p>
-          <div class="mss-hero__actions">
-            <a class="btn btn--primary" href="#mss-products">Khám phá sản phẩm</a>
-            <a class="btn btn--outline-light" href="contact.html?cfg=NEXT%20MSS">Yêu cầu tư vấn</a>
-          </div>
-        </div>
+    <section class="mss-hero">
+      <img class="mss-hero__media-img" src="assets/img/next-mss-hero.jpg" width="1780" height="1654" alt="Kỹ thuật viên kéo ngăn kéo tủ Sonic NEXT MSS trong xưởng" />
+      <div class="next-hero-cta">
+        <a class="btn btn--primary" href="#mss-products">Khám phá NEXT MSS</a>
+        <a class="btn btn--outline-light" href="contact.html">Yêu cầu tư vấn</a>
       </div>
     </section>
 
