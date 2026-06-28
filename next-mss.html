@@ -16,6 +16,14 @@
     }
     .next-hero-cta .btn { border: 2px solid #FFFFFF; }
     .next-hero-cta .btn:hover { transform: none; }
+    /* Grid 3 card (thay 3 section showcase: Hoàn thiện / NEXT MSS / Ứng dụng thực tế) */
+    .mss-cards { background: #FFFFFF; padding: 4rem 2rem; }
+    .mss-cards__grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .mss-card__img { width: 100%; height: auto; object-fit: unset; display: block; }
+    .mss-card__text { padding: 1.25rem 1.5rem; }
+    .mss-card__title { margin-top: .4rem; color: #1C1C1C; font-weight: 800; font-style: normal; font-size: 20px; line-height: 1.3; }
+    .mss-card__body { margin-top: .6rem; color: #4a4f57; font-size: 15px; line-height: 1.6; }
+    @media (max-width: 768px) { .mss-cards__grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body class="mss-page">
@@ -112,42 +120,29 @@
         </div>
       </section>
 
-      <section class="mss-module-showcase" aria-labelledby="mss-floor-title">
-        <div class="container">
-          <div class="mss-module-showcase__copy">
-            <span class="mss-overview__eyebrow">Hoàn thiện chuyên nghiệp</span>
-            <h2 id="mss-floor-title">Cân chỉnh hoàn hảo trên mặt sàn không bằng phẳng.</h2>
-            <p>Sàn xưởng hiếm khi hoàn toàn phẳng. NEXT MSS sử dụng cặp tấm ốp chân để bù chênh lệch bề mặt, giúp hệ tủ cân chỉnh gọn gàng và tạo nên diện mạo liền mạch, chuyên nghiệp.</p>
-          </div>
-          <figure class="mss-module-showcase__media">
-            <img src="assets/products/next-mss/landing/next-mss-modules.png" width="1050" height="620" alt="Các module của hệ lưu trữ NEXT MSS" loading="lazy" />
-          </figure>
-        </div>
-      </section>
-
-      <section class="mss-system-showcase" aria-labelledby="mss-system-title">
-        <div class="container">
-          <figure class="mss-system-showcase__media">
-            <img src="assets/products/next-mss/landing/next-mss-complete-system.png" width="1550" height="900" alt="Hệ tủ NEXT MSS hoàn chỉnh bố trí theo góc xưởng" loading="lazy" />
-          </figure>
-          <div class="mss-system-showcase__copy">
-            <span class="mss-overview__eyebrow">NEXT MSS</span>
-            <h2 id="mss-system-title">Một hệ lưu trữ liền mạch cho xưởng.</h2>
-            <p>Sức chứa lớn cùng khả năng tích hợp với Sonic Foam System giúp dụng cụ được tổ chức rõ ràng trong một tổng thể đồng bộ và chuyên nghiệp.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="mss-workshop-showcase" aria-labelledby="mss-workshop-title">
-        <div class="container">
-          <div class="mss-workshop-showcase__copy">
-            <span class="mss-overview__eyebrow">Ứng dụng thực tế</span>
-            <h2 id="mss-workshop-title">Gọn gàng trong từng khu vực làm việc.</h2>
-            <p>Giải pháp lưu trữ độc lập cho môi trường chuyên nghiệp, với diện mạo đồng bộ và liền mạch.</p>
-          </div>
-          <figure class="mss-workshop-showcase__media">
-            <img src="assets/products/next-mss/landing/next-mss-workshop.png" width="1550" height="905" alt="Hệ tủ NEXT MSS được lắp đặt trong workshop" loading="lazy" />
-          </figure>
+      <section class="mss-cards">
+        <div class="mss-cards__grid">
+          <article class="mss-card">
+            <img class="mss-card__img" src="assets/img/next-mss-card-01.jpg" width="2539" height="1428" alt="Các module của hệ lưu trữ NEXT MSS" loading="lazy" />
+            <div class="mss-card__text">
+              <h3 class="mss-card__title">Cân chỉnh hoàn hảo trên mặt sàn không bằng phẳng.</h3>
+              <p class="mss-card__body">Sàn xưởng hiếm khi hoàn toàn phẳng. NEXT MSS sử dụng cặp tấm ốp chân để bù chênh lệch bề mặt, giúp hệ tủ cân chỉnh gọn gàng và tạo nên diện mạo liền mạch, chuyên nghiệp.</p>
+            </div>
+          </article>
+          <article class="mss-card">
+            <img class="mss-card__img" src="assets/img/next-mss-card-02.jpg" width="2368" height="1332" alt="Hệ tủ NEXT MSS hoàn chỉnh bố trí theo góc xưởng" loading="lazy" />
+            <div class="mss-card__text">
+              <h3 class="mss-card__title">Một hệ lưu trữ liền mạch cho xưởng.</h3>
+              <p class="mss-card__body">Sức chứa lớn cùng khả năng tích hợp với Sonic Foam System giúp dụng cụ được tổ chức rõ ràng trong một tổng thể đồng bộ và chuyên nghiệp.</p>
+            </div>
+          </article>
+          <article class="mss-card">
+            <img class="mss-card__img" src="assets/img/next-mss-card-03.jpg" width="2368" height="1332" alt="Hệ tủ NEXT MSS được lắp đặt trong workshop" loading="lazy" />
+            <div class="mss-card__text">
+              <h3 class="mss-card__title">Gọn gàng trong từng khu vực làm việc.</h3>
+              <p class="mss-card__body">Giải pháp lưu trữ độc lập cho môi trường chuyên nghiệp, với diện mạo đồng bộ và liền mạch.</p>
+            </div>
+          </article>
         </div>
       </section>
     </div>
