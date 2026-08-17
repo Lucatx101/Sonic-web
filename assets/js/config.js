@@ -19,7 +19,7 @@ const CONFIG = {
   hotline: "0888 23 23 66",                 // ← ĐIỀN số hotline
   hotlineRaw: "0843555566",                // ← số không dấu cách (dùng cho link gọi)
   zalo: "0843555566",                      // ← số/zalo id (link https://zalo.me/<số>)
-  email: "info@sonic-vietnam.vn",          // ← email nhận báo giá
+  email: "info@ktechviet.com",             // ← email nhận báo giá
   showroom: "C7-23, Geleximco,Nam Từ Liêm, TP. Hà Nội", // ← ĐIỀN địa chỉ showroom
   companyName: "Sonic Việt Nam",
   workingHours: "Thứ 2 – Thứ 7: 8:00 – 17:30",
